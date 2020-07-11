@@ -28,15 +28,25 @@ namespace EuclideanGCD
         /// </summary>
         /// <param name="a">An integer number.</param>
         /// <param name="b">An integer number.</param>
+        /// <param name="clock">A TimeSpan number.</param>
         /// <returns>The GCD of two integers numbers.</returns>
-        public int GCD(int a, int b)
+        public int GCD(int a, int b, out TimeSpan clock)
         {
+            swatch.Start();
             min = Min(Math.Abs(a), Math.Abs(b));
             mod = Mod(Math.Abs(a), Math.Abs(b));
             if (min == mod)
+            {
+                swatch.Stop();
+                clock = swatch.Elapsed;
                 return mod;
+            }
             else
+            {
+                swatch.Stop();
+                clock = swatch.Elapsed;
                 return GCD(min, mod);
+            }
         }
 
         /// <summary>
@@ -68,7 +78,7 @@ namespace EuclideanGCD
         /// </summary>
         /// <param name="a">An integer number.</param>
         /// <param name="b">An integer number.</param>
-        /// <param name="clock">Time interval.</param>
+        /// <param name="clock">A TimeSpan number.</param>
         /// <returns>The GCD of two integers numbers.</returns>
         public int BinGCD(int a, int b, out TimeSpan clock)
         {
