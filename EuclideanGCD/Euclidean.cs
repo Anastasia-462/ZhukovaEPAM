@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace EuclideanGCD
     {
         int min = -1;
         int mod = 0;
-        
+        Stopwatch swatch = new Stopwatch();
         /// <summary>
         /// Constructor of this class.
         /// </summary>
@@ -27,7 +28,7 @@ namespace EuclideanGCD
         /// </summary>
         /// <param name="a">An integer number.</param>
         /// <param name="b">An integer number.</param>
-        /// <returns>The GCD of two integers.</returns>
+        /// <returns>The GCD of two integers numbers.</returns>
         public int GCD(int a, int b)
         {
             min = Min(Math.Abs(a), Math.Abs(b));
@@ -42,7 +43,7 @@ namespace EuclideanGCD
         /// This method calculate GCD with the help Euclidean algorithm for several integers.
         /// </summary>
         /// <param name="a">An array of integers number.</param>
-        /// <returns>The GCD of several integers.</returns>
+        /// <returns>The GCD of several integers numbers.</returns>
         public int GCD(params int[] a)
         {
             List<int> mod = Mod(a);
@@ -59,6 +60,60 @@ namespace EuclideanGCD
                 }
             }
             return Min(mod);
+        }
+
+        /// <summary>
+        /// A method that implements the Stein algorithm (binary Euclidean algorithm)
+        /// for calculating the GCD of two integers.
+        /// </summary>
+        /// <param name="a">An integer number.</param>
+        /// <param name="b">An integer number.</param>
+        /// <param name="clock">Time interval.</param>
+        /// <returns>The GCD of two integers numbers.</returns>
+        public int BinGCD(int a, int b, out TimeSpan clock)
+        {
+            swatch.Start();
+            if (a == 0)
+            {
+                swatch.Stop();
+                clock = swatch.Elapsed;
+                return b;
+            }
+            if (b == 0)
+            {
+                swatch.Stop();
+                clock = swatch.Elapsed;
+                return a;
+            }
+
+            if (a == b)
+            {
+                swatch.Stop();
+                clock = swatch.Elapsed;
+                return a;
+            }
+
+            if ((a == 1) || (b == 1))
+            {
+                swatch.Stop();
+                clock = swatch.Elapsed;
+                return 1;
+            }
+
+            if (a % 2 == 0)
+            {
+                swatch.Stop();
+                return (b % 2 == 0) ? 2 * BinGCD(a / 2, b / 2, out clock) : BinGCD(a / 2, b, out clock);
+            }
+            else if (a % 2 != 0)
+            {
+                swatch.Stop();
+                return (b % 2 == 0) ? BinGCD(a, b / 2, out clock) : BinGCD(b > a ? (b - a) / 2 : (a - b) / 2,
+                    b > a ? a : b, out clock);
+            }
+            swatch.Stop();
+            clock = swatch.Elapsed;
+            return 0;
         }
 
         //This method finds the minimum value for two integers.
