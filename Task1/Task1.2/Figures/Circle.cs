@@ -28,5 +28,21 @@ namespace Figures
         {
             return "Circle : R = " + Convert.ToString(Radius) + "S = " + Convert.ToString(CalcS()) + "P = " + Convert.ToString(CalcP());
         }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -1919740922;
+            hashCode = hashCode * -1521134295 + Radius.GetHashCode();
+            return hashCode;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != this.GetType())
+                return false;
+
+            Circle circle = (Circle)obj;
+            return (this.Radius == circle.Radius);
+        }
     }
 }
