@@ -41,17 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Circle.cs" />
-    <Compile Include="Ellipse.cs" />
+    <Compile Include="Factory\Creator.cs" />
+    <Compile Include="Factory\CreatorCircle.cs" />
+    <Compile Include="Factory\CreatorSquare.cs" />
+    <Compile Include="Figure\Circle.cs" />
+    <Compile Include="Figure\Ellipse.cs" />
     <Compile Include="Figure.cs" />
-    <Compile Include="Point.cs" />
-    <Compile Include="Polygonum.cs" />
+    <Compile Include="Figure\Point.cs" />
+    <Compile Include="Figure\Polygonum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rectangle.cs" />
-    <Compile Include="Rhombus.cs" />
-    <Compile Include="Square.cs" />
-    <Compile Include="Trapeze.cs" />
-    <Compile Include="Triangle.cs" />
+    <Compile Include="Figure\Rectangle.cs" />
+    <Compile Include="Figure\Rhombus.cs" />
+    <Compile Include="Figure\Square.cs" />
+    <Compile Include="Figure\Trapeze.cs" />
+    <Compile Include="Figure\Triangle.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
