@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EuclideanGCD", "EuclideanGC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EuclideanGCDTests", "Task1\Task1.1\EuclideanGCDTests\EuclideanGCDTests.csproj", "{9ECC523C-AE3E-4BC1-A625-CAFE861ACDE2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Figures", "Task1\Task1.2\Figures\Figures.csproj", "{859EAADB-6F05-4781-AD13-CE2B7EED0D71}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{9ECC523C-AE3E-4BC1-A625-CAFE861ACDE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9ECC523C-AE3E-4BC1-A625-CAFE861ACDE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9ECC523C-AE3E-4BC1-A625-CAFE861ACDE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{859EAADB-6F05-4781-AD13-CE2B7EED0D71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{859EAADB-6F05-4781-AD13-CE2B7EED0D71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{859EAADB-6F05-4781-AD13-CE2B7EED0D71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{859EAADB-6F05-4781-AD13-CE2B7EED0D71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +42,7 @@ Global
 		{EBC8CE56-1B0C-4597-9530-58ACAA479791} = {610AC7F4-3C37-4252-B862-FA1432ECE159}
 		{D08ABA8C-B8E8-4B7F-9C45-F988EFB90FAC} = {31610F0B-E226-401A-93C7-1A01721C743A}
 		{9ECC523C-AE3E-4BC1-A625-CAFE861ACDE2} = {31610F0B-E226-401A-93C7-1A01721C743A}
+		{859EAADB-6F05-4781-AD13-CE2B7EED0D71} = {EBC8CE56-1B0C-4597-9530-58ACAA479791}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D5B17BF1-5A5B-43BD-93CD-1867E39E04E1}
