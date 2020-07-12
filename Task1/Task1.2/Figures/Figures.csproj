@@ -41,13 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factory\CreatorPolygonum.cs" />
     <Compile Include="Factory\Creator.cs" />
     <Compile Include="Factory\CreatorCircle.cs" />
+    <Compile Include="Factory\CreatorEllipse.cs" />
+    <Compile Include="Factory\CreatorRectangle.cs" />
     <Compile Include="Factory\CreatorSquare.cs" />
     <Compile Include="Figure\Circle.cs" />
     <Compile Include="Figure\Ellipse.cs" />
     <Compile Include="Figure.cs" />
-    <Compile Include="Figure\Point.cs" />
+    <Compile Include="Point.cs" />
     <Compile Include="Figure\Polygonum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Figure\Rectangle.cs" />
