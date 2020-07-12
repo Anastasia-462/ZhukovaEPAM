@@ -46,7 +46,10 @@
     <Compile Include="Factory\CreatorCircle.cs" />
     <Compile Include="Factory\CreatorEllipse.cs" />
     <Compile Include="Factory\CreatorRectangle.cs" />
+    <Compile Include="Factory\CreatorRhombus.cs" />
     <Compile Include="Factory\CreatorSquare.cs" />
+    <Compile Include="Factory\CreatorTrapeze.cs" />
+    <Compile Include="Factory\CreatorTriangle.cs" />
     <Compile Include="Figure\Circle.cs" />
     <Compile Include="Figure\Ellipse.cs" />
     <Compile Include="Figure.cs" />
