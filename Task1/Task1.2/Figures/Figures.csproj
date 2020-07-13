@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Figures.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -53,6 +54,7 @@
     <Compile Include="Figure\Circle.cs" />
     <Compile Include="Figure\Ellipse.cs" />
     <Compile Include="Figure.cs" />
+    <Compile Include="Parser.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Figure\Polygonum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

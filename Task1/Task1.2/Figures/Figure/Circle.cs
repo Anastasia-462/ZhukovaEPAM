@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Figures
 {
@@ -26,7 +22,7 @@ namespace Figures
 
         public override string ToString()
         {
-            return "Circle : R = " + Convert.ToString(Radius) + "S = " + Convert.ToString(CalcS()) + "P = " + Convert.ToString(CalcP());
+            return "Circle : R = " + Convert.ToString(Radius) + " S = " + Convert.ToString(CalcS()) + " P = " + Convert.ToString(CalcP());
         }
 
         public override int GetHashCode()

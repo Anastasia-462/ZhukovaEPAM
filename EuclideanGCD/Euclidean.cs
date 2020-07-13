@@ -18,6 +18,7 @@ namespace EuclideanGCD
         int min = -1;
         int mod = 0;
         Stopwatch swatch = new Stopwatch();
+
         /// <summary>
         /// Constructor of this class.
         /// </summary>
