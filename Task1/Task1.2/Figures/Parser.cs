@@ -47,11 +47,14 @@ namespace Figures
         {
             Figure[] figure = FormingArrayOfFigure();
             string result = "";
-            for(int i = 0; i < figure.Length - 1; i++)
+            for (int i = 0; i < figure.Length; i++)
             {
-                if ((figure[i].CalcS() == figure[i + 1].CalcS()) &&
-                    (figure[i].CalcP() == figure[i + 1].CalcP()))
-                    result += "Identical figures: " + figure[i].ToString() + " AND " + figure[i + 1].ToString() + "\n";
+                for (int j = i + 1; j < figure.Length; j++)
+                {
+                    if ((figure[i].CalcS() == figure[j].CalcS()) &&
+                        (figure[i].CalcP() == figure[j].CalcP()))
+                        result += "Identical figures: " + figure[i].ToString() + " AND " + figure[j].ToString() + "\n";
+                }
             }
             if (result == "")
                 result = "There are no identical figures!\n";
@@ -69,10 +72,10 @@ namespace Figures
                 case "Square":
                     return new CreatorSquare(Double.Parse(words[1]));
                 case "Polygonum":
-                    Point[] points = new Point[length - 2];
-                    for (int i = 1; i < length - 2; i++)
+                    Point[] points = new Point[length / 2];
+                    for (int i = 0, j = 1; i < length / 2; i++, j += 2)
                     {
-                        points[i - 1] = new Point(Double.Parse(words[i]), Double.Parse(words[i + 1]));
+                        points[i] = new Point(Double.Parse(words[j]), Double.Parse(words[j + 1]));
                     }
                     return new CreatorPolygonum(points);
                 case "Ellipse":
