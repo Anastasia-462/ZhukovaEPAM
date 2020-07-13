@@ -15,7 +15,7 @@ namespace Figures
         /// <summary>
         /// Constructor of this class.
         /// </summary>
-        /// <param name="text"></param>
+        /// <param name="text">The text file.</param>
         public Parser(string text)
         {
             this.text = text;
