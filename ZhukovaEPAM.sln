@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polynomials", "Task2\task2.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolynomialsTest", "Task2\task2.2\PolynomialsTest\PolynomialsTest.csproj", "{DE66ED30-64F7-4A58-AF49-D7F205607772}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop", "Task2\task2.3\Shop\Shop.csproj", "{D2245C40-A83A-4F0C-93D1-CF53B9D02FB6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{DE66ED30-64F7-4A58-AF49-D7F205607772}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE66ED30-64F7-4A58-AF49-D7F205607772}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE66ED30-64F7-4A58-AF49-D7F205607772}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2245C40-A83A-4F0C-93D1-CF53B9D02FB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2245C40-A83A-4F0C-93D1-CF53B9D02FB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2245C40-A83A-4F0C-93D1-CF53B9D02FB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2245C40-A83A-4F0C-93D1-CF53B9D02FB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{F5C552F2-5202-4CA0-AF1F-00A05C6B4A15} = {AD702D7F-3118-4FF0-AF08-1CDC3DC18EA4}
 		{19E569BE-8C2F-4327-97A1-9A20ED88C5BE} = {3A4BB4C0-61D6-4850-8097-1309166D735B}
 		{DE66ED30-64F7-4A58-AF49-D7F205607772} = {3A4BB4C0-61D6-4850-8097-1309166D735B}
+		{D2245C40-A83A-4F0C-93D1-CF53B9D02FB6} = {ACA3B3D6-2D1E-4E8C-B999-3A14DA04E601}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D5B17BF1-5A5B-43BD-93CD-1867E39E04E1}
