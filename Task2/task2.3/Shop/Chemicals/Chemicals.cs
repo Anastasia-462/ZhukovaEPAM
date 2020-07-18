@@ -26,5 +26,23 @@
             double price = (ch1.Price + ch2.Price) / 2;
             return new Chemicals(name, price);
         }
+
+        /// <summary>
+        /// Method that converting a Chemicals to an FoodSupply.
+        /// </summary>
+        /// <param name="foodSupply">A FoodSupply value.</param>
+        public static explicit operator Chemicals(FoodSupply foodSupply)
+        {
+            return new Chemicals(foodSupply.Name, foodSupply.Price);
+        }
+
+        /// <summary>
+        /// Method that converting a Chemicals to an Technic.
+        /// </summary>
+        /// <param name="technic">A Technic value.</param>
+        public static explicit operator Chemicals(Technic technic)
+        {
+            return new Chemicals(technic.Name, technic.Price);
+        }
     }
 }

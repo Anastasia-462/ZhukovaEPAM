@@ -12,5 +12,17 @@
         {
         }
 
+        /// <summary>
+        /// Method that converting a Goods Type to an Integer.
+        /// </summary>
+        /// <param name="computer">A Computer value.</param>
+        public static implicit operator int(Computer computer) => (int)(computer.Price * 100);
+
+        /// <summary>
+        /// Method that converting a Goods Type to an Double.
+        /// </summary>
+        /// <param name="computer">A Computer value.</param>
+        public static implicit operator double(Computer computer) => computer.Price;
+
     }
 }

@@ -8,7 +8,7 @@
         /// <summary>
         /// Name of product.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; protected set; }
         /// <summary>
         /// price of product.
         /// </summary>
