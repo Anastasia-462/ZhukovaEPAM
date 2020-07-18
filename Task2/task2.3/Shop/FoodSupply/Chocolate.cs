@@ -8,7 +8,7 @@
         /// <summary>
         /// Constructor of this class.
         /// </summary>
-        public Chocolate() : base("Chocolate", 2.26)
+        public Chocolate() : base("Chocolate", 2.25)
         {
         }
 

@@ -10,7 +10,7 @@
         /// </summary>
         /// <param name="name">A string.</param>
         /// <param name="price">A double number.</param>
-        protected FoodSupply(string name, double price) : base(name, price)
+        public FoodSupply(string name, double price) : base(name, price)
         {
         }
 

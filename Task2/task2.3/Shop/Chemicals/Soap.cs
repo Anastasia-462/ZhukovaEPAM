@@ -21,7 +21,7 @@
         /// <summary>
         /// Method that converting a Goods Type to an Double.
         /// </summary>
-        /// <param name="shampoo">A Soap value.</param>
+        /// <param name="soap">A Soap value.</param>
         public static implicit operator double(Soap soap) => soap.Price;
     }
 }

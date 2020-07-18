@@ -104,12 +104,12 @@ namespace Vectors
         /// Overriden operation is dividing it by a number.
         /// </summary>
         /// <param name="v1">A Vector3 value.</param>
-        /// <param name="number">A double number.</param>
+        /// <param name="a">A double number.</param>
         /// <returns>New object of the class Vector3.</returns>
-        public static Vector3 operator /(Vector3 v1, double number)
+        public static Vector3 operator /(Vector3 v1, double a)
         {
-            double number2 = 1.0f / number;
-            return new Vector3(v1.X * number2, v1.Y * number2, v1.Z * number2);
+            double b = 1.0f / a;
+            return new Vector3(v1.X * b, v1.Y * b, v1.Z * b);
         }
 
         /// <summary>

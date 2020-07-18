@@ -183,6 +183,7 @@ namespace Polynomials
                 }
             return flag;
         }
+
         /// <summary>
         /// Overriden equality operation. 
         /// </summary>
@@ -190,7 +191,6 @@ namespace Polynomials
         /// <returns>True if the values are equal, false in the opposite case.</returns>
         public override bool Equals(object obj)
         {
-            
             return obj is Polynomial polynomial &&
                    Degree == polynomial.Degree &&
                    CompareCoefficient(this, polynomial);
