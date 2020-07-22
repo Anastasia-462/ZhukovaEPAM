@@ -33,6 +33,16 @@ namespace Figures
         }
 
         /// <summary>
+        /// Constructor of this class.
+        /// </summary>
+        /// <param name="figure">A Figure object.</param>
+        public Rectangle(Figure figure)
+        {
+            if (CalculateSquare() > figure.CalculateSquare())
+                throw new Exception("It's not possible to cut a figure from this one.");
+        }
+
+        /// <summary>
         /// Method for calculating perimeter.
         /// </summary>
         /// <returns>Perimeter of rectangle.</returns>
