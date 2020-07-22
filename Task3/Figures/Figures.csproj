@@ -43,13 +43,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Circle.cs" />
+    <Compile Include="Colors.cs" />
     <Compile Include="Ellipse.cs" />
     <Compile Include="Figure.cs" />
+    <Compile Include="Decorator\Decorator.cs" />
+    <Compile Include="Decorator\IPaper.cs" />
+    <Compile Include="Decorator\PaperDecorator.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Polygonum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rectangle.cs" />
     <Compile Include="Triangle.cs" />
+    <Compile Include="Decorator\IWrap.cs" />
+    <Compile Include="Decorator\WrapDecorator.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
