@@ -9,13 +9,13 @@ namespace Figures
     /// <summary>
     /// A specific figure decorator.
     /// </summary>
-    public class WrapDecorator : Decorator, IWrap
+    public class FilmDecorator : Decorator, IFilm
     {
         /// <summary>
         /// Constructor of this class.
         /// </summary>
         /// <param name="figure">The figure to be decorated.</param>
-        public WrapDecorator(Figure figure) : base(figure)
+        public FilmDecorator(Figure figure) : base(figure)
         {
         }
     }

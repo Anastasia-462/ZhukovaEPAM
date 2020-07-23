@@ -21,9 +21,9 @@ namespace Figures
         /// </summary>
         /// <param name="figure">The figure to be decorated.</param>
         /// <param name="color">Color of the figure.</param>
-        public PaperDecorator(Figure figure, Colors color) : base(figure)
+        public PaperDecorator(Figure figure, Colors color = Colors.None) : base(figure)
         {
             this.color = color;
-        }                
+        }
     }
 }
