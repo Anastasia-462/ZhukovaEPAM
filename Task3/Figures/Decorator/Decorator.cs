@@ -53,5 +53,25 @@ namespace Figures
         {
             return figure.CalculateSquare();
         }
+
+        /// <summary>
+        /// A method that determines whether two object instances are equal.
+        /// </summary>
+        /// <param name="obj">An object.</param>
+        /// <returns>True if objects are equals, and false if they are not.</returns>
+        public override bool Equals(object obj)
+        {
+            return obj is Decorator decorator &&
+                   figure.Equals(decorator.figure);
+        }
+
+        /// <summary>
+        /// The method that the object hashcode will define.
+        /// </summary>
+        /// <returns>An int number.</returns>
+        public override int GetHashCode()
+        {
+            return -1854858383 + figure.GetHashCode();
+        }
     }
 }

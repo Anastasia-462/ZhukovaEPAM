@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Figures
+﻿namespace Figures
 {
     /// <summary>
     /// A specific figure decorator.
@@ -24,6 +18,30 @@ namespace Figures
         public PaperDecorator(Figure figure, Colors color = Colors.None) : base(figure)
         {
             this.color = color;
+        }
+
+        /// <summary>
+        /// A method that determines whether two object instances are equal.
+        /// </summary>
+        /// <param name="obj">An object.</param>
+        /// <returns>True if objects are equals, and false if they are not.</returns>
+        public override bool Equals(object obj)
+        {
+            return obj is PaperDecorator decorator &&
+                   base.Equals(obj) &&
+                   color == decorator.color;
+        }
+
+        /// <summary>
+        /// The method that the object hashcode will define.
+        /// </summary>
+        /// <returns>An int number.</returns>
+        public override int GetHashCode()
+        {
+            int hashCode = -1570605816;
+            hashCode = hashCode * -1521134295 + base.GetHashCode();
+            hashCode = hashCode * -1521134295 + color.GetHashCode();
+            return hashCode;
         }
     }
 }

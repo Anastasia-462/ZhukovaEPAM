@@ -50,6 +50,13 @@
       <Project>{7c1df4eb-a8dc-4149-ba6d-e1ae80c96345}</Project>
       <Name>Figures</Name>
     </ProjectReference>
+    <ProjectReference Include="..\XmlProcessing\XmlProcessing.csproj">
+      <Project>{d9fbe510-2b6c-4f4c-91a3-51932d1d1a49}</Project>
+      <Name>XmlProcessing</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

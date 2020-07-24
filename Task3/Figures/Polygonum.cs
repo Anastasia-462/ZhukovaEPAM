@@ -87,8 +87,19 @@ namespace Figures
         /// <returns>True if objects are equals, and false if they are not.</returns>
         public override bool Equals(object obj)
         {
-            return obj is Polygonum polygonum &&
-                   EqualityComparer<Point[]>.Default.Equals(Points, polygonum.Points);
+            if (obj.GetType() != this.GetType())
+                return false;
+
+            Polygonum polygonum = (Polygonum)obj;
+            int amount = 0;
+            for (int i = 0; i < Points.Length; i++)
+            {
+                if (this.Points[i] == polygonum.Points[i])
+                {
+                    amount++;
+                }
+            }
+            return (amount == Points.Length);
         }
 
         /// <summary>
@@ -97,7 +108,12 @@ namespace Figures
         /// <returns>An int number.</returns>
         public override int GetHashCode()
         {
-            return 480822998 + EqualityComparer<Point[]>.Default.GetHashCode(Points);
+            var hashCode = -1919740922;
+            for (int i = 0; i < Points.Length; i++)
+            {
+                hashCode = hashCode * -1521134295 + Points[i].GetHashCode();
+            }
+            return hashCode;
         }
     }
 }

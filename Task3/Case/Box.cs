@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using XmlProcessing;
 
 namespace Case
 {
@@ -70,6 +71,21 @@ namespace Case
                 throw new Exception("There is no figure for this number.");
             else
                 figures[number] = figure;
+        }
+
+        /// <summary>
+        /// Method to search for a figure by pattern.
+        /// </summary>
+        /// <param name="figure">A Figure object.</param>
+        /// <returns>Index of found figure.</returns>
+        public int SearchForFigure(Figure figure)
+        {
+            for(int i = 0; i < figures.Length; i++)
+            {
+                if (figures[i].Equals(figure))
+                    return i;
+            }
+            return -1;
         }
 
         /// <summary>
@@ -145,6 +161,96 @@ namespace Case
                     filmFigures.Add(figures[i]);
             }
             return filmFigures.ToArray();
+        }
+
+        /// <summary>
+        /// Method to save all figures with the help StreamWriter.
+        /// </summary>
+        public void SaveAllFiguresSW()
+        {
+            StreamFigureWriter.XmlStreamWriting(figures);
+        }
+
+        /// <summary>
+        /// Method to save only paper figures with the help StreamWriter.
+        /// </summary>
+        public void SavePaperFiguresSW()
+        {
+            List<Figure> paperFigure = new List<Figure>();
+            for(int i = 0; i < figures.Length; i++)
+            {
+                if (figures[i] is PaperDecorator)
+                    paperFigure.Add(figures[i]);
+            }
+            StreamFigureWriter.XmlStreamWriting(paperFigure.ToArray());
+        }
+
+        /// <summary>
+        /// Method to save only film figures with the help StreamWriter.
+        /// </summary>
+        public void SaveFilmFiguresSW()
+        {
+            List<Figure> filmFigure = new List<Figure>();
+            for (int i = 0; i < figures.Length; i++)
+            {
+                if (figures[i] is FilmDecorator)
+                    filmFigure.Add(figures[i]);
+            }
+            StreamFigureWriter.XmlStreamWriting(filmFigure.ToArray());
+        }
+
+        /// <summary>
+        /// Method to save all figures with the help XmlWriter.
+        /// </summary>
+        public void SaveAllFiguresXW()
+        {
+            XmlFigureWriter.XmlWriting(figures);
+        }
+
+        /// <summary>
+        /// Method to save only paper figures with the help XmlWriter.
+        /// </summary>
+        public void SavePaperFiguresXW()
+        {
+            List<Figure> paperFigure = new List<Figure>();
+            for (int i = 0; i < figures.Length; i++)
+            {
+                if (figures[i] is PaperDecorator)
+                    paperFigure.Add(figures[i]);
+            }
+            XmlFigureWriter.XmlWriting(paperFigure.ToArray());
+        }
+
+        /// <summary>
+        /// Method to save only film figure with the help XmlWriter.
+        /// </summary>
+        public void SaveFilmFiguresXW()
+        {
+            List<Figure> filmFigure = new List<Figure>();
+            for (int i = 0; i < figures.Length; i++)
+            {
+                if (figures[i] is FilmDecorator)
+                    filmFigure.Add(figures[i]);
+            }
+            XmlFigureWriter.XmlWriting(filmFigure.ToArray());
+        }
+
+        /// <summary>
+        /// Method to download all figures to the box from a xml file with the help StreamReader.
+        /// </summary>
+        /// <returns>An array of figures.</returns>
+        public Figure[] DownloadFiguresSR()
+        {
+            return XmlFigureReader.XmlReading();
+        }
+
+        /// <summary>
+        /// Method to download all figures to the box from a xml file with the help XmlReader.
+        /// </summary>
+        /// <returns>An array of figures.</returns>
+        public Figure[] DownloadFiguresXR()
+        {
+            return StreamFigureReader.XmlStreamReading();
         }
     }
 }
