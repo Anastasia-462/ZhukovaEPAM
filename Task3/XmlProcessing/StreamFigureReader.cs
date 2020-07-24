@@ -53,7 +53,7 @@ namespace XmlProcessing
         /// <summary>
         /// Inner class for parsing xml file.
         /// </summary>
-        public static class Parser
+        private static class Parser
         {
             /// <summary>
             /// Method which processing circle.

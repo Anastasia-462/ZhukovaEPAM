@@ -48,7 +48,7 @@ namespace XmlProcessing
             }
         }
 
-        //Method which forming circle in xml file.
+        //Method which forming circle for xml file.
         private static void FormCircle(XmlWriter xml, Figure figure)
         {
             Circle circle = (Circle)(((Decorator)figure).GetFigure());
@@ -77,7 +77,7 @@ namespace XmlProcessing
             xml.WriteEndElement();
         }
 
-        //Method which forming ellipse in xml file.
+        //Method which forming ellipse for xml file.
         private static void FormEllipse(XmlWriter xml, Figure figure)
         {
             Ellipse ellipse = (Ellipse)(((Decorator)figure).GetFigure());
@@ -109,7 +109,7 @@ namespace XmlProcessing
             xml.WriteEndElement();
         }
 
-        //Method which forming polygonum in xml file.
+        //Method which forming polygonum for xml file.
         private static void FormPolygonum(XmlWriter xml, Figure figure)
         {
             Polygonum polygonum = (Polygonum)(((Decorator)figure).GetFigure());
@@ -118,7 +118,7 @@ namespace XmlProcessing
             xml.WriteStartElement("type");
             xml.WriteString("Polygonum");
             xml.WriteEndElement();
-            for(int i =0; i < polygonum.Points.Length; i++)
+            for(int i = 0; i < polygonum.Points.Length; i++)
             {
                 xml.WriteStartElement("point" + i);
                 xml.WriteString(polygonum.Points[i].X + " " + polygonum.Points[i].Y);
@@ -141,7 +141,7 @@ namespace XmlProcessing
             xml.WriteEndElement();
         }
 
-        //Method which forming triangle in xml file.
+        //Method which forming triangle for xml file.
         private static void FormTriangle(XmlWriter xml, Figure figure)
         {
             Triangle triangle = (Triangle)(((Decorator)figure).GetFigure());
@@ -176,7 +176,7 @@ namespace XmlProcessing
             xml.WriteEndElement();
         }
 
-        //Method which forming rectangle in xml file.
+        //Method which forming rectangle for xml file.
         private static void FormRectangle(XmlWriter xml, Figure figure)
         {
             Rectangle rectangle = (Rectangle)(((Decorator)figure).GetFigure());
