@@ -8,29 +8,29 @@ namespace XmlProcessing
     /// <summary>
     /// Class which read xml file with the help XmlReader.
     /// </summary>
-    public class XmlFigureReader
+    public static class XmlFigureReader
     {        
         /// <summary>
         /// The main method which processing xml file.
         /// </summary>
-        public void XmlReading()
+        public static Figure[] XmlReading()
         {
-            List<Figure> figure = new List<Figure>();
+            List<Figure> figures = new List<Figure>();
             using (XmlReader xml = XmlReader.Create("Figures.xml"))
             {
                 while(xml.Read())
                 {
                     if((xml.NodeType == XmlNodeType.Element) && (xml.Name == "figure"))
                     {
-                        figure.Add(SelectingFigure(xml));
-                    }    
-
+                        figures.Add(SelectingFigure(xml));
+                    }
                 }
             }
+            return figures.ToArray();
         }
 
         //Method which processing circle.
-        private Figure CircleParser(XmlReader xml)
+        private static Figure CircleParser(XmlReader xml)
         {
             double radius = 0;
             while((xml.NodeType == XmlNodeType.Element) && (xml.Name != "material"))
@@ -47,7 +47,7 @@ namespace XmlProcessing
         }
 
         //Method which processing rectangle.
-        private Figure RectangleParser(XmlReader xml)
+        private static Figure RectangleParser(XmlReader xml)
         {
             double a = 0;
             double b = 0;
@@ -70,7 +70,7 @@ namespace XmlProcessing
         }
 
         ////Method which processing ellipse.
-        private Figure EllipseParser(XmlReader xml)
+        private static Figure EllipseParser(XmlReader xml)
         {
             double d1 = 0;
             double d2 = 0;
@@ -93,7 +93,7 @@ namespace XmlProcessing
         }
 
         ////Method which processing triangle.
-        private Figure TriangleParser(XmlReader xml)
+        private static Figure TriangleParser(XmlReader xml)
         {
             double a = 0;
             double b = 0;
@@ -122,7 +122,7 @@ namespace XmlProcessing
         }
 
         ////Method which processing polygonum.
-        private Figure PolygonumParser(XmlReader xml)
+        private static Figure PolygonumParser(XmlReader xml)
         {
             List<Point> points = new List<Point>();
             int i = 0;
@@ -142,7 +142,7 @@ namespace XmlProcessing
         }
 
         //Method which sets the method for processing the figure.
-        private Figure SelectingFigure(XmlReader xml)
+        private static Figure SelectingFigure(XmlReader xml)
         {
             xml.Read();
             xml.Read();
@@ -164,7 +164,7 @@ namespace XmlProcessing
         }
 
         //Method which converts a string to an element of enum.
-        private Colors ConvertToColors(string color)
+        private static Colors ConvertToColors(string color)
         {
             switch(color)
             {
@@ -190,7 +190,7 @@ namespace XmlProcessing
         }
 
         //Method which decorates the figure depending on the material.
-        private Decorator Decorating(XmlReader xml, Figure figure)
+        private static Decorator Decorating(XmlReader xml, Figure figure)
         {
             string material = "";
             string color = "";

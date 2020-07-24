@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="XmlFigureReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XmlFigureWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Figures.xml" />

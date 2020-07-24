@@ -1,4 +1,6 @@
-﻿namespace Figures
+﻿using System;
+
+namespace Figures
 {
     /// <summary>
     /// Class that decorates the figure.
@@ -23,6 +25,15 @@
         public Figure GetFigure()
         {
             return figure;
+        }
+
+        /// <summary>
+        /// Method that checks the class of the decorated object
+        /// </summary>
+        /// <returns>Object type.</returns>
+        public override Type TypeExist()
+        {
+            return figure.TypeExist();
         }
 
         /// <summary>

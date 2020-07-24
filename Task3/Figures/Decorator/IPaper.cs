@@ -3,7 +3,7 @@
     /// <summary>
     /// Paper interface.
     /// </summary>
-    interface IPaper
+    public interface IPaper
     {
         /// <summary>
         /// Color of the paper.

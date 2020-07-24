@@ -121,15 +121,15 @@ namespace Case
         /// Method to get all the circles.
         /// </summary>
         /// <returns>Array of circles.</returns>
-        public Circle[] GetCircle()
+        public Figure[] GetCircle()
         {
-            List<Circle> circles = null;
-            for(int i = 0; i < figures.Length; i++)
+            List<Figure> figures = new List<Figure>();
+            for(int i = 0; i < figures.Count; i++)
             {
-                if (figures[i] is Circle)
-                    circles.Add(figures[i] as Circle);
+                if (figures[i].TypeExist() == typeof(Circle))
+                    figures.Add(figures[i]);
             }
-            return circles.ToArray();
+            return figures.ToArray();
         }
 
         /// <summary>
@@ -146,7 +146,5 @@ namespace Case
             }
             return filmFigures.ToArray();
         }
-
-
     }
 }

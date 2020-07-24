@@ -5,13 +5,13 @@
     <radius>3</radius>
     <material>Paper</material>
     <color>Blue</color>    
-    <figure>
-      <type>Triangle</type>      
-      <sideA>3</sideA>
-      <sideB>2</sideB>
-      <sideC>1</sideC>
-      <material>Paper</material>
-    </figure>
+  </figure>
+  <figure>
+    <type>Triangle</type>
+    <sideA>3</sideA>
+    <sideB>2</sideB>
+    <sideC>1</sideC>
+    <material>Paper</material>
   </figure>
   <figure>
     <type>Rectangle</type>      
@@ -30,12 +30,12 @@
     <type>Ellipse</type>    
     <diagonalA>8</diagonalA>
     <diagonalB>4</diagonalB>
+    <material>Film</material>    
+  </figure>
+  <figure>
+    <type>Circle</type>
     <material>Film</material>
-    <figure>
-      <type>Circle</type>
-      <material>Film</material>      
-      <radius>6</radius>
-    </figure>
+    <radius>6</radius>
   </figure>
   <figure>
     <type>Polygonum</type>   

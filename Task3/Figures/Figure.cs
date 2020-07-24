@@ -41,5 +41,14 @@ namespace Figures
             else
                 throw new Exception("The figure of the wrap cannot be colored.");
         }
+
+        /// <summary>
+        /// Method comparing the type and type of the current object
+        /// </summary>
+        /// <returns>Object type.</returns>
+        public virtual Type TypeExist()
+        {
+            return GetType();
+        }
     }
 }
