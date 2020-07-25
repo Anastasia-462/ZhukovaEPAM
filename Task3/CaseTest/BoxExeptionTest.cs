@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CaseTest
 {
     /// <summary>
-    /// which tests exeptions in the Box class.
+    /// Class which tests exeptions in the Box class.
     /// </summary>
     [TestClass]
     public class BoxExeptionTest

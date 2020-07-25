@@ -29,12 +29,15 @@ namespace Figures
         /// <param name="figure">A Figure object.</param>
         /// <param name="color">A color.</param>
         /// <returns>A colored figure.</returns>
-        public Figure PaintFigure(Figure figure, Colors color)
+        public static Figure PaintFigure(Figure figure, Colors color)
         {            
             if (figure is PaperDecorator)
             {
                 if (((IPaper)figure).Color == Colors.None)
-                    return new PaperDecorator(figure, color);
+                {
+                    Figure figureNew = ((Decorator)figure).GetFigure();
+                    return new PaperDecorator(figureNew, color);
+                }
                 else
                     throw new Exception("The figure is already colored.");
             }

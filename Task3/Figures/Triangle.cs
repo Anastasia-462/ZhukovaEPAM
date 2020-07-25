@@ -45,7 +45,7 @@ namespace Figures
         /// <param name="figure">A Figure object.</param>
         public Triangle(Figure figure)
         {
-            if (CalculateSquare() > figure.CalculateSquare())
+            if (figure.CalculateSquare() > CalculateSquare())
                 throw new Exception("It's not possible to cut a figure from this one.");
         }
 
