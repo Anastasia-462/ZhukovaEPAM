@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<figures>
+	<figure>
+		<type>Rectangle</type>
+		<sideA>5</sideA>
+		<sideB>7</sideB>
+		<material>Film</material>
+	</figure>
+	<figure>
+		<type>Ellipse</type>
+		<diagonalA>8</diagonalA>
+		<diagonalB>4</diagonalB>
+		<material>Film</material>
+	</figure>
+	<figure>
+		<type>Circle</type>
+		<radius>6</radius>
+		<material>Film</material>
+	</figure>
+	<figure>
+		<type>Polygonum</type>
+		<point1>0,6 2,1</point1>
+		<point2>1,8 3,6</point2>
+		<point3>2,2 2,3</point3>
+		<point4>3,6 2,4</point4>
+		<point5>3,1 0,5</point5>
+		<material>Film</material>
+	</figure>
+</figures>

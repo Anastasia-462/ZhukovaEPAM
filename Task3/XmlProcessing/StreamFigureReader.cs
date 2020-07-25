@@ -14,11 +14,11 @@ namespace XmlProcessing
         /// <summary>
         /// The main method which processing xml file.
         /// </summary>
-        public static Figure[] XmlStreamReading()
+        public static Figure[] XmlStreamReading(string path)
         {
             string strline;
             List<Figure> figures = new List<Figure>();
-            using (StreamReader stream = new StreamReader("Figures.xml"))
+            using (StreamReader stream = new StreamReader(path))
             {
                 while ((strline = stream.ReadLine()) != null)
                 {
@@ -32,8 +32,10 @@ namespace XmlProcessing
         //Method which sets the method for processing the figure.
         private static Figure SelectingFigure(StreamReader stream, string strline)
         {
-            string match = Regex.Match(strline, @"(?<=<type>)(.*)(?<=</type>)").ToString();
-            switch (match)
+            string match = Regex.Match(strline, @"(<type>)(.*)(</type>)").ToString();
+            string pattern = Regex.Replace(match, "<type>", "");
+            string result = Regex.Replace(pattern, "</type>", "");
+            switch (result)
             {
                 case "Circle":
                     return Parser.CircleParser(stream);
@@ -63,8 +65,10 @@ namespace XmlProcessing
             public static Figure CircleParser(StreamReader stream)
             {
                 string strline = stream.ReadLine();
-                string radius = Regex.Match(strline, @"(?<=<radius>)(.*)(?<=</radius>)").ToString();
-                Circle circle = new Circle(Double.Parse(radius));
+                string radius = Regex.Match(strline, @"(<radius>)(.*)(</radius>)").ToString();
+                string pattern = Regex.Replace(radius, "<radius>", "");
+                string result = Regex.Replace(pattern, "</radius>", "");
+                Circle circle = new Circle(Double.Parse(result));
                 return Decorating(circle, stream);
             }
 
@@ -76,10 +80,14 @@ namespace XmlProcessing
             public static Figure EllipseParser(StreamReader stream)
             {
                 string strline = stream.ReadLine();
-                string d1 = Regex.Match(strline, @"(?<=<diagonalA>)(.*)(?<=</diagonalA>)").ToString();
+                string d1 = Regex.Match(strline, @"(<diagonalA>)(.*)(</diagonalA>)").ToString();
+                string pattern1 = Regex.Replace(d1, "<diagonalA>", "");
+                string result1 = Regex.Replace(pattern1, "</diagonalA>", "");
                 strline = stream.ReadLine();
-                string d2 = Regex.Match(strline, @"(?<=<diagonalB>)(.*)(?<=</diagonalB>)").ToString();
-                Ellipse ellipse = new Ellipse(Double.Parse(d1), Double.Parse(d2));
+                string d2 = Regex.Match(strline, @"(<diagonalB>)(.*)(</diagonalB>)").ToString();
+                string pattern2 = Regex.Replace(d2, "<diagonalB>", "");
+                string result2 = Regex.Replace(pattern2, "</diagonalB>", "");
+                Ellipse ellipse = new Ellipse(Double.Parse(result1), Double.Parse(result2));
                 return Decorating(ellipse, stream);
             }
 
@@ -94,14 +102,15 @@ namespace XmlProcessing
                 int i = 0;
                 string point;
                 List<Point> points = new List<Point>();
-                while(!Regex.IsMatch(strline, @"<material>"))
-                {
-                    strline = stream.ReadLine();
-                    point = Regex.Match(strline, @"(?<=<point" + i + @">)(.*)(?<=</point" + i + @">)").ToString();
-                    string[] words = (point).Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                while (!Regex.IsMatch(strline, @"<material>"))
+                {                    
+                    point = Regex.Match(strline, @"(<point" + (i + 1) + @">)(.*)(</point" + (i + 1) + @">)").ToString();
+                    string pattern = Regex.Replace(point, "<point" + (i + 1) + ">", "");
+                    string result = Regex.Replace(pattern, "</point" + (i + 1) + ">", "");
+                    string[] words = (result).Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                     points.Add(new Point(Double.Parse(words[0]), Double.Parse(words[1])));
                     i++;
-
+                    strline = stream.ReadLine();
                 }
                 Polygonum polygonum = new Polygonum(points.ToArray());
                 return Decorating(polygonum, stream);
@@ -115,10 +124,14 @@ namespace XmlProcessing
             public static Figure RectangleParser(StreamReader stream)
             {
                 string strline = stream.ReadLine();
-                string a = Regex.Match(strline, @"(?<=<sideA>)(.*)(?<=</sideA>)").ToString();
+                string a = Regex.Match(strline, @"(<sideA>)(.*)(</sideA>)").ToString();
+                string pattern1 = Regex.Replace(a, "<sideA>", "");
+                string result1 = Regex.Replace(pattern1, "</sideA>", "");
                 strline = stream.ReadLine();
-                string b = Regex.Match(strline, @"(?<=<sideB>)(.*)(?<=</sideB>)").ToString();
-                Rectangle rectangle = new Rectangle(Double.Parse(a), Double.Parse(b));
+                string b = Regex.Match(strline, @"(<sideB>)(.*)(</sideB>)").ToString();
+                string pattern2 = Regex.Replace(b, "<sideB>", "");
+                string result2 = Regex.Replace(pattern2, "</sideB>", "");
+                Rectangle rectangle = new Rectangle(Double.Parse(result1), Double.Parse(result2));
                 return Decorating(rectangle, stream);
             }
 
@@ -130,12 +143,18 @@ namespace XmlProcessing
             public static Figure TriangleParser(StreamReader stream)
             {
                 string strline = stream.ReadLine();
-                string a = Regex.Match(strline, @"(?<=<sideA>)(.*)(?<=</sideA>)").ToString();
+                string a = Regex.Match(strline, @"(<sideA>)(.*)(</sideA>)").ToString();
+                string pattern1 = Regex.Replace(a, "<sideA>", "");
+                string result1 = Regex.Replace(pattern1, "</sideA>", "");
                 strline = stream.ReadLine();
-                string b = Regex.Match(strline, @"(?<=<sideB>)(.*)(?<=</sideB>)").ToString();
+                string b = Regex.Match(strline, @"(<sideB>)(.*)(</sideB>)").ToString();
+                string pattern2 = Regex.Replace(b, "<sideB>", "");
+                string result2 = Regex.Replace(pattern2, "</sideB>", "");
                 strline = stream.ReadLine();
-                string c = Regex.Match(strline, @"(?<=<sideC>)(.*)(?<=</sideC>)").ToString();
-                Triangle triangle = new Triangle(Double.Parse(a), Double.Parse(b), Double.Parse(c));
+                string c = Regex.Match(strline, @"(<sideC>)(.*)(</sideC>)").ToString();
+                string pattern3 = Regex.Replace(c, "<sideC>", "");
+                string result3 = Regex.Replace(pattern3, "</sideC>", "");
+                Triangle triangle = new Triangle(Double.Parse(result1), Double.Parse(result2), Double.Parse(result3));
                 return Decorating(triangle, stream);
             }
 
@@ -169,13 +188,17 @@ namespace XmlProcessing
             private static Decorator Decorating(Figure figure, StreamReader stream)
             {
                 string strline = stream.ReadLine();
-                string material = Regex.Match(strline, @"(?<=<material>)(.*)(?<=</material>)").ToString();
+                string material = Regex.Match(strline, @"(<material>)(.*)(</material>)").ToString();
+                string pattern1 = Regex.Replace(material, "<material>", "");
+                string result1 = Regex.Replace(pattern1, "</material>", "");
                 strline = stream.ReadLine();
-                string color = Regex.Match(strline, @"(?<=<material>)(.*)(?<=</material>)").ToString();
-                if (material == "Paper")
+                string color = Regex.Match(strline, @"(<color>)(.*)(</color>)").ToString();
+                string pattern2 = Regex.Replace(color, "<color>", "");
+                string result2 = Regex.Replace(pattern2, "</color>", "");
+                if (result1 == "Paper")
                 {
-                    if (color != "")
-                        return new PaperDecorator(figure, ConvertToColors(color));
+                    if (result2 != "")
+                        return new PaperDecorator(figure, ConvertToColors(result2));
                     return new PaperDecorator(figure);
                 }
                 else

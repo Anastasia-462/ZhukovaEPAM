@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Case", "Task3\Case\Case.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlProcessing", "Task3\XmlProcessing\XmlProcessing.csproj", "{D9FBE510-2B6C-4F4C-91A3-51932D1D1A49}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaseTest", "Task3\CaseTest\CaseTest.csproj", "{0A59E07F-1926-49AC-A553-C9D68A09C71D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{D9FBE510-2B6C-4F4C-91A3-51932D1D1A49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9FBE510-2B6C-4F4C-91A3-51932D1D1A49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9FBE510-2B6C-4F4C-91A3-51932D1D1A49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A59E07F-1926-49AC-A553-C9D68A09C71D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A59E07F-1926-49AC-A553-C9D68A09C71D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A59E07F-1926-49AC-A553-C9D68A09C71D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A59E07F-1926-49AC-A553-C9D68A09C71D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

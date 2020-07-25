@@ -43,5 +43,14 @@
             hashCode = hashCode * -1521134295 + color.GetHashCode();
             return hashCode;
         }
+
+        /// <summary>
+        /// Overriden method to output a string with the characteristics of the decorator.
+        /// </summary>
+        /// <returns>A string.</returns>
+        public override string ToString()
+        {
+            return base.ToString() + " Color: " + color;
+        }
     }
 }

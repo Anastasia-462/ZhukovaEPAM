@@ -13,14 +13,14 @@ namespace XmlProcessing
         /// <summary>
         /// The main method which processing xml file.
         /// </summary>
-        public static Figure[] XmlReading()
+        public static Figure[] XmlReading(string path)
         {
             List<Figure> figures = new List<Figure>();
-            using (XmlReader xml = XmlReader.Create("Figures.xml"))
+            using (XmlReader xml = XmlReader.Create(path))
             {
                 while(xml.Read())
                 {
-                    if((xml.NodeType == XmlNodeType.Element) && (xml.Name == "figure"))
+                    if((xml.NodeType == XmlNodeType.Element) && (xml.Name == "type"))
                     {
                         figures.Add(SelectingFigure(xml));
                     }
@@ -29,11 +29,32 @@ namespace XmlProcessing
             return figures.ToArray();
         }
 
+        //Method which sets the method for processing the figure.
+        private static Figure SelectingFigure(XmlReader xml)
+        {
+            xml.Read();
+            switch (xml.Value)
+            {
+                case "Circle":
+                    return CircleParser(xml);
+                case "Ellipse":
+                    return EllipseParser(xml);
+                case "Polygonum":
+                    return PolygonumParser(xml);
+                case "Rectangle":
+                    return RectangleParser(xml);
+                case "Triangle":
+                    return TriangleParser(xml);
+                default:
+                    return null;
+            }
+        }
+
         //Method which processing circle.
         private static Figure CircleParser(XmlReader xml)
         {
             double radius = 0;
-            while((xml.NodeType == XmlNodeType.Element) && (xml.Name != "material"))
+            while(xml.Name != "material")
             {
                 xml.Read();
                 if ((xml.NodeType == XmlNodeType.Element) && (xml.Name == "radius"))
@@ -51,7 +72,7 @@ namespace XmlProcessing
         {
             double a = 0;
             double b = 0;
-            while ((xml.NodeType == XmlNodeType.Element) && (xml.Name != "material"))
+            while (xml.Name != "material")
             {
                 xml.Read();
                 if ((xml.NodeType == XmlNodeType.Element) && (xml.Name == "sideA"))
@@ -74,7 +95,7 @@ namespace XmlProcessing
         {
             double d1 = 0;
             double d2 = 0;
-            while ((xml.NodeType == XmlNodeType.Element) && (xml.Name != "material"))
+            while (xml.Name != "material")
             {
                 xml.Read();
                 if ((xml.NodeType == XmlNodeType.Element) && (xml.Name == "diagonalA"))
@@ -98,7 +119,7 @@ namespace XmlProcessing
             double a = 0;
             double b = 0;
             double c = 0;
-            while ((xml.NodeType == XmlNodeType.Element) && (xml.Name != "material"))
+            while (xml.Name != "material")
             {
                 xml.Read();
                 if ((xml.NodeType == XmlNodeType.Element) && (xml.Name == "sideA"))
@@ -126,10 +147,10 @@ namespace XmlProcessing
         {
             List<Point> points = new List<Point>();
             int i = 0;
-            while ((xml.NodeType == XmlNodeType.Element) && (xml.Name != "material"))
+            while (xml.Name != "material")
             {
                 xml.Read();
-                if ((xml.NodeType == XmlNodeType.Element) && (xml.Name == "point" + i))
+                if ((xml.NodeType == XmlNodeType.Element) && (xml.Name == "point" + (i + 1)))
                 {
                     xml.Read();
                     string[] words = (xml.Value).Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
@@ -139,28 +160,6 @@ namespace XmlProcessing
             }
             Polygonum polygonum = new Polygonum(points.ToArray());
             return Decorating(xml, polygonum);
-        }
-
-        //Method which sets the method for processing the figure.
-        private static Figure SelectingFigure(XmlReader xml)
-        {
-            xml.Read();
-            xml.Read();
-            switch (xml.Value)
-            {
-                case "Circle":
-                    return CircleParser(xml);
-                case "Ellipse":
-                    return EllipseParser(xml);
-                case "Polygonum":
-                    return PolygonumParser(xml);
-                case "Rectangle":
-                    return RectangleParser(xml);
-                case "Triangle":
-                    return TriangleParser(xml);
-                default:
-                    return null;
-            }
         }
 
         //Method which converts a string to an element of enum.
@@ -199,6 +198,7 @@ namespace XmlProcessing
                 xml.Read();
                 material = xml.Value;
             }
+            xml.Read();
             xml.Read();
             xml.Read();
             if ((xml.NodeType == XmlNodeType.Element) && (xml.Name == "color"))

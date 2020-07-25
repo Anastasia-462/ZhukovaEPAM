@@ -1,7 +1,7 @@
 ﻿namespace Figures
 {
     /// <summary>
-    /// Wrap interface.
+    /// Film interface.
     /// </summary>
     public interface IFilm
     {

@@ -28,7 +28,7 @@ namespace Figures
         }
 
         /// <summary>
-        /// Method that checks the class of the decorated object
+        /// Method that checks the class of the decorated object.
         /// </summary>
         /// <returns>Object type.</returns>
         public override Type TypeExist()
@@ -72,6 +72,15 @@ namespace Figures
         public override int GetHashCode()
         {
             return -1854858383 + figure.GetHashCode();
+        }
+
+        /// <summary>
+        /// Overriden method to output a string with the characteristics of the decorator.
+        /// </summary>
+        /// <returns>A string.</returns>
+        public override string ToString()
+        {
+            return "Decorator : Figure = " + figure.ToString();
         }
     }
 }

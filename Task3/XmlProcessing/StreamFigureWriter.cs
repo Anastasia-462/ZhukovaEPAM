@@ -11,18 +11,22 @@ namespace XmlProcessing
         /// <summary>
         /// The main method which processing xml file.
         /// </summary>
-        public static void XmlStreamWriting(Figure[] figures)
+        public static void XmlStreamWriting(Figure[] figures, string path)
         {
-            using (StreamWriter stream = new StreamWriter("Figures.xml"))
+            using (StreamWriter stream = new StreamWriter(path))
             {
-                stream.WriteLine("<?xml version=" + "1.0" + " encoding=" + "utf - 8" + "?>");
+                stream.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
                 stream.WriteLine("<figures>");
                 for(int i = 0; i < figures.Length; i++)
                 {
-                    stream.WriteLine("\t<figure>");
-                    SelectingFigure(stream, figures[i]);
-                    stream.WriteLine("\t</figure>");
+                    if(figures[i] != null)
+                    {
+                        stream.WriteLine("\t<figure>");
+                        SelectingFigure(stream, figures[i]);
+                        stream.WriteLine("\t</figure>");
+                    }                    
                 }
+                stream.Write("</figures>");
             }
         }
 
@@ -75,9 +79,9 @@ namespace XmlProcessing
             stream.WriteLine("\t\t<type>" + "Polygonum" + "</type>");
             for (int i = 0; i < polygonum.Points.Length; i++)
             {
-                stream.Write("\t\t<point" + i + ">");
+                stream.Write("\t\t<point" + (i + 1) + ">");
                 stream.Write(polygonum.Points[i].X + " " + polygonum.Points[i].Y);
-                stream.Write("</point" + i + ">");
+                stream.WriteLine("</point" + (i + 1) + ">");
             }
             FormCharacteristics(stream, figure);
         }
@@ -109,7 +113,7 @@ namespace XmlProcessing
             stream.Write("\t\t<material>");
             if (figure is PaperDecorator)
             {
-                stream.Write("Paper" + "</material>");
+                stream.WriteLine("Paper" + "</material>");
                 if (((IPaper)figure).Color != Colors.None)
                     stream.WriteLine("\t\t<color>" + ((IPaper)figure).Color + "</color>");
             }

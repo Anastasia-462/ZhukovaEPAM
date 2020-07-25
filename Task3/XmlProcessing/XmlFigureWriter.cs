@@ -11,15 +11,23 @@ namespace XmlProcessing
         /// <summary>
         /// The main method which processing xml file.
         /// </summary>
-        public static void XmlWriting(Figure[] figures)
+        public static void XmlWriting(Figure[] figures, string path)
         {
-            using (XmlWriter xml = XmlWriter.Create("Figures.xml"))
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
+            settings.IndentChars = "\t";
+            settings.NewLineChars = "\r\n";
+            using (XmlWriter xml = XmlWriter.Create(path, settings))
             {
+                //xml.Settings.NewLineChars = "\r\n";                
                 xml.WriteStartDocument();
                 xml.WriteStartElement("figures");
                 for (int i = 0; i < figures.Length; i++)
                 {
-                    SelectingFigure(xml, figures[i]);
+                    if (figures[i] != null)
+                    {
+                        SelectingFigure(xml, figures[i]);
+                    }
                 }
                 xml.WriteEndDocument();
             }
@@ -60,20 +68,8 @@ namespace XmlProcessing
             xml.WriteStartElement("radius");
             xml.WriteString($"{ circle.Radius}");
             xml.WriteEndElement();
-            xml.WriteStartElement("material");
-            if(figure is PaperDecorator)
-            {
-                xml.WriteString("Paper");
-                if(((IPaper)figure).Color != Colors.None)
-                {
-                    xml.WriteStartElement("color");
-                    xml.WriteString($"{ ((IPaper)figure).Color }");
-                    xml.WriteEndElement();
-                }                    
-            }                
-            else
-                xml.WriteString("Film");
-            xml.WriteEndElement();
+            FormCharacteristics(xml, figure);
+
             xml.WriteEndElement();
         }
 
@@ -92,20 +88,8 @@ namespace XmlProcessing
             xml.WriteStartElement("diagonalB");
             xml.WriteString($"{ ellipse.DiagonalB }");
             xml.WriteEndElement();
-            xml.WriteStartElement("material");
-            if (figure is PaperDecorator)
-            {
-                xml.WriteString("Paper");
-                if (((IPaper)figure).Color != Colors.None)
-                {
-                    xml.WriteStartElement("color");
-                    xml.WriteString($"{ ((IPaper)figure).Color }");
-                    xml.WriteEndElement();
-                }
-            }
-            else
-                xml.WriteString("Film");
-            xml.WriteEndElement();
+            FormCharacteristics(xml, figure);
+
             xml.WriteEndElement();
         }
 
@@ -120,24 +104,12 @@ namespace XmlProcessing
             xml.WriteEndElement();
             for(int i = 0; i < polygonum.Points.Length; i++)
             {
-                xml.WriteStartElement("point" + i);
+                xml.WriteStartElement("point" + (i + 1));
                 xml.WriteString(polygonum.Points[i].X + " " + polygonum.Points[i].Y);
                 xml.WriteEndElement();
             }
-            xml.WriteStartElement("material");
-            if (figure is PaperDecorator)
-            {
-                xml.WriteString("Paper");
-                if (((IPaper)figure).Color != Colors.None)
-                {
-                    xml.WriteStartElement("color");
-                    xml.WriteString($"{ ((IPaper)figure).Color }");
-                    xml.WriteEndElement();
-                }
-            }
-            else
-                xml.WriteString("Film");
-            xml.WriteEndElement();
+            FormCharacteristics(xml, figure);
+
             xml.WriteEndElement();
         }
 
@@ -159,20 +131,8 @@ namespace XmlProcessing
             xml.WriteStartElement("sideC");
             xml.WriteString($"{ triangle.C }");
             xml.WriteEndElement();
-            xml.WriteStartElement("material");
-            if (figure is PaperDecorator)
-            {
-                xml.WriteString("Paper");
-                if (((IPaper)figure).Color != Colors.None)
-                {
-                    xml.WriteStartElement("color");
-                    xml.WriteString($"{ ((IPaper)figure).Color }");
-                    xml.WriteEndElement();
-                }
-            }
-            else
-                xml.WriteString("Film");
-            xml.WriteEndElement();
+            FormCharacteristics(xml, figure);
+
             xml.WriteEndElement();
         }
 
@@ -191,10 +151,19 @@ namespace XmlProcessing
             xml.WriteStartElement("sideB");
             xml.WriteString($"{ rectangle.B }");
             xml.WriteEndElement();
+            FormCharacteristics(xml, figure);
+
+            xml.WriteEndElement();
+        }
+
+        //Method which forming material and color for the figure.
+        private static void FormCharacteristics(XmlWriter xml, Figure figure)
+        {
             xml.WriteStartElement("material");
             if (figure is PaperDecorator)
             {
                 xml.WriteString("Paper");
+                xml.WriteEndElement();
                 if (((IPaper)figure).Color != Colors.None)
                 {
                     xml.WriteStartElement("color");
@@ -203,9 +172,10 @@ namespace XmlProcessing
                 }
             }
             else
+            {
                 xml.WriteString("Film");
-            xml.WriteEndElement();
-            xml.WriteEndElement();
+                xml.WriteEndElement();
+            }
         }
     }
 }

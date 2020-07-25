@@ -1,9 +1,6 @@
 ﻿using Figures;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using XmlProcessing;
 
 namespace Case
@@ -13,7 +10,19 @@ namespace Case
     /// </summary>
     public class Box
     {
-        Figure[] figures = new Figure[20];
+        /// <summary>
+        /// Array of figures.
+        /// </summary>
+        public Figure[] Figures { get => figures; }
+        private Figure[] figures;
+
+        /// <summary>
+        /// Constructor of this class.
+        /// </summary>
+        public Box()
+        {
+            figures = new Figure[20];
+        }
 
         /// <summary>
         /// Mathod to add new figure in the box.
@@ -21,18 +30,16 @@ namespace Case
         /// <param name="figure">A Figure object.</param>
         public void AddFigure(Figure figure)
         {
-            for(int i = 0; i < figures.Length; i++)
+            int i = 0;
+            while(figures[i] != null)
             {
-                if (figures[figures.Length - 1] != null)
-                    throw new Exception("You can't add a figure because the box is full.");
-                if (figures[i] != figure)
-                {
-                    if (figures[i] == null)
-                        figures[i] = figure;
-                }
-                else
+                if(figures[i].Equals(figure))
                     throw new Exception("This figure already exists.");
+                if(i == figures.Length - 1)
+                    throw new Exception("You can't add a figure because the box is full.");
+                i++;
             }
+            figures[i] = figure;
         }
 
         /// <summary>
@@ -82,7 +89,7 @@ namespace Case
         {
             for(int i = 0; i < figures.Length; i++)
             {
-                if (figures[i].Equals(figure))
+                if ((figures[i] != null) && (figures[i].Equals(figure)))
                     return i;
             }
             return -1;
@@ -154,7 +161,7 @@ namespace Case
         /// <returns>Array of film figures.</returns>
         public Figure[] GetFilmFigures()
         {
-            List<Figure> filmFigures = null;
+            List<Figure> filmFigures = new List<Figure>();
             for (int i = 0; i < figures.Length; i++)
             {
                 if (figures[i] is FilmDecorator)
@@ -166,15 +173,15 @@ namespace Case
         /// <summary>
         /// Method to save all figures with the help StreamWriter.
         /// </summary>
-        public void SaveAllFiguresSW()
+        public void SaveAllFiguresSW(string path)
         {
-            StreamFigureWriter.XmlStreamWriting(figures);
+            StreamFigureWriter.XmlStreamWriting(figures, path);
         }
 
         /// <summary>
         /// Method to save only paper figures with the help StreamWriter.
         /// </summary>
-        public void SavePaperFiguresSW()
+        public void SavePaperFiguresSW(string path)
         {
             List<Figure> paperFigure = new List<Figure>();
             for(int i = 0; i < figures.Length; i++)
@@ -182,13 +189,13 @@ namespace Case
                 if (figures[i] is PaperDecorator)
                     paperFigure.Add(figures[i]);
             }
-            StreamFigureWriter.XmlStreamWriting(paperFigure.ToArray());
+            StreamFigureWriter.XmlStreamWriting(paperFigure.ToArray(), path);
         }
 
         /// <summary>
         /// Method to save only film figures with the help StreamWriter.
         /// </summary>
-        public void SaveFilmFiguresSW()
+        public void SaveFilmFiguresSW(string path)
         {
             List<Figure> filmFigure = new List<Figure>();
             for (int i = 0; i < figures.Length; i++)
@@ -196,21 +203,21 @@ namespace Case
                 if (figures[i] is FilmDecorator)
                     filmFigure.Add(figures[i]);
             }
-            StreamFigureWriter.XmlStreamWriting(filmFigure.ToArray());
+            StreamFigureWriter.XmlStreamWriting(filmFigure.ToArray(), path);
         }
 
         /// <summary>
         /// Method to save all figures with the help XmlWriter.
         /// </summary>
-        public void SaveAllFiguresXW()
+        public void SaveAllFiguresXW(string path)
         {
-            XmlFigureWriter.XmlWriting(figures);
+            XmlFigureWriter.XmlWriting(figures, path);
         }
 
         /// <summary>
         /// Method to save only paper figures with the help XmlWriter.
         /// </summary>
-        public void SavePaperFiguresXW()
+        public void SavePaperFiguresXW(string path)
         {
             List<Figure> paperFigure = new List<Figure>();
             for (int i = 0; i < figures.Length; i++)
@@ -218,13 +225,13 @@ namespace Case
                 if (figures[i] is PaperDecorator)
                     paperFigure.Add(figures[i]);
             }
-            XmlFigureWriter.XmlWriting(paperFigure.ToArray());
+            XmlFigureWriter.XmlWriting(paperFigure.ToArray(), path);
         }
 
         /// <summary>
         /// Method to save only film figure with the help XmlWriter.
         /// </summary>
-        public void SaveFilmFiguresXW()
+        public void SaveFilmFiguresXW(string path)
         {
             List<Figure> filmFigure = new List<Figure>();
             for (int i = 0; i < figures.Length; i++)
@@ -232,25 +239,75 @@ namespace Case
                 if (figures[i] is FilmDecorator)
                     filmFigure.Add(figures[i]);
             }
-            XmlFigureWriter.XmlWriting(filmFigure.ToArray());
+            XmlFigureWriter.XmlWriting(filmFigure.ToArray(), path);
         }
 
         /// <summary>
         /// Method to download all figures to the box from a xml file with the help StreamReader.
         /// </summary>
         /// <returns>An array of figures.</returns>
-        public Figure[] DownloadFiguresSR()
+        public void DownloadFiguresSR(string path)
         {
-            return XmlFigureReader.XmlReading();
+            figures = StreamFigureReader.XmlStreamReading(path);
         }
 
         /// <summary>
         /// Method to download all figures to the box from a xml file with the help XmlReader.
         /// </summary>
         /// <returns>An array of figures.</returns>
-        public Figure[] DownloadFiguresXR()
+        public void DownloadFiguresXR(string path)
         {
-            return StreamFigureReader.XmlStreamReading();
+            figures = XmlFigureReader.XmlReading(path);
+        }
+
+        //Method to compare the arrays.
+        private bool ComparisonOfArray(Figure[] figures)
+        {
+            if (this.figures.Length != figures.Length) return false;
+            int amount = 0;
+            for (int i = 0; i < this.figures.Length; i++)
+            {
+                if ((this.figures[i] != null) && (figures[i] != null) && (this.figures[i].Equals(figures[i])))
+                    amount++;
+                if ((figures[i] == null) && (this.figures[i] == null)) 
+                    amount++;
+            }
+            return (amount == this.figures.Length);
+        }
+
+        /// <summary>
+        /// A method that determines whether two object instances are equal.
+        /// </summary>
+        /// <param name="obj">An object.</param>
+        /// <returns>True if objects are equals, and false if they are not.</returns>
+        public override bool Equals(object obj)
+        {
+            return obj is Box box &&
+                   ComparisonOfArray(box.figures);
+        }
+
+        /// <summary>
+        /// The method that the object hashcode will define.
+        /// </summary>
+        /// <returns>An int number.</returns>
+        public override int GetHashCode()
+        {
+            return 429526846 + EqualityComparer<Figure[]>.Default.GetHashCode(figures);
+        }
+
+        /// <summary>
+        /// Overriden method to output a string with the characteristics of the box.
+        /// </summary>
+        /// <returns>A string.</returns>
+        public override string ToString()
+        {
+            string result = "Box : Figures - ";
+            for(int i = 0; i < figures.Length; i++)
+            {
+                if(figures[i] != null)
+                    result += figures[i].ToString() + "\n";
+            }
+            return result;
         }
     }
 }

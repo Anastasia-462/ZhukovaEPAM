@@ -74,8 +74,8 @@ namespace Figures
         /// <returns>A string.</returns>
         public override string ToString()
         {
-            return "Triangle : SideA = " + Convert.ToString(A) + "SideB = " + Convert.ToString(B) +
-                "SideC = " + Convert.ToString(C) + " S = " + Convert.ToString(CalculateSquare()) +
+            return "Triangle : SideA = " + Convert.ToString(A) + " SideB = " + Convert.ToString(B) +
+                " SideC = " + Convert.ToString(C) + " S = " + Convert.ToString(CalculateSquare()) +
                 " P = " + Convert.ToString(CalculatePerimeter());
         }
 

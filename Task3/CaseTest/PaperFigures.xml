@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<figures>
+	<figure>
+		<type>Circle</type>
+		<radius>3</radius>
+		<material>Paper</material>
+		<color>Blue</color>
+	</figure>
+	<figure>
+		<type>Triangle</type>
+		<sideA>3</sideA>
+		<sideB>2</sideB>
+		<sideC>1</sideC>
+		<material>Paper</material>
+	</figure>
+	<figure>
+		<type>Ellipse</type>
+		<diagonalA>3</diagonalA>
+		<diagonalB>6</diagonalB>
+		<material>Paper</material>
+		<color>Red</color>
+	</figure>
+</figures>

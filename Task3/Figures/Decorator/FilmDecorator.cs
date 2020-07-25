@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Figures
+﻿namespace Figures
 {
     /// <summary>
     /// A specific figure decorator.
@@ -36,6 +30,15 @@ namespace Figures
         public override int GetHashCode()
         {
             return base.GetHashCode();
+        }
+
+        /// <summary>
+        /// Overriden method to output a string with the characteristics of the decorator.
+        /// </summary>
+        /// <returns>A string.</returns>
+        public override string ToString()
+        {
+            return base.ToString();
         }
     }
 }

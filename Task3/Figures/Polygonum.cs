@@ -74,7 +74,7 @@ namespace Figures
             string result = "Polygonum : ";
             for (int i = 0; i < Points.Length; i++)
             {
-                result += "Side " + (i + 1) + ": " + "x = " + Convert.ToString(Points[i].X) + "y = " + Convert.ToString(Points[i].Y) + "\n";
+                result += "Side " + (i + 1) + ": " + "x = " + Convert.ToString(Points[i].X) + " y = " + Convert.ToString(Points[i].Y) + "\n";
             }
             result += " S = " + Convert.ToString(CalculateSquare()) + " P = " + Convert.ToString(CalculatePerimeter());
             return result;

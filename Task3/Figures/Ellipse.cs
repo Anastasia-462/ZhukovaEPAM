@@ -66,7 +66,7 @@ namespace Figures
         /// <returns>A string.</returns>
         public override string ToString()
         {
-            return "Ellipse : DiagonalA = " + Convert.ToString(DiagonalA) + "DiagonalB = " + Convert.ToString(DiagonalB) +
+            return "Ellipse : DiagonalA = " + Convert.ToString(DiagonalA) + " DiagonalB = " + Convert.ToString(DiagonalB) +
                 " S = " + Convert.ToString(CalculateSquare()) + " P = " + Convert.ToString(CalculatePerimeter());
         }
 

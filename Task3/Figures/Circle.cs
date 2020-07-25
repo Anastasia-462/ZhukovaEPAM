@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Figures
 {
@@ -59,7 +55,7 @@ namespace Figures
         /// <returns>A string.</returns>
         public override string ToString()
         {
-            return "Circle : R = " + Convert.ToString(Radius) + "S = " + Convert.ToString(CalculateSquare()) + " P = " + Convert.ToString(CalculatePerimeter());
+            return "Circle : R = " + Convert.ToString(Radius) + " S = " + Convert.ToString(CalculateSquare()) + " P = " + Convert.ToString(CalculatePerimeter());
         }
 
 

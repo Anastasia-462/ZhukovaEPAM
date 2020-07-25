@@ -4,7 +4,7 @@
     <type>Circle</type>
     <radius>3</radius>
     <material>Paper</material>
-    <color>Blue</color>    
+    <color>Blue</color>
   </figure>
   <figure>
     <type>Triangle</type>
