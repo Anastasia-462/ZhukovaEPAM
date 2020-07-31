@@ -53,8 +53,6 @@ namespace FiguresTest
             Circle circle = new Circle(60);
             Triangle triangle = new Triangle(1, 1, 1);
             triangle = new Triangle(circle);
-            //Figure.PaintFigure(circle, Colors.Blue);
-            //Assert.AreEqual(new PaperDecorator(new Circle(6), Colors.Blue), Figure.PaintFigure(circle, Colors.Blue));
         }
 
         /// <summary>
