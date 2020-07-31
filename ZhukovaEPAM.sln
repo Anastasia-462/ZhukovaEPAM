@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpIp", "Task4\TcpIp\TcpIp.csproj", "{F784307D-37EE-4229-B990-E99ECD0FF1C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TcpIpTest", "Task4\TcpIpTest\TcpIpTest.csproj", "{139794F3-6E53-4F42-9E69-16CFEABF73A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F784307D-37EE-4229-B990-E99ECD0FF1C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F784307D-37EE-4229-B990-E99ECD0FF1C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F784307D-37EE-4229-B990-E99ECD0FF1C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{139794F3-6E53-4F42-9E69-16CFEABF73A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{139794F3-6E53-4F42-9E69-16CFEABF73A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{139794F3-6E53-4F42-9E69-16CFEABF73A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{139794F3-6E53-4F42-9E69-16CFEABF73A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

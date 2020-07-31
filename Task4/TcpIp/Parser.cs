@@ -27,7 +27,7 @@ namespace TcpIp
                 char[] letters = words[i].ToCharArray();
                 foreach (char x in letters)
                 {
-                    if ((int)Char.GetNumericValue(x) < 127)
+                    if ((int)x < 127)
                         result += alphabetEng[x];
                     else
                         result += alphabetRus[x];
