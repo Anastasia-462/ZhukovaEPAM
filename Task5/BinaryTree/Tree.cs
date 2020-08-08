@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace BinaryTree
 {
@@ -199,6 +201,90 @@ namespace BinaryTree
                 }
             }
             return false;
+        }
+
+        /// <summary>
+        /// Method to serialization of binary tree.
+        /// </summary>
+        /// <param name="path">File path.</param>
+        /// <returns>True if the tree is serialized and false in the opposite case.</returns>
+        public bool Serialization(string path)
+        {
+            bool result = false;
+
+            List<T> list = new List<T>();
+            TreeToList(list);
+            XmlSerializer format = new XmlSerializer(typeof(List<T>));
+            using (Stream fStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                format.Serialize(fStream, list);
+                result = true;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Method to deserialization of binary tree.
+        /// </summary>
+        /// <param name="path">File path.</param>
+        /// <returns>True if the tree is deserialized and false in the opposite case.</returns>
+        public bool Deserialization(string path)
+        {
+            bool result = false;
+            XmlSerializer format = new XmlSerializer(typeof(List<T>));
+            using (Stream fs = new FileStream(path, FileMode.OpenOrCreate))
+            {
+                List<T> list = (List<T>)format.Deserialize(fs);
+                Right = null;
+                Left = null;
+                int middle = list.Count / 2;
+                Value = list.ElementAt(middle);
+                ListToTree(list, 0, middle);
+                ListToTree(list, middle, list.Count);
+                result = true;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Method for balance of the tree.
+        /// </summary>
+        public void Balance()
+        {
+            List<T> list = new List<T>();
+            TreeToList(list);
+            list.Sort();
+            Right = null;
+            Left = null;
+            int middle = list.Count / 2;
+            Value = list.ElementAt(middle);
+            ListToTree(list, 0, middle);
+            ListToTree(list, middle, list.Count);
+        }
+
+        //Method to form tree from list.
+        private List<T> TreeToList(List<T> treeList)
+        {
+            treeList.Add(Value);
+            if (Left != null)
+                Left.TreeToList(treeList);
+            if (Right != null)
+                Right.TreeToList(treeList);
+            return treeList;
+        }
+
+        //Method to form list from tree.
+        private void ListToTree(List<T> treeList, int start, int finish)
+        {
+            int middle = (start + finish) / 2;
+            if (middle > start && middle < finish)
+            {
+                Add(treeList.ElementAt(middle));
+                ListToTree(treeList, start, middle);
+                ListToTree(treeList, middle, finish);
+            }
+            else if ((start == 0) && (finish == 1))
+                Add(treeList.ElementAt(start));
         }
 
         //Method for searching node.
