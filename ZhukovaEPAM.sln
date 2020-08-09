@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryTree", "Task5\BinaryT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryTreeTest", "Task5\BinaryTreeTest\BinaryTreeTest.csproj", "{9885CA9D-CBF9-48FC-8611-6ACD8B05A52F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "task5.1", "task5.1", "{5E7AC663-F2B0-4631-A367-8339D3E47148}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serializer", "Task5\Serializer\Serializer.csproj", "{A8B7671A-D548-4685-AA51-B87F5FAF0182}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,9 +25,17 @@ Global
 		{9885CA9D-CBF9-48FC-8611-6ACD8B05A52F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9885CA9D-CBF9-48FC-8611-6ACD8B05A52F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9885CA9D-CBF9-48FC-8611-6ACD8B05A52F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8B7671A-D548-4685-AA51-B87F5FAF0182}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8B7671A-D548-4685-AA51-B87F5FAF0182}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8B7671A-D548-4685-AA51-B87F5FAF0182}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8B7671A-D548-4685-AA51-B87F5FAF0182}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1E57C69F-87F4-4BE9-8A72-21FDCE6E4183} = {5E7AC663-F2B0-4631-A367-8339D3E47148}
+		{9885CA9D-CBF9-48FC-8611-6ACD8B05A52F} = {5E7AC663-F2B0-4631-A367-8339D3E47148}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D5B17BF1-5A5B-43BD-93CD-1867E39E04E1}
