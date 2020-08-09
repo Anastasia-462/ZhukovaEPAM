@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
-//using System.Text.Json;
+using System.Text.Json;
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Serializer
@@ -176,6 +176,89 @@ namespace Serializer
             string jsonString = File.ReadAllText(path);
             value = (ICollection<T>)JsonSerializer.Deserialize<T>(jsonString, options);
             return value;
+        }
+
+
+
+
+        //BINARY FILE
+
+
+
+        /// <summary>
+        /// Method to binary serialization of class.
+        /// </summary>
+        /// <param name="path">File path.</param>
+        /// <param name="value">Universal parameter.</param>
+        /// <returns>True if the class is serialized and false in the opposite case.</returns>
+        public static bool BinarySerialization(string path, T value)
+        {
+            bool result = false;
+
+            BinaryFormatter formatter = new BinaryFormatter();
+            using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
+            {
+                formatter.Serialize(fs, value);
+                result = true;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Method to binary serialization of of collection of class.
+        /// </summary>
+        /// <param name="path">File path.</param>
+        /// <param name="value">Collection.</param>
+        /// <returns>True if the class is serialized and false in the opposite case.</returns>
+        public static bool BinarySerialization(string path, ICollection<T> value)
+        {
+            bool result = false;
+            List<T> values = value.ToList<T>();
+            BinaryFormatter formatter = new BinaryFormatter();
+            using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
+            {
+                formatter.Serialize(fs, values);
+                result = true;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Method to binary deserialization of class.
+        /// </summary>
+        /// <param name="path">File path.</param>
+        /// <param name="version">Verion of class.</param>
+        /// <returns>True if the class is deserialized and false in the opposite case.</returns>
+        public static T BinaryDeserialization(string path, int version)
+        {
+            T value;
+            BinaryFormatter formatter = new BinaryFormatter();
+            using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
+            {
+                value = (T)formatter.Deserialize(fs);
+
+            }
+            if (version == value.GetHashCode())
+                return value;
+            else
+                return default(T);
+        }
+
+        /// <summary>
+        /// Method to binary deserialization of collection of class.
+        /// </summary>
+        /// <param name="path">File path.</param>
+        /// <returns>True if the class is deserialized and false in the opposite case.</returns>
+        public static ICollection<T> BinaryDeserializationCollection(string path)
+        {
+            ICollection<T> value;
+            BinaryFormatter formatter = new BinaryFormatter();
+            using (Stream fs = new FileStream(path, FileMode.OpenOrCreate))
+            {
+                value = (ICollection<T>)formatter.Deserialize(fs);
+            }
+            return value;
+
         }
     }
 }
