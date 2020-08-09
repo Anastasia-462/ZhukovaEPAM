@@ -302,5 +302,21 @@ namespace BinaryTree
                     return null;
             }
         }
+        /// <summary>
+        /// Overriden method to output a string with the characteristics of the binary tree.
+        /// </summary>
+        /// <returns>A string.</returns>
+        public override string ToString()
+        {
+            string root = "";
+            string left = "";
+            string right = "";
+            root = Value.ToString();
+            if (Left != null)
+                left = Left.ToString();
+            if (Right != null)
+                right = Right.ToString();
+            return root + " (" + left + ", " + right + ")";
+        }
     }
 }
