@@ -89,5 +89,93 @@ namespace Serializer
             }
             return value;
         }
+
+
+
+        //JSON
+
+
+        /// <summary>
+        /// Method to json serialization of class.
+        /// </summary>
+        /// <param name="path">File path.</param>
+        /// <param name="value">Universal parameter.</param>
+        /// <returns>True if the class is serialized and false in the opposite case.</returns>
+        public static bool JsonSerialization(string path, T value)
+        {
+            bool result = false;
+            var options = new JsonSerializerOptions
+            {
+                AllowTrailingCommas = true,
+                WriteIndented = true
+            };
+            string jsonString = JsonSerializer.Serialize(value, options);
+            if (jsonString != null)
+                result = true;
+            File.WriteAllText(path, jsonString);
+            return result;
+        }
+
+        /// <summary>
+        /// Method to json serialization of of collection of class.
+        /// </summary>
+        /// <param name="path">File path.</param>
+        /// <param name="value">Collection.</param>
+        /// <returns>True if the class is serialized and false in the opposite case.</returns>
+        public static bool JsonSerialization(string path, ICollection<T> value)
+        {
+            bool result = false;
+            string jsonString = "";
+            var options = new JsonSerializerOptions
+            {
+                AllowTrailingCommas = true,
+                WriteIndented = true
+            };
+            jsonString = JsonSerializer.Serialize(value, options);
+            File.WriteAllText(path, jsonString);
+            if (jsonString != null)
+                result = true;
+            return result;
+        }
+
+        /// <summary>
+        /// Method to json deserialization of class.
+        /// </summary>
+        /// <param name="path">File path.</param>
+        /// <param name="version">Version of class.</param>
+        /// <returns>True if the class is deserialized and false in the opposite case.</returns>
+        public static T JsonDeserialization(string path, int version)
+        {
+            T value;
+            var options = new JsonSerializerOptions
+            {
+                AllowTrailingCommas = true,
+                WriteIndented = true
+            };
+            string jsonString = File.ReadAllText(path);
+            value = JsonSerializer.Deserialize<T>(jsonString, options);
+            if (version == value.GetHashCode())
+                return value;
+            else
+                return default(T);
+        }
+
+        /// <summary>
+        /// Method to xml deserialization of collection of class.
+        /// </summary>
+        /// <param name="path">File path.</param>
+        /// <returns>True if the class is deserialized and false in the opposite case.</returns>
+        public static ICollection<T> JsonDeserializationCollection(string path)
+        {
+            ICollection<T> value = new List<T>();
+            var options = new JsonSerializerOptions
+            {
+                AllowTrailingCommas = true,
+                WriteIndented = true
+            };
+            string jsonString = File.ReadAllText(path);
+            value = (ICollection<T>)JsonSerializer.Deserialize<T>(jsonString, options);
+            return value;
+        }
     }
 }
