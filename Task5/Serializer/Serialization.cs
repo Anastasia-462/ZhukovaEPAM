@@ -58,7 +58,7 @@ namespace Serializer
         /// </summary>
         /// <param name="path">File path.</param>
         /// <param name="version">Version of class.</param>
-        /// <returns>True if the class is deserialized and false in the opposite case.</returns>
+        /// <returns>T - universal parameter.</returns>
         public static T XmlDeserialization(string path, int version)
         {
             T value;
@@ -78,7 +78,7 @@ namespace Serializer
         /// Method to xml deserialization of collection of class.
         /// </summary>
         /// <param name="path">File path.</param>
-        /// <returns>True if the class is deserialized and false in the opposite case.</returns>
+        /// <returns>ICollection.</returns>
         public static ICollection<T> XmlDeserializationCollection(string path)
         {
             ICollection<T> value;
@@ -143,7 +143,7 @@ namespace Serializer
         /// </summary>
         /// <param name="path">File path.</param>
         /// <param name="version">Version of class.</param>
-        /// <returns>True if the class is deserialized and false in the opposite case.</returns>
+        /// <returns>T - universal parameter.</returns>
         public static T JsonDeserialization(string path, int version)
         {
             T value;
@@ -164,7 +164,7 @@ namespace Serializer
         /// Method to xml deserialization of collection of class.
         /// </summary>
         /// <param name="path">File path.</param>
-        /// <returns>True if the class is deserialized and false in the opposite case.</returns>
+        /// <returns>ICollection.</returns>
         public static ICollection<T> JsonDeserializationCollection(string path)
         {
             ICollection<T> value = new List<T>();
@@ -228,7 +228,7 @@ namespace Serializer
         /// </summary>
         /// <param name="path">File path.</param>
         /// <param name="version">Verion of class.</param>
-        /// <returns>True if the class is deserialized and false in the opposite case.</returns>
+        /// <returns>T - universal parameter.</returns>
         public static T BinaryDeserialization(string path, int version)
         {
             T value;
@@ -248,7 +248,7 @@ namespace Serializer
         /// Method to binary deserialization of collection of class.
         /// </summary>
         /// <param name="path">File path.</param>
-        /// <returns>True if the class is deserialized and false in the opposite case.</returns>
+        /// <returns>ICollection.</returns>
         public static ICollection<T> BinaryDeserializationCollection(string path)
         {
             ICollection<T> value;
