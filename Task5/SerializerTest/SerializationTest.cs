@@ -55,7 +55,7 @@ namespace SerializerTest
         {
             Student student = new Student("Artem", "History", new DateTime(2012, 10, 5), 9);
             Serialization<Student>.XmlSerialization("Student.xml", student);
-            Student studentNew = Serialization<Student>.XmlDeserialization("Student.xml", 155);
+            Student studentNew = Serialization<Student>.XmlDeserialization("Student.xml", 15);
             Assert.AreEqual(default(Student), studentNew);
         }
 
@@ -111,9 +111,9 @@ namespace SerializerTest
         public void TestClass_JsonDeserialization()
         {
             Student student = new Student("Artem", "History", new DateTime(2012, 10, 5), 9);
-            Serialization<Student>.JsonSerialization("JsonStudent.txt", student);
-            Student studentNew = Serialization<Student>.JsonDeserialization("Student.txt", student.GetHashCode());
-            Assert.AreEqual(student, studentNew);
+            Serialization<Student>.JsonSerialization("Student.txt", student);
+
+            Assert.AreEqual(student, Serialization<Student>.JsonDeserialization("Student.txt", student.GetHashCode()));
         }
 
         /// <summary>
@@ -134,14 +134,17 @@ namespace SerializerTest
         [TestMethod]
         public void TestCollection_JsonDeserialization()
         {
+            string actual = "";
             StudentCollection students = new StudentCollection();
             students.Add(new Student("Artem", "History", new DateTime(2012, 10, 5), 7));
             students.Add(new Student("Misha", "Math", new DateTime(2012, 10, 9), 5));
             students.Add(new Student("Alena", "OOP", new DateTime(2012, 10, 14), 8));
             students.Add(new Student("Lena", "History", new DateTime(2012, 10, 5), 9));
-            Serialization<Student>.JsonSerialization("JsonStudent.txt", students);
-
-            Assert.AreEqual(students, Serialization<Student>.JsonDeserializationCollection("Student.txt"));
+            Serialization<Student>.JsonSerialization("Student.txt", students);
+            ICollection<Student> studentNew = Serialization<Student>.JsonDeserializationCollection("Student.txt");
+            foreach (Student st in studentNew)
+                actual += st.ToString();
+            Assert.AreEqual(students.ToString(), actual);
         }
 
 

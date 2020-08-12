@@ -24,6 +24,7 @@ namespace Serializer
         }
 
         /// <summary>
+        /// Indexer.
         /// </summary>
         /// <param name="index">An int number.</param>
         /// <returns></returns>

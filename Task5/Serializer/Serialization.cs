@@ -174,7 +174,7 @@ namespace Serializer
                 WriteIndented = true
             };
             string jsonString = File.ReadAllText(path);
-            value = (ICollection<T>)JsonSerializer.Deserialize<T>(jsonString, options);
+            value = (ICollection<T>)JsonSerializer.Deserialize<ICollection<T>>(jsonString, options);
             return value;
         }
 
