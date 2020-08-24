@@ -42,7 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exam.cs" />
     <Compile Include="FactoryDAO.cs" />
+    <Compile Include="Grades.cs" />
+    <Compile Include="Group.cs" />
     <Compile Include="IExam.cs" />
     <Compile Include="IGrade.cs" />
     <Compile Include="IGroup.cs" />
