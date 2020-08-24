@@ -4,11 +4,11 @@ namespace University
 {
     public interface IExam
     {
-        string[] GetSubjectName();
-        DateTime[] GetExamDate();
+        //string[] GetSubjectName();
+        //DateTime[] GetExamDate();
 
-        int GetIndexByName(string name);
-        int GetGroupByExamIndex(int id);
+        //int GetIndexByName(string name);
+        //int GetGroupByExamIndex(int id);
 
         /// <summary>
         /// Adding a new exam to the database.
@@ -37,5 +37,7 @@ namespace University
         /// <param name="exam">A exam.</param>
         /// <returns>True if the operation was successful, otherwise False.</returns>
         bool Delete(Exam exam);
+
+        //string GetGroupByExamIndex(int id);
     }
 }

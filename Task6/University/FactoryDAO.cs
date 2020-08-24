@@ -16,10 +16,6 @@
             MSSQL
         }
 
-        private FactoryDAO() { }
-
-        private static FactoryDAO _instance;
-
         /// <summary>
         /// Obtaining an object for accessing exams.
         /// </summary>
@@ -52,17 +48,13 @@
         /// <returns>Concrete factory.</returns>
         public static FactoryDAO GetFactoryDAO(DBMS typeFactory, string connectionString)
         {
-            //if(_instance == null)
-            //{
-                switch (typeFactory)
-                {
-                    case DBMS.MSSQL:
-                        return null;
-                    default:
-                        return null;
-                }
-            //}
-            
+            switch (typeFactory)
+            {
+                case DBMS.MSSQL:
+                    return MSSQLFactoryDAO.GetInstance(connectionString); ;
+                default:
+                    return null;
+            }
         }
     }
 }

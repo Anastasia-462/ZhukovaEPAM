@@ -5,10 +5,10 @@
     /// </summary>
     public interface IGroup
     {
-        string[] GetGroupName();
+        //string[] GetGroupName();
 
-        int GetIndexByName(string name);
-        string GetGroupByIndex(int id);
+        //int GetIndexByName(string name);
+        //string GetGroupByIndex(int id);
 
         /// <summary>
         /// Adding a new group to the database.

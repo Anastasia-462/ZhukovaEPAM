@@ -14,5 +14,14 @@
         /// Constructor of this class.
         /// </summary>
         public Group() { }
+
+        /// <summary>
+        /// Method which returns values of class fields anf properties.
+        /// </summary>
+        /// <returns>A string.</returns>
+        public override string ToString()
+        {
+            return GroupName + "";
+        }
     }
 }

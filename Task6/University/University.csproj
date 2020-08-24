@@ -50,6 +50,8 @@
     <Compile Include="IGrade.cs" />
     <Compile Include="IGroup.cs" />
     <Compile Include="IStudent.cs" />
+    <Compile Include="MSSQLExamDAO.cs" />
+    <Compile Include="MSSQLFactoryDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Student.cs" />
   </ItemGroup>
