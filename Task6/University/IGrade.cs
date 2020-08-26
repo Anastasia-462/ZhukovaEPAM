@@ -7,8 +7,8 @@
     {
         //int[] GetGrades();
 
-        string GetExamByGradeIndex(int id);
-        string GetStudentByGradeIndex(int id);
+        //string GetExamByGradeIndex(int id);
+        //string GetStudentByGradeIndex(int id);
 
         /// <summary>
         /// Adding a new grade to the database.

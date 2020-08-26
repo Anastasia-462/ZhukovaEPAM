@@ -44,7 +44,7 @@ namespace University
         private IGroup group;
 
         /// <summary>
-        /// Создание DAO поставок для MS SQL Server.
+        /// Creation of DAO exams for MS SQL Server.
         /// </summary>
         /// <param name="connectionString">The string connecting to the database.</param>
         public MSSQLExamDAO(string connectionString)
