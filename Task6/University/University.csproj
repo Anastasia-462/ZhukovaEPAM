@@ -54,6 +54,7 @@
     <Compile Include="MSSQLFactoryDAO.cs" />
     <Compile Include="MSSQLGradesDAO.cs" />
     <Compile Include="MSSQLGroupDAO.cs" />
+    <Compile Include="MSSQLStudentDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Student.cs" />
   </ItemGroup>

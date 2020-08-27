@@ -33,21 +33,38 @@ namespace University
             return _instance;
         }
 
+
+        /// <summary>
+        /// Getting an object to access the university database.
+        /// </summary>
+        /// <returns>DAO exam.</returns>
         public override IExam GetExam()
         {
             return new MSSQLExamDAO(connectionString);
         }
 
+        /// <summary>
+        /// Getting an object to access the university database.
+        /// </summary>
+        /// <returns>DAO grade.</returns>
         public override IGrade GetGrade()
         {
-            return new MSSQLGradeDAO(connectionString);
+            return new MSSQLGradesDAO(connectionString);
         }
 
+        /// <summary>
+        /// Getting an object to access the university database.
+        /// </summary>
+        /// <returns>DAO group.</returns>
         public override IGroup GetGroup()
         {
             return new MSSQLGroupDAO(connectionString);
         }
 
+        /// <summary>
+        /// Getting an object to access the university database.
+        /// </summary>
+        /// <returns>DAO student.</returns>
         public override IStudent GetStudent()
         {
             return new MSSQLStudentDAO(connectionString);

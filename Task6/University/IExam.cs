@@ -1,7 +1,8 @@
-﻿using System;
-
-namespace University
+﻿namespace University
 {
+    /// <summary>
+    /// The interface of the grade access object.
+    /// </summary>
     public interface IExam
     {
         //string[] GetSubjectName();
