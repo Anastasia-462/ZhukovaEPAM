@@ -12,7 +12,7 @@ namespace University
         /// SQL query to add data to the database.
         /// </summary>
         private const string INSERT_EXPRESSION =
-            "INSERT INTO Exams(SubjectName, ExamDate, GroupId) VALUES (@subjectName, @examDate, @groupId)";
+            "INSERT INTO Exams(SubjectName, AssessmentForm, ExamDate, GroupId) VALUES (@subjectName, @assessmentForm, @examDate, @groupId)";
 
         /// <summary>
         /// SQL query to get the list of exams from the database.
@@ -24,24 +24,22 @@ namespace University
         /// SQL query to update data in the database.
         /// </summary>
         private const string UPDATE_EXPRESSION
-            = "UPDATE Exams SET SubjectName='{0}', ExamDate='{1}', GroupId='{2}' WHERE ExamId='{4}'";
+            = "UPDATE Exams SET SubjectName=@subjectName, AssessmentForm=@assessmentForm, ExamDate=@examDate, GroupId=@groupId WHERE ExamId=@examId";
 
         /// <summary>
         /// SQL query to delete data from the database.
         /// </summary>
         private const string DELETE_EXPRESSION
-            = "DELETE FROM Exams WHERE ExamId={0}";
+            = "DELETE FROM Exams WHERE ExamId=@examId";
 
         /// <summary>
         /// Obtaining an exam ID.
         /// </summary>
         private const string GET_EXAM_EXPRESSION
-            = "SELECT ExamId FROM Exams WHERE SubjectName='{0}' AND ExamDate='{1}' AND GroupId='{2}'";
+            = "SELECT ExamId FROM Exams WHERE SubjectName=@subjectName AND AssessmentForm=@assessmentForm AND ExamDate=@examDate AND GroupId=@groupId";
 
         
         private string connectionString;
-
-        private IGroup group;
 
         /// <summary>
         /// Creation of DAO exams for MS SQL Server.
@@ -52,8 +50,6 @@ namespace University
             this.connectionString = connectionString;
 
             FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, connectionString);
-
-            group = factory.GetGroup();
         }
 
         private int GetIdExam(Exam exam)
@@ -61,15 +57,12 @@ namespace University
             int id = 0;
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
-                //int groupId = group.GetIndexByName(group.ToString());
-
                 sqlConnection.Open();
-                SqlCommand sqlCommand = new SqlCommand(
-                    string.Format(GET_EXAM_EXPRESSION,
-                    exam.SubjectName,
-                    exam.ExamDate,
-                    exam.GroupId
-                    ), sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(GET_EXAM_EXPRESSION, sqlConnection);
+                sqlCommand.Parameters.Add(new SqlParameter("@subjectName", exam.SubjectName));
+                sqlCommand.Parameters.Add(new SqlParameter("@assessmentForm", exam.AssessmentForm));
+                sqlCommand.Parameters.Add(new SqlParameter("@examDate", exam.ExamDate));
+                sqlCommand.Parameters.Add(new SqlParameter("@groupId", exam.GroupId));
                 SqlDataReader reader = sqlCommand.ExecuteReader();
                 if (reader.HasRows)
                 {
@@ -85,8 +78,9 @@ namespace University
             Exam exam = new Exam();
 
             exam.SubjectName = reader.GetString(1);
-            exam.ExamDate = reader.GetDateTime(2);
-            exam.GroupId = reader.GetInt32(3);
+            exam.AssessmentForm = reader.GetString(2);
+            exam.ExamDate = reader.GetDateTime(3);
+            exam.GroupId = reader.GetInt32(4);
             return exam;
         }
 
@@ -100,11 +94,10 @@ namespace University
             int numb;
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
-                //int groupId = group.GetIndexByName(group.ToString());
-
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand(INSERT_EXPRESSION, sqlConnection);
                 sqlCommand.Parameters.Add(new SqlParameter("@subjectName", exam.SubjectName));
+                sqlCommand.Parameters.Add(new SqlParameter("@assessmentForm", exam.AssessmentForm));
                 sqlCommand.Parameters.Add(new SqlParameter("@examDate", exam.ExamDate));
                 sqlCommand.Parameters.Add(new SqlParameter("@groupId", exam.GroupId));
 
@@ -151,11 +144,16 @@ namespace University
                 //int groupId = group.GetIndexByName(newExam.ToString());
 
                 sqlConnection.Open();
-                SqlCommand sqlCommand = new SqlCommand(
-                    string.Format(UPDATE_EXPRESSION,
-                    newExam.SubjectName,
-                    newExam.ExamDate.ToString("yyyy-MM-dd"),
-                    newExam.GroupId, id), sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(INSERT_EXPRESSION, sqlConnection);
+                sqlCommand.Parameters.Add(new SqlParameter("@subjectName", newExam.SubjectName));
+                sqlCommand.Parameters.Add(new SqlParameter("@assessmentForm", newExam.AssessmentForm));
+                sqlCommand.Parameters.Add(new SqlParameter("@examDate", newExam.ExamDate.ToString("yyyy-MM-dd")));
+                sqlCommand.Parameters.Add(new SqlParameter("@groupId", newExam.GroupId));
+                //SqlCommand sqlCommand = new SqlCommand(
+                //    string.Format(UPDATE_EXPRESSION,
+                //    newExam.SubjectName,
+                //    newExam.ExamDate.ToString("yyyy-MM-dd"),
+                //    newExam.GroupId, id), sqlConnection);
                 numb = sqlCommand.ExecuteNonQuery();
             }
             return numb > 0;
@@ -174,9 +172,8 @@ namespace University
                 int id = GetIdExam(exam);
 
                 sqlConnection.Open();
-                SqlCommand sqlCommand = new SqlCommand(
-                    string.Format(DELETE_EXPRESSION,
-                    id), sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(DELETE_EXPRESSION, sqlConnection);
+                sqlCommand.Parameters.Add(new SqlParameter("@examId", id));
                 numb = sqlCommand.ExecuteNonQuery();
             }
             return numb > 0;

@@ -10,6 +10,10 @@
         //int GetIndexByName(string name);
         //string GetGroupByIndex(int id);
 
+
+        //int GetIdGroup(Group group);
+
+
         /// <summary>
         /// Adding a new group to the database.
         /// </summary>

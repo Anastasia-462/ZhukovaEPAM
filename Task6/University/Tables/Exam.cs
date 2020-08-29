@@ -27,6 +27,11 @@ namespace University
         public int GroupId { get; set; }
 
         /// <summary>
+        /// Assessment form.
+        /// </summary>
+        public string AssessmentForm { get; set; }
+
+        /// <summary>
         /// Constructor of this class.
         /// </summary>
         public Exam() { }

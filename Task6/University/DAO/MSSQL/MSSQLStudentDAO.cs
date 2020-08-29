@@ -53,7 +53,12 @@ namespace University
             FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, connectionString);
         }
 
-        private int GetIdStudent(Student student)
+        /// <summary>
+        /// Method which gets student id.
+        /// </summary>
+        /// <param name="student">Student.</param>
+        /// <returns>An int value.</returns>
+        public int GetIdStudent(Student student)
         {
             int id = 0;
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
@@ -156,7 +161,7 @@ namespace University
                 sqlCommand.Parameters.Add(new SqlParameter("@name", newStudent.Name));
                 sqlCommand.Parameters.Add(new SqlParameter("@middleName", newStudent.MiddleName));
                 sqlCommand.Parameters.Add(new SqlParameter("@gender", newStudent.Gender));
-                sqlCommand.Parameters.Add(new SqlParameter("@dateOfBirth", newStudent.DateOfBirth));
+                sqlCommand.Parameters.Add(new SqlParameter("@dateOfBirth", newStudent.DateOfBirth.ToString("yyyy-MM-dd")));
                 sqlCommand.Parameters.Add(new SqlParameter("@groupId", newStudent.GroupId));
                 numb = sqlCommand.ExecuteNonQuery();
             }

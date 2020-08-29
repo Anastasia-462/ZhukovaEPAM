@@ -6,6 +6,13 @@
     public interface IStudent
     {
         /// <summary>
+        /// Method which gets student id.
+        /// </summary>
+        /// <param name="student">Student.</param>
+        /// <returns>An int value.</returns>
+        int GetIdStudent(Student student);
+
+        /// <summary>
         /// Adding a new student to the database.
         /// </summary>
         /// <param name="student">A student.</param>

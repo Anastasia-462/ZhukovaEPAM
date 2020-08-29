@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,21 +46,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exam.cs" />
-    <Compile Include="FactoryDAO.cs" />
-    <Compile Include="Grades.cs" />
-    <Compile Include="Group.cs" />
-    <Compile Include="IExam.cs" />
-    <Compile Include="IGrade.cs" />
-    <Compile Include="IGroup.cs" />
-    <Compile Include="IStudent.cs" />
-    <Compile Include="MSSQLExamDAO.cs" />
-    <Compile Include="MSSQLFactoryDAO.cs" />
-    <Compile Include="MSSQLGradesDAO.cs" />
-    <Compile Include="MSSQLGroupDAO.cs" />
-    <Compile Include="MSSQLStudentDAO.cs" />
+    <Compile Include="ReportGeneration.cs" />
+    <Compile Include="Tables\Exam.cs" />
+    <Compile Include="DAO\FactoryDAO.cs" />
+    <Compile Include="Tables\Grades.cs" />
+    <Compile Include="Tables\Group.cs" />
+    <Compile Include="DAO\IExam.cs" />
+    <Compile Include="DAO\IGrade.cs" />
+    <Compile Include="DAO\IGroup.cs" />
+    <Compile Include="DAO\IStudent.cs" />
+    <Compile Include="DAO\MSSQL\MSSQLExamDAO.cs" />
+    <Compile Include="DAO\MSSQL\MSSQLFactoryDAO.cs" />
+    <Compile Include="DAO\MSSQL\MSSQLGradesDAO.cs" />
+    <Compile Include="DAO\MSSQL\MSSQLGroupDAO.cs" />
+    <Compile Include="DAO\MSSQL\MSSQLStudentDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Student.cs" />
+    <Compile Include="Tables\Student.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
