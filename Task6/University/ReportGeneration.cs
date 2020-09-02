@@ -118,36 +118,6 @@ namespace University
             ex.Application.ActiveWorkbook.SaveCopyAs(Directory.GetCurrentDirectory() + @"\1.xlsx");
         }
 
-        private static string FormSessionName(string session)
-        {
-            switch (session)
-            {
-                case "л":
-                    return "Летняя";
-                case "з":
-                    return "Зимняя";
-                default:
-                    return null;
-            }
-        }
-
-        private static string FormFullName(Student student)
-        {
-            return student.Surname + " " + student.Name + " " + student.MiddleName;
-        }
-
-        private static string FormGroupName(string session)
-        {
-            switch (session)
-            {
-                case "л":
-                    return "Летняя";
-                case "з":
-                    return "Зимняя";
-                default:
-                    return null;
-            }
-        }
 
         /// <summary>
         /// Method which forms list of expelled students.
@@ -167,6 +137,91 @@ namespace University
                 expelledStudent.Add(groupName[i], ExpelledStudent(i));
             }
             return expelledStudent;
+        }
+
+        private static float[] GroupMaxScore()
+        {
+            FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, CONNECTIONSTRING);
+            IGroup group = factory.GetGroup();
+            Group[] groups = group.GetGroups();
+            float max = -1;
+            float[] maxScore = new float[groups.Length];
+
+            for(int i = 0; i < groups.Length; i++)
+            {
+                float[] studentsScores = AverageStudentsScore(i);
+                for (int j = 0;  j < studentsScores.Length; j++)
+                {
+                    if(studentsScores[j] > max)
+                    {
+                        maxScore[i] = studentsScores[j];
+                    }
+                }
+            }
+            return maxScore;
+        }
+
+        private static float[] GroupMinScore()
+        {
+            FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, CONNECTIONSTRING);
+            IGroup group = factory.GetGroup();
+            Group[] groups = group.GetGroups();
+            float min = 1000;
+            float[] minScore = new float[groups.Length];
+
+            for (int i = 0; i < groups.Length; i++)
+            {
+                float[] studentsScores = AverageStudentsScore(i);
+                for (int j = 0; j < studentsScores.Length; j++)
+                {
+                    if (studentsScores[j] < min)
+                    {
+                        minScore[i] = studentsScores[j];
+                    }
+                }
+            }
+            return minScore;
+        }
+
+        private static float[] GroupAverageScore()
+        {
+            FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, CONNECTIONSTRING);
+            IGroup group = factory.GetGroup();
+            Group[] groups = group.GetGroups();
+            float[] averageScore = new float[groups.Length];
+
+            for (int i = 0; i < groups.Length; i++)
+            {
+                float[] studentsScores = AverageStudentsScore(i);
+                for (int j = 0; j < studentsScores.Length; j++)
+                {
+                    averageScore[i] += studentsScores[j];
+                }
+                averageScore[i] = averageScore[i] / studentsScores.Length;
+            }
+            return averageScore;
+        }
+
+        private static float[] AverageStudentsScore(int groupId)
+        {
+            FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, CONNECTIONSTRING);
+            IStudent student = factory.GetStudent();
+            Student[] students = student.GetStudents();
+            List<float> averageStudentsScore = new List<float>();
+            for (int i = 0; i < students.Length; i++)
+            {
+                if(students[i].GroupId == groupId)
+                {
+                    int averageScore = 0;
+                    int count = GetStudentsGrades(i).Length;
+                    foreach (int score in GetStudentsGrades(i))
+                    {
+                        averageScore += score;
+                    }
+                    averageStudentsScore.Add(averageScore / count);
+                }
+            }
+            return averageStudentsScore.ToArray();
         }
 
         private static int[] GetStudentsGrades(int id)
@@ -206,6 +261,37 @@ namespace University
                 }
             }
             return expelledStudents.ToArray();
+        }
+
+        private static string FormSessionName(string session)
+        {
+            switch (session)
+            {
+                case "л":
+                    return "Летняя";
+                case "з":
+                    return "Зимняя";
+                default:
+                    return null;
+            }
+        }
+
+        private static string FormFullName(Student student)
+        {
+            return student.Surname + " " + student.Name + " " + student.MiddleName;
+        }
+
+        private static string FormGroupName(string session)
+        {
+            switch (session)
+            {
+                case "л":
+                    return "Летняя";
+                case "з":
+                    return "Зимняя";
+                default:
+                    return null;
+            }
         }
     }
 }
