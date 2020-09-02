@@ -42,5 +42,14 @@ namespace University
         /// </summary>
         public Student() { }
 
+        public Student(string surname, string name, string middleName, string gender, DateTime dateOfBirth, int groupId)
+        {
+            Surname = surname;
+            Name = name;
+            MiddleName = middleName;
+            Gender = gender;
+            DateOfBirth = dateOfBirth;
+            GroupId = groupId;
+        }
     }
 }

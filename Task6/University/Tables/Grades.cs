@@ -24,5 +24,12 @@
         /// Constructor of this class.
         /// </summary>
         public Grades() { }
+
+        public Grades(int grade, int examId, int studentId)
+        {
+            Grade = grade;
+            ExamId = examId;
+            StudentId = studentId;
+        }
     }
 }

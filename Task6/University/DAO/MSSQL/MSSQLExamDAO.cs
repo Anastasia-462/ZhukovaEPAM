@@ -12,7 +12,7 @@ namespace University
         /// SQL query to add data to the database.
         /// </summary>
         private const string INSERT_EXPRESSION =
-            "INSERT INTO Exams(SubjectName, AssessmentForm, ExamDate, GroupId) VALUES (@subjectName, @assessmentForm, @examDate, @groupId)";
+            "INSERT INTO Exams(SubjectName, AssessmentForm, ExamDate, Session, GroupId) VALUES (@subjectName, @assessmentForm, @examDate, @session, @groupId)";
 
         /// <summary>
         /// SQL query to get the list of exams from the database.
@@ -24,7 +24,7 @@ namespace University
         /// SQL query to update data in the database.
         /// </summary>
         private const string UPDATE_EXPRESSION
-            = "UPDATE Exams SET SubjectName=@subjectName, AssessmentForm=@assessmentForm, ExamDate=@examDate, GroupId=@groupId WHERE ExamId=@examId";
+            = "UPDATE Exams SET SubjectName=@subjectName, AssessmentForm=@assessmentForm, ExamDate=@examDate, Session=@session, GroupId=@groupId WHERE ExamId=@examId";
 
         /// <summary>
         /// SQL query to delete data from the database.
@@ -36,7 +36,7 @@ namespace University
         /// Obtaining an exam ID.
         /// </summary>
         private const string GET_EXAM_EXPRESSION
-            = "SELECT ExamId FROM Exams WHERE SubjectName=@subjectName AND AssessmentForm=@assessmentForm AND ExamDate=@examDate AND GroupId=@groupId";
+            = "SELECT ExamId FROM Exams WHERE SubjectName=@subjectName AND AssessmentForm=@assessmentForm AND ExamDate=@examDate AND Session=@session AND GroupId=@groupId";
 
         
         private string connectionString;
@@ -62,6 +62,7 @@ namespace University
                 sqlCommand.Parameters.Add(new SqlParameter("@subjectName", exam.SubjectName));
                 sqlCommand.Parameters.Add(new SqlParameter("@assessmentForm", exam.AssessmentForm));
                 sqlCommand.Parameters.Add(new SqlParameter("@examDate", exam.ExamDate));
+                sqlCommand.Parameters.Add(new SqlParameter("@session", exam.Session));
                 sqlCommand.Parameters.Add(new SqlParameter("@groupId", exam.GroupId));
                 SqlDataReader reader = sqlCommand.ExecuteReader();
                 if (reader.HasRows)
@@ -80,7 +81,8 @@ namespace University
             exam.SubjectName = reader.GetString(1);
             exam.AssessmentForm = reader.GetString(2);
             exam.ExamDate = reader.GetDateTime(3);
-            exam.GroupId = reader.GetInt32(4);
+            exam.Session = reader.GetString(4);
+            exam.GroupId = reader.GetInt32(5);
             return exam;
         }
 
@@ -99,6 +101,7 @@ namespace University
                 sqlCommand.Parameters.Add(new SqlParameter("@subjectName", exam.SubjectName));
                 sqlCommand.Parameters.Add(new SqlParameter("@assessmentForm", exam.AssessmentForm));
                 sqlCommand.Parameters.Add(new SqlParameter("@examDate", exam.ExamDate));
+                sqlCommand.Parameters.Add(new SqlParameter("@session", exam.Session));
                 sqlCommand.Parameters.Add(new SqlParameter("@groupId", exam.GroupId));
 
                 numb = sqlCommand.ExecuteNonQuery();
@@ -148,6 +151,7 @@ namespace University
                 sqlCommand.Parameters.Add(new SqlParameter("@subjectName", newExam.SubjectName));
                 sqlCommand.Parameters.Add(new SqlParameter("@assessmentForm", newExam.AssessmentForm));
                 sqlCommand.Parameters.Add(new SqlParameter("@examDate", newExam.ExamDate.ToString("yyyy-MM-dd")));
+                sqlCommand.Parameters.Add(new SqlParameter("@session", newExam.Session));
                 sqlCommand.Parameters.Add(new SqlParameter("@groupId", newExam.GroupId));
                 //SqlCommand sqlCommand = new SqlCommand(
                 //    string.Format(UPDATE_EXPRESSION,

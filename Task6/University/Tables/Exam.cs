@@ -32,8 +32,30 @@ namespace University
         public string AssessmentForm { get; set; }
 
         /// <summary>
+        /// Type if session.
+        /// </summary>
+        public string Session { get; set; }
+
+        /// <summary>
         /// Constructor of this class.
         /// </summary>
         public Exam() { }
+
+        /// <summary>
+        /// Constructor of this class.
+        /// </summary>
+        /// <param name="subjectName">A string value.</param>
+        /// <param name="examDate">A DateTime.</param>
+        /// <param name="groupId">A int value.</param>
+        /// <param name="assessmentForm">A string value.</param>
+        /// <param name="session">A string value.</param>
+        public Exam(string subjectName, DateTime examDate, int groupId, string assessmentForm, string session)
+        {
+            SubjectName = subjectName;
+            ExamDate = examDate;
+            GroupId = groupId;
+            AssessmentForm = assessmentForm;
+            Session = session;
+        }
     }
 }

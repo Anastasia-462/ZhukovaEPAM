@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Excel = Microsoft.Office.Interop.Excel;
+using Microsoft.Office.Interop.Excel;
 
 namespace University
 {
@@ -13,14 +14,139 @@ namespace University
     public static class ReportGeneration
     {
         private const string CONNECTIONSTRING = @"Data Source=.\SQLEXPRESS;Initial Catalog=University;Integrated Security=True";
-        private static void CreateExcel()
+
+        /// <summary>
+        /// Method which forms outcome of session.
+        /// </summary>
+        public static void OutcomeOfSession()
         {
-            Excel.Application ex = new Microsoft.Office.Interop.Excel.Application();
-            ex.Visible = true;
-            ex.SheetsInNewWorkbook = 2;
-            Excel.Workbook workBook = ex.Workbooks.Add(Type.Missing);
+            Application ex = new Application();
+            ex.SheetsInNewWorkbook = 1;
+            Workbook workBook = ex.Workbooks.Add(Type.Missing);
             ex.DisplayAlerts = false;
-            Excel.Worksheet sheet = (Excel.Worksheet)ex.Worksheets.get_Item(1);
+            Worksheet sheet = (Worksheet)ex.Worksheets.get_Item(1);
+            sheet.Name = "Итоги сессии";
+
+            //FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, CONNECTIONSTRING);
+            //Group[] groups = factory.GetGroup().GetGroups();
+            //Exam[] exams = factory.GetExam().GetExams();
+            //Grades[] grades = factory.GetGrade().GetGrades();
+            //Student[] students = factory.GetStudent().GetStudents();
+            MSSQLStudentDAO st = new MSSQLStudentDAO(CONNECTIONSTRING);
+
+
+            //(string subjectName, DateTime examDate, int groupId, string assessmentForm, string session)
+            Group[] groups = new Group[] { new Group("ИТИ-21"), new Group("ИТП-21") };
+            Exam[] exams = new Exam[]
+            { 
+                new Exam("Math", new DateTime(2019, 01, 15), 1, "э", "з"),
+                new Exam("1", new DateTime(2019, 01, 22), 1, "з", "л"),
+                new Exam("2", new DateTime(2019, 01, 23), 2, "э", "л"),
+                new Exam("3", new DateTime(2019, 01, 24), 1, "з", "з"),
+                new Exam("4", new DateTime(2019, 01, 25), 2, "э", "л"),
+                new Exam("5", new DateTime(2019, 01, 26), 1, "з", "л"),
+                new Exam("6", new DateTime(2019, 01, 27), 2, "э", "з")
+            };
+            Grades[] grades = new Grades[]
+            {
+                new Grades(9, 1, 1),
+                new Grades(7, 2, 1),
+
+                new Grades(9, 3, 2),
+                new Grades(9, 4, 2),
+
+                new Grades(9, 1, 3),
+                new Grades(9, 2, 3),
+
+                new Grades(9, 1, 4),
+                new Grades(9, 2, 4),
+
+                new Grades(9, 1, 5),
+                new Grades(9, 2, 5),
+
+                new Grades(9, 1, 6),
+                new Grades(9, 2, 6)
+            };
+            Student[] students = new Student[]
+            {
+                new Student("Akyla1", "Artemon", "Pavlovich", "f", new DateTime(2000, 07, 21), 1),
+                new Student("Akyla2", "Artemon", "Pavlovich", "m", new DateTime(2000, 06, 21), 1),
+                new Student("Akyla3", "Artemon", "Pavlovich", "m", new DateTime(2000, 05, 21), 1),
+
+                new Student("Akyla4", "Artemon", "Pavlovich", "f", new DateTime(2000, 04, 21), 2),
+                new Student("Akyla5", "Artemon", "Pavlovich", "f", new DateTime(2000, 03, 21), 2),
+                new Student("Akyla6", "Artemon", "Pavlovich", "m", new DateTime(2000, 02, 21), 2)
+            };
+
+            int pos = 0; // po vertikali
+            IEnumerable<IGrouping<string,Exam>> session = exams.GroupBy(exam => exam.Session);
+            IEnumerable<IGrouping<string, Exam>> subject = exams.GroupBy(exam => exam.SubjectName);
+            //IEnumerable<IGrouping<string, Exam>> student = exams.GroupBy(exam => exam.SubjectName);
+            for (int i = 0; i < session.Count(); i++)
+            {
+                sheet.Range[sheet.Cells[++pos, 1], sheet.Cells[pos, subject.Count() + 1]].Merge();
+                sheet.Cells[pos, 1] = FormSessionName(session.ElementAt(i).Key) + " cессия";
+                IEnumerable<IGrouping<int, Exam>> group = exams.Where(exam => exam.Session == session.ElementAt(i).Key).GroupBy(exam => exam.GroupId);
+                for (int j = 0; j < group.Count(); j++)
+                {
+                    sheet.Range[sheet.Cells[++pos, 1], sheet.Cells[pos, subject.Count() + 1]].Merge();
+                    sheet.Cells[pos, 1] = "Группа - " + group.ElementAt(j).Key; // группа неправильная
+                    sheet.Cells[++pos, 1] = "Тип";
+                    var subjectAmount = group.ElementAt(j).GetEnumerator();
+                    int k = 2;
+                    while (subjectAmount.MoveNext())
+                    {
+                        sheet.Cells[pos, k] = subjectAmount.Current.AssessmentForm;
+                        sheet.Cells[pos + 1, k] = subjectAmount.Current.SubjectName;
+                        k++;
+                    }                   
+                    sheet.Cells[++pos, 1] = "ФИО";
+                    IEnumerable<Student> studentGroup = students.Where(student => student.GroupId == group.ElementAt(j).Key);
+                    //grades.GroupBy(grade => grade.StudentId);
+                    for (k = 0; k < studentGroup.Count(); k++)
+                    {
+                        sheet.Cells[++pos, 1] = FormFullName(studentGroup.ElementAt(k));
+                        IEnumerable<Grades> gradeStudent = grades.Where(grade => grade.StudentId == st.GetIdStudent(studentGroup.ElementAt(k)));
+                        for (int m = 0; m < studentGroup.Count(); m++)
+                        {
+                            sheet.Cells[++pos, 1] = FormFullName(studentGroup.ElementAt(m));
+                        }
+                    }
+                }
+            }
+            //ex.Application.ActiveWorkbook.SaveAs(Directory.GetCurrentDirectory() + @"\Report.xlsx");
+            ex.Application.ActiveWorkbook.SaveCopyAs(Directory.GetCurrentDirectory() + @"\1.xlsx");
+        }
+
+        private static string FormSessionName(string session)
+        {
+            switch (session)
+            {
+                case "л":
+                    return "Летняя";
+                case "з":
+                    return "Зимняя";
+                default:
+                    return null;
+            }
+        }
+
+        private static string FormFullName(Student student)
+        {
+            return student.Surname + " " + student.Name + " " + student.MiddleName;
+        }
+
+        private static string FormGroupName(string session)
+        {
+            switch (session)
+            {
+                case "л":
+                    return "Летняя";
+                case "з":
+                    return "Зимняя";
+                default:
+                    return null;
+            }
         }
 
         /// <summary>
@@ -46,9 +172,7 @@ namespace University
         private static int[] GetStudentsGrades(int id)
         {
             FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, CONNECTIONSTRING);
-            IGrade grade = factory.GetGrade();
-            IExam exam = factory.GetExam();
-            Exam[] exams = exam.GetExams();
+            IGrade grade = factory.GetGrade();            
             Grades[] grades = grade.GetGrades();
             List<int> gradeStudent = new List<int>();
             for (int i = 0; i < grades.Length; i++)
