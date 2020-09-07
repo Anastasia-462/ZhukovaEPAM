@@ -77,9 +77,9 @@ namespace University
         private Exam CreateExam(SqlDataReader reader)
         {
             Exam exam = new Exam();
-
-            exam.SubjectName = reader.GetString(1);
-            exam.AssessmentForm = reader.GetString(2);
+                        
+            exam.AssessmentForm = reader.GetString(1);
+            exam.SubjectName = reader.GetString(2);
             exam.ExamDate = reader.GetDateTime(3);
             exam.Session = reader.GetString(4);
             exam.GroupId = reader.GetInt32(5);
@@ -147,7 +147,7 @@ namespace University
                 //int groupId = group.GetIndexByName(newExam.ToString());
 
                 sqlConnection.Open();
-                SqlCommand sqlCommand = new SqlCommand(INSERT_EXPRESSION, sqlConnection);
+                SqlCommand sqlCommand = new SqlCommand(UPDATE_EXPRESSION, sqlConnection);
                 sqlCommand.Parameters.Add(new SqlParameter("@subjectName", newExam.SubjectName));
                 sqlCommand.Parameters.Add(new SqlParameter("@assessmentForm", newExam.AssessmentForm));
                 sqlCommand.Parameters.Add(new SqlParameter("@examDate", newExam.ExamDate.ToString("yyyy-MM-dd")));

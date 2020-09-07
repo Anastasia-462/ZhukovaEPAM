@@ -53,7 +53,7 @@ namespace University
             FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, connectionString);
         }
 
-        private int GetIdGroup(Group group)
+        public int GetIdGroup(Group group)
         {
             int id = 0;
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))

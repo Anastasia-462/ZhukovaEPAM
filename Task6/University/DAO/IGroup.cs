@@ -11,7 +11,7 @@
         //string GetGroupByIndex(int id);
 
 
-        //int GetIdGroup(Group group);
+        int GetIdGroup(Group group);
 
 
         /// <summary>

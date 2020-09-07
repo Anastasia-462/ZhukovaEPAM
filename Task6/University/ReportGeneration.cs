@@ -27,70 +27,74 @@ namespace University
             Worksheet sheet = (Worksheet)ex.Worksheets.get_Item(1);
             sheet.Name = "Итоги сессии";
 
-            //FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, CONNECTIONSTRING);
-            //Group[] groups = factory.GetGroup().GetGroups();
-            //Exam[] exams = factory.GetExam().GetExams();
-            //Grades[] grades = factory.GetGrade().GetGrades();
-            //Student[] students = factory.GetStudent().GetStudents();
+            FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, CONNECTIONSTRING);
+            Group[] groups = factory.GetGroup().GetGroups();
+            Exam[] exams = factory.GetExam().GetExams();
+            Grades[] grades = factory.GetGrade().GetGrades();
+            Student[] students = factory.GetStudent().GetStudents();
             MSSQLStudentDAO st = new MSSQLStudentDAO(CONNECTIONSTRING);
 
 
             //(string subjectName, DateTime examDate, int groupId, string assessmentForm, string session)
-            Group[] groups = new Group[] { new Group("ИТИ-21"), new Group("ИТП-21") };
-            Exam[] exams = new Exam[]
-            { 
-                new Exam("Math", new DateTime(2019, 01, 15), 1, "э", "з"),
-                new Exam("1", new DateTime(2019, 01, 22), 1, "з", "л"),
-                new Exam("2", new DateTime(2019, 01, 23), 2, "э", "л"),
-                new Exam("3", new DateTime(2019, 01, 24), 1, "з", "з"),
-                new Exam("4", new DateTime(2019, 01, 25), 2, "э", "л"),
-                new Exam("5", new DateTime(2019, 01, 26), 1, "з", "л"),
-                new Exam("6", new DateTime(2019, 01, 27), 2, "э", "з")
-            };
-            Grades[] grades = new Grades[]
-            {
-                new Grades(9, 1, 1),
-                new Grades(7, 2, 1),
+            //Group[] groups = new Group[] { new Group("ИТИ-21"), new Group("ИТП-21") };
+            //Exam[] exams = new Exam[]
+            //{ 
+            //    new Exam("Math", new DateTime(2019, 01, 15), 1, "э", "з"),
+            //    new Exam("1", new DateTime(2019, 01, 22), 1, "з", "л"),
+            //    new Exam("2", new DateTime(2019, 01, 23), 2, "э", "л"),
+            //    new Exam("3", new DateTime(2019, 01, 24), 1, "з", "з"),
+            //    new Exam("4", new DateTime(2019, 01, 25), 2, "э", "л"),
+            //    new Exam("5", new DateTime(2019, 01, 26), 1, "з", "л"),
+            //    new Exam("6", new DateTime(2019, 01, 27), 2, "э", "з")
+            //};
+            //Grades[] grades = new Grades[]
+            //{
+            //    new Grades(9, 1, 1),
+            //    new Grades(7, 2, 1),
 
-                new Grades(9, 3, 2),
-                new Grades(9, 4, 2),
+            //    new Grades(9, 3, 2),
+            //    new Grades(9, 4, 2),
 
-                new Grades(9, 1, 3),
-                new Grades(9, 2, 3),
+            //    new Grades(9, 1, 3),
+            //    new Grades(9, 2, 3),
 
-                new Grades(9, 1, 4),
-                new Grades(9, 2, 4),
+            //    new Grades(9, 1, 4),
+            //    new Grades(9, 2, 4),
 
-                new Grades(9, 1, 5),
-                new Grades(9, 2, 5),
+            //    new Grades(9, 1, 5),
+            //    new Grades(9, 2, 5),
 
-                new Grades(9, 1, 6),
-                new Grades(9, 2, 6)
-            };
-            Student[] students = new Student[]
-            {
-                new Student("Akyla1", "Artemon", "Pavlovich", "f", new DateTime(2000, 07, 21), 1),
-                new Student("Akyla2", "Artemon", "Pavlovich", "m", new DateTime(2000, 06, 21), 1),
-                new Student("Akyla3", "Artemon", "Pavlovich", "m", new DateTime(2000, 05, 21), 1),
+            //    new Grades(9, 1, 6),
+            //    new Grades(9, 2, 6)
+            //};
+            //Student[] students = new Student[]
+            //{
+            //    new Student("Akyla1", "Artemon", "Pavlovich", "f", new DateTime(2000, 07, 21), 1),
+            //    new Student("Akyla2", "Artemon", "Pavlovich", "m", new DateTime(2000, 06, 21), 1),
+            //    new Student("Akyla3", "Artemon", "Pavlovich", "m", new DateTime(2000, 05, 21), 1),
 
-                new Student("Akyla4", "Artemon", "Pavlovich", "f", new DateTime(2000, 04, 21), 2),
-                new Student("Akyla5", "Artemon", "Pavlovich", "f", new DateTime(2000, 03, 21), 2),
-                new Student("Akyla6", "Artemon", "Pavlovich", "m", new DateTime(2000, 02, 21), 2)
-            };
+            //    new Student("Akyla4", "Artemon", "Pavlovich", "f", new DateTime(2000, 04, 21), 2),
+            //    new Student("Akyla5", "Artemon", "Pavlovich", "f", new DateTime(2000, 03, 21), 2),
+            //    new Student("Akyla6", "Artemon", "Pavlovich", "m", new DateTime(2000, 02, 21), 2)
+            //};
 
             int pos = 0; // po vertikali
             IEnumerable<IGrouping<string,Exam>> session = exams.GroupBy(exam => exam.Session);
             IEnumerable<IGrouping<string, Exam>> subject = exams.GroupBy(exam => exam.SubjectName);
             //IEnumerable<IGrouping<string, Exam>> student = exams.GroupBy(exam => exam.SubjectName);
+            sheet.Columns[1].ColumnWidth = 30;
             for (int i = 0; i < session.Count(); i++)
             {
-                sheet.Range[sheet.Cells[++pos, 1], sheet.Cells[pos, subject.Count() + 1]].Merge();
+                sheet.Range[sheet.Cells[++pos, 1], sheet.Cells[pos, (subject.Count() + 1) / 2]].Merge();
                 sheet.Cells[pos, 1] = FormSessionName(session.ElementAt(i).Key) + " cессия";
+                sheet.Cells[pos, 1].Font.Bold = 7;
                 IEnumerable<IGrouping<int, Exam>> group = exams.Where(exam => exam.Session == session.ElementAt(i).Key).GroupBy(exam => exam.GroupId);
                 for (int j = 0; j < group.Count(); j++)
                 {
-                    sheet.Range[sheet.Cells[++pos, 1], sheet.Cells[pos, subject.Count() + 1]].Merge();
-                    sheet.Cells[pos, 1] = "Группа - " + group.ElementAt(j).Key; // группа неправильная
+                    sheet.Range[sheet.Cells[++pos, 1], sheet.Cells[pos, (subject.Count() + 1) / 2]].Merge();
+                    sheet.Cells[pos, 1] = "Группа - " + SearchNameById(factory.GetGroup(), groups, group.ElementAt(j).Key); // группа неправильная
+                    sheet.Cells[pos, 1].Font.Italic = 7;
+                    sheet.Cells[pos, 1].Font.Bold = 7;
                     sheet.Cells[++pos, 1] = "Тип";
                     var subjectAmount = group.ElementAt(j).GetEnumerator();
                     int k = 2;
@@ -98,6 +102,7 @@ namespace University
                     {
                         sheet.Cells[pos, k] = subjectAmount.Current.AssessmentForm;
                         sheet.Cells[pos + 1, k] = subjectAmount.Current.SubjectName;
+                        sheet.Columns[k].ColumnWidth = 15;
                         k++;
                     }                   
                     sheet.Cells[++pos, 1] = "ФИО";
@@ -107,10 +112,10 @@ namespace University
                     {
                         sheet.Cells[++pos, 1] = FormFullName(studentGroup.ElementAt(k));
                         IEnumerable<Grades> gradeStudent = grades.Where(grade => grade.StudentId == st.GetIdStudent(studentGroup.ElementAt(k)));
-                        for (int m = 0; m < studentGroup.Count(); m++)
-                        {
-                            sheet.Cells[++pos, 1] = FormFullName(studentGroup.ElementAt(m));
-                        }
+                        //for (int m = 0; m < studentGroup.Count(); m++)
+                        //{
+                        //    sheet.Cells[++pos, 1] = FormFullName(studentGroup.ElementAt(m));
+                        //}
                     }
                 }
             }
@@ -130,24 +135,32 @@ namespace University
             FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, CONNECTIONSTRING);
             IGroup group = factory.GetGroup();
             Group[] groups = group.GetGroups();
-            string[] groupName = new string[groups.Length];
             for (int i = 0; i < groups.Length; i++)
             {
-                groupName[i] = groups[i].GroupName;
-                expelledStudent.Add(groupName[i], ExpelledStudent(i));
+                expelledStudent.Add(groups[i].GroupName, ExpelledStudent(group.GetIdGroup(groups[i])));
             }
             return expelledStudent;
         }
 
+        private static string SearchNameById(IGroup group, Group[] groups, int id)
+        {
+            for (int i = 0; i < groups.Length; i++)
+            {
+                if(group.GetIdGroup(groups[i]) == id)
+                {
+                    return groups[i].GroupName;
+                }
+            }
+            throw new Exception("Not found.");
+        }
         private static float[] GroupMaxScore()
         {
             FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, CONNECTIONSTRING);
             IGroup group = factory.GetGroup();
             Group[] groups = group.GetGroups();
-            float max = -1;
             float[] maxScore = new float[groups.Length];
-
-            for(int i = 0; i < groups.Length; i++)
+            float max = maxScore[0];
+            for (int i = 1; i < groups.Length; i++)
             {
                 float[] studentsScores = AverageStudentsScore(i);
                 for (int j = 0;  j < studentsScores.Length; j++)
@@ -166,8 +179,8 @@ namespace University
             FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, CONNECTIONSTRING);
             IGroup group = factory.GetGroup();
             Group[] groups = group.GetGroups();
-            float min = 1000;
             float[] minScore = new float[groups.Length];
+            float min = minScore[0];
 
             for (int i = 0; i < groups.Length; i++)
             {
@@ -183,16 +196,20 @@ namespace University
             return minScore;
         }
 
+        // возвращает массив средних оценнок у групп
         private static float[] GroupAverageScore()
         {
             FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, CONNECTIONSTRING);
             IGroup group = factory.GetGroup();
             Group[] groups = group.GetGroups();
+            IStudent student = factory.GetStudent();
+            Student[] students = student.GetStudents();
+
             float[] averageScore = new float[groups.Length];
 
             for (int i = 0; i < groups.Length; i++)
             {
-                float[] studentsScores = AverageStudentsScore(i);
+                float[] studentsScores = AverageStudentsScore(group.GetIdGroup(groups[i]));
                 for (int j = 0; j < studentsScores.Length; j++)
                 {
                     averageScore[i] += studentsScores[j];
@@ -202,6 +219,7 @@ namespace University
             return averageScore;
         }
 
+        // Возвращает массив средних оценок каждого студента в гурппе
         private static float[] AverageStudentsScore(int groupId)
         {
             FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, CONNECTIONSTRING);
@@ -213,17 +231,18 @@ namespace University
                 if(students[i].GroupId == groupId)
                 {
                     int averageScore = 0;
-                    int count = GetStudentsGrades(i).Length;
-                    foreach (int score in GetStudentsGrades(i))
+                    int[] grades = GetStudentsGrades(student.GetIdStudent(students[i]));// i не является индексом студента 
+                    foreach (int score in grades) 
                     {
                         averageScore += score;
                     }
-                    averageStudentsScore.Add(averageScore / count);
+                    averageStudentsScore.Add(averageScore / grades.Length);
                 }
             }
             return averageStudentsScore.ToArray();
         }
 
+        //Возвращает все оценки студента id, без учёта семестра +
         private static int[] GetStudentsGrades(int id)
         {
             FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, CONNECTIONSTRING);
@@ -238,6 +257,7 @@ namespace University
             return gradeStudent.ToArray();
         }
 
+        //Возвращает массив студентов на отчисление в группе groupId +
         private static Student[] ExpelledStudent(int groupId)
         {
             FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, CONNECTIONSTRING);
