@@ -163,6 +163,7 @@ namespace University
                 sqlCommand.Parameters.Add(new SqlParameter("@gender", newStudent.Gender));
                 sqlCommand.Parameters.Add(new SqlParameter("@dateOfBirth", newStudent.DateOfBirth.ToString("yyyy-MM-dd")));
                 sqlCommand.Parameters.Add(new SqlParameter("@groupId", newStudent.GroupId));
+                sqlCommand.Parameters.Add(new SqlParameter("@studentId", id));
                 numb = sqlCommand.ExecuteNonQuery();
             }
             return numb > 0;

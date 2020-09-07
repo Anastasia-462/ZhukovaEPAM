@@ -25,6 +25,12 @@
         /// </summary>
         public Grades() { }
 
+        /// <summary>
+        /// Constructor of this class.
+        /// </summary>
+        /// <param name="grade">An int number.</param>
+        /// <param name="examId">An int number.</param>
+        /// <param name="studentId">An int number.</param>
         public Grades(int grade, int examId, int studentId)
         {
             Grade = grade;

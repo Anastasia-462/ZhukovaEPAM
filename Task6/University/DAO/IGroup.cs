@@ -5,12 +5,11 @@
     /// </summary>
     public interface IGroup
     {
-        //string[] GetGroupName();
-
-        //int GetIndexByName(string name);
-        //string GetGroupByIndex(int id);
-
-
+        /// <summary>
+        /// Method which get index by group.
+        /// </summary>
+        /// <param name="group">Group.</param>
+        /// <returns>An int number.</returns>
         int GetIdGroup(Group group);
 
 

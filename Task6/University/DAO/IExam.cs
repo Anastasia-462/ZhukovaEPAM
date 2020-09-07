@@ -5,11 +5,12 @@
     /// </summary>
     public interface IExam
     {
-        //string[] GetSubjectName();
-        //DateTime[] GetExamDate();
-
-        //int GetIndexByName(string name);
-        //int GetGroupByExamIndex(int id);
+        /// <summary>
+        /// Method which get index by exam.
+        /// </summary>
+        /// <param name="exam">Exam.</param>
+        /// <returns>An int number.</returns>
+        int GetIdExam(Exam exam);
 
         /// <summary>
         /// Adding a new exam to the database.
@@ -39,6 +40,11 @@
         /// <returns>True if the operation was successful, otherwise False.</returns>
         bool Delete(Exam exam);
 
-        //string GetGroupByExamIndex(int id);
+        /// <summary>
+        /// Method which get exam by index.
+        /// </summary>
+        /// <param name="id">An int number.</param>
+        /// <returns>Exam.</returns>
+        Exam GetExamByIndex(int id);
     }
 }

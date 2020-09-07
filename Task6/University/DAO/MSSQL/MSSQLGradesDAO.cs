@@ -49,8 +49,6 @@ namespace University
         public MSSQLGradesDAO(string connectionString)
         {
             this.connectionString = connectionString;
-
-            FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, connectionString);
         }
 
         private int GetIdGrade(Grades grade)
@@ -95,9 +93,9 @@ namespace University
             {
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand(INSERT_EXPRESSION, sqlConnection);
-                sqlCommand.Parameters.Add(new SqlParameter("@subjectName", grade.ExamId));
-                sqlCommand.Parameters.Add(new SqlParameter("@examDate", grade.StudentId));
-                sqlCommand.Parameters.Add(new SqlParameter("@groupId", grade.Grade));
+                sqlCommand.Parameters.Add(new SqlParameter("@examId", grade.ExamId));
+                sqlCommand.Parameters.Add(new SqlParameter("@studentId", grade.StudentId));
+                sqlCommand.Parameters.Add(new SqlParameter("@grade", grade.Grade));
 
                 numb = sqlCommand.ExecuteNonQuery();
             }
@@ -142,9 +140,10 @@ namespace University
 
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand(UPDATE_EXPRESSION, sqlConnection);
-                sqlCommand.Parameters.Add(new SqlParameter("@subjectName", newGrade.ExamId));
-                sqlCommand.Parameters.Add(new SqlParameter("@examDate", newGrade.StudentId));
-                sqlCommand.Parameters.Add(new SqlParameter("@groupId", newGrade.Grade));
+                sqlCommand.Parameters.Add(new SqlParameter("@examId", newGrade.ExamId));
+                sqlCommand.Parameters.Add(new SqlParameter("@studentId", newGrade.StudentId));
+                sqlCommand.Parameters.Add(new SqlParameter("@grade", newGrade.Grade)); 
+                sqlCommand.Parameters.Add(new SqlParameter("@gradeId", id));
                 numb = sqlCommand.ExecuteNonQuery();
             }
             return numb > 0;

@@ -42,6 +42,15 @@ namespace University
         /// </summary>
         public Student() { }
 
+        /// <summary>
+        /// Constructor of this class.
+        /// </summary>
+        /// <param name="surname">A string value.</param>
+        /// <param name="name">A string value.</param>
+        /// <param name="middleName">A string value.</param>
+        /// <param name="gender">A string value.</param>
+        /// <param name="dateOfBirth">A DateTime value.</param>
+        /// <param name="groupId">An int number.</param>
         public Student(string surname, string name, string middleName, string gender, DateTime dateOfBirth, int groupId)
         {
             Surname = surname;

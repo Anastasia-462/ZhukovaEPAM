@@ -53,6 +53,11 @@ namespace University
             FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, connectionString);
         }
 
+        /// <summary>
+        /// Method which gets id group.
+        /// </summary>
+        /// <param name="group">A Group.</param>
+        /// <returns>An in number.</returns>
         public int GetIdGroup(Group group)
         {
             int id = 0;
@@ -137,6 +142,7 @@ namespace University
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand(UPDATE_EXPRESSION, sqlConnection);
                 sqlCommand.Parameters.Add(new SqlParameter("@groupName", newGroup.GroupName));
+                sqlCommand.Parameters.Add(new SqlParameter("@groupId", id));
                 numb = sqlCommand.ExecuteNonQuery();
             }
             return numb > 0;

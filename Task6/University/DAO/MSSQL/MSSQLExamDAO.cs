@@ -38,6 +38,8 @@ namespace University
         private const string GET_EXAM_EXPRESSION
             = "SELECT ExamId FROM Exams WHERE SubjectName=@subjectName AND AssessmentForm=@assessmentForm AND ExamDate=@examDate AND Session=@session AND GroupId=@groupId";
 
+        private const string GET_EXAM_BY_ID
+            = "SELECT * FROM Exams WHERE ExamId = @examId";
         
         private string connectionString;
 
@@ -49,10 +51,15 @@ namespace University
         {
             this.connectionString = connectionString;
 
-            FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, connectionString);
+            //FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, connectionString);
         }
 
-        private int GetIdExam(Exam exam)
+        /// <summary>
+        /// Method which get index by exam.
+        /// </summary>
+        /// <param name="exam">Exam.</param>
+        /// <returns>An int number.</returns>
+        public int GetIdExam(Exam exam)
         {
             int id = 0;
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
@@ -144,7 +151,6 @@ namespace University
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
                 int id = GetIdExam(nowExam);
-                //int groupId = group.GetIndexByName(newExam.ToString());
 
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand(UPDATE_EXPRESSION, sqlConnection);
@@ -153,11 +159,7 @@ namespace University
                 sqlCommand.Parameters.Add(new SqlParameter("@examDate", newExam.ExamDate.ToString("yyyy-MM-dd")));
                 sqlCommand.Parameters.Add(new SqlParameter("@session", newExam.Session));
                 sqlCommand.Parameters.Add(new SqlParameter("@groupId", newExam.GroupId));
-                //SqlCommand sqlCommand = new SqlCommand(
-                //    string.Format(UPDATE_EXPRESSION,
-                //    newExam.SubjectName,
-                //    newExam.ExamDate.ToString("yyyy-MM-dd"),
-                //    newExam.GroupId, id), sqlConnection);
+                sqlCommand.Parameters.Add(new SqlParameter("@examId", id));
                 numb = sqlCommand.ExecuteNonQuery();
             }
             return numb > 0;
@@ -181,6 +183,31 @@ namespace University
                 numb = sqlCommand.ExecuteNonQuery();
             }
             return numb > 0;
+        }
+
+        /// <summary>
+        /// Method which get exam by index.
+        /// </summary>
+        /// <param name="id">An int number.</param>
+        /// <returns>Exam.</returns>
+        public Exam GetExamByIndex(int id)
+        {
+            Exam exam = null;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                
+                connection.Open();
+                SqlCommand sqlCommand = new SqlCommand(GET_EXAM_BY_ID, connection);
+                sqlCommand.Parameters.Add(new SqlParameter("@examId", id));
+
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    reader.Read();
+                    exam = new Exam(reader.GetString(2), reader.GetDateTime(3), reader.GetInt32(5), reader.GetString(1), reader.GetString(4));
+                }
+            }
+            return exam;
         }
     }
 }
