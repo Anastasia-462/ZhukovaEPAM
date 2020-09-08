@@ -31,11 +31,12 @@ namespace University
     public static class ReportGeneration
     {
         private const string CONNECTIONSTRING = @"Data Source=.\SQLEXPRESS;Initial Catalog=University;Integrated Security=True";
-        
+
         /// <summary>
         /// Method which forms summary table. 
         /// </summary>
-        public static void FormSummaryTable()
+        /// <returns>True if method works right, false in the opposite case.</returns>
+        public static bool FormSummaryTable()
         {
             Application ex = new Application();
             ex.SheetsInNewWorkbook = 1;
@@ -73,6 +74,7 @@ namespace University
                 }
             }
             ex.Application.ActiveWorkbook.SaveCopyAs(Directory.GetCurrentDirectory() + @"\SummaryTable.xlsx");
+            return true;
         }
 
         /// <summary>
@@ -96,7 +98,8 @@ namespace University
         /// <summary>
         /// Method which forms outcome of session.
         /// </summary>
-        public static void OutcomeOfSession(Sorting sorting)
+        /// <returns>True if method works right, false in the opposite case.</returns>
+        public static bool OutcomeOfSession(Sorting sorting)
         {
             Application ex = new Application();
             ex.SheetsInNewWorkbook = 1;
@@ -161,6 +164,7 @@ namespace University
                 }
             }
             ex.Application.ActiveWorkbook.SaveCopyAs(Directory.GetCurrentDirectory() + @"\rep.xlsx");
+            return true;
         }
 
         private static IEnumerable<Student> SortingStudents(Sorting sorting, IEnumerable<Student> students)
@@ -269,7 +273,6 @@ namespace University
             IGrade grade = factory.GetGrade();            
             Grades[] grades = grade.GetGrades();
             IExam exam = factory.GetExam();
-            Exam[] exams = exam.GetExams();
             List<int> gradeStudent = new List<int>();
             for (int i = 0; i < grades.Length; i++)
             {

@@ -11,16 +11,6 @@ namespace UniversityTest
     public class CRUDTest
     {
         /// <summary>
-        /// Testing method which forms summary table.
-        /// </summary>
-        [TestMethod]
-        public void FormSummaryTableTest()
-        {
-            ReportGeneration.FormSummaryTable();
-            Assert.IsTrue(true);
-        }
-
-        /// <summary>
         /// Testing method which inserts data in the Exam table.
         /// </summary>
         [TestMethod]
@@ -114,8 +104,8 @@ namespace UniversityTest
         public void UptadeGradesTest()
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=University;Integrated Security=True";
-            Grades oldGrades = new Grades(9, 1, 1);
-            Grades newGrades = new Grades(9, 1, 6);
+            Grades oldGrades = new Grades(7, 9, 1);
+            Grades newGrades = new Grades(9, 9, 1);
             MSSQLGradesDAO mSSQLGradesDAO = new MSSQLGradesDAO(connectionString);
             Assert.IsTrue(mSSQLGradesDAO.Update(oldGrades, newGrades));
         }
@@ -187,7 +177,7 @@ namespace UniversityTest
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=University;Integrated Security=True";
             MSSQLStudentDAO mSSQLStudentDAO = new MSSQLStudentDAO(connectionString);
-            Assert.AreEqual(15, mSSQLStudentDAO.GetStudents().Length);
+            Assert.AreEqual(16, mSSQLStudentDAO.GetStudents().Length);
         }
 
         /// <summary>
@@ -198,7 +188,7 @@ namespace UniversityTest
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=University;Integrated Security=True";
             MSSQLGroupDAO mSSQLGroupDAO = new MSSQLGroupDAO(connectionString);
-            Assert.AreEqual(3, mSSQLGroupDAO.GetGroups().Length);
+            Assert.AreEqual(4, mSSQLGroupDAO.GetGroups().Length);
         }
 
         /// <summary>
