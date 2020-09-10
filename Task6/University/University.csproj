@@ -38,6 +38,12 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Linq, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Linq.4.3.0\lib\net463\System.Linq.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,11 +52,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LINQExamDAO.cs" />
+    <Compile Include="LINQFactoryDAO.cs" />
+    <Compile Include="LINQGradesDAO.cs" />
+    <Compile Include="LINQGroupDAO.cs" />
+    <Compile Include="LINQStudentDAO.cs" />
     <Compile Include="ReportGeneration.cs" />
     <Compile Include="Tables\Exam.cs" />
     <Compile Include="DAO\FactoryDAO.cs" />
     <Compile Include="Tables\Grades.cs" />
-    <Compile Include="Tables\Group.cs" />
+    <Compile Include="Tables\Groups.cs" />
     <Compile Include="DAO\IExam.cs" />
     <Compile Include="DAO\IGrade.cs" />
     <Compile Include="DAO\IGroup.cs" />
@@ -61,7 +72,7 @@
     <Compile Include="DAO\MSSQL\MSSQLGroupDAO.cs" />
     <Compile Include="DAO\MSSQL\MSSQLStudentDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tables\Student.cs" />
+    <Compile Include="Tables\Students.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

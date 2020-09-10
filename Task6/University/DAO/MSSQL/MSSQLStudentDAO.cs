@@ -58,7 +58,7 @@ namespace University
         /// </summary>
         /// <param name="student">Student.</param>
         /// <returns>An int value.</returns>
-        public int GetIdStudent(Student student)
+        public int GetIdStudent(Students student)
         {
             int id = 0;
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
@@ -81,9 +81,9 @@ namespace University
             return id;
         }
 
-        private Student CreateGrades(SqlDataReader reader)
+        private Students CreateGrades(SqlDataReader reader)
         {
-            Student student = new Student();
+            Students student = new Students();
 
             student.Surname = reader.GetString(1);
             student.Name = reader.GetString(2);
@@ -100,7 +100,7 @@ namespace University
         /// </summary>
         /// <param name="student">Student.</param>
         /// <returns>True if successful, otherwise False.</returns>
-        public bool Insert(Student student)
+        public bool Insert(Students student)
         {
             int numb;
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
@@ -123,9 +123,9 @@ namespace University
         /// Getting a list of all students from the MS SQL Server database.
         /// </summary>
         /// <returns>All students in the database.</returns>
-        public Student[] GetStudents()
+        public Students[] GetStudents()
         {
-            List<Student> students = new List<Student>();
+            List<Students> students = new List<Students>();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -147,7 +147,7 @@ namespace University
         /// <param name="nowStudent">Student for renewal.</param>
         /// <param name="newStudent">New student.</param>
         /// <returns>True if successful, otherwise False.</returns>
-        public bool Update(Student nowStudent, Student newStudent)
+        public bool Update(Students nowStudent, Students newStudent)
         {
             int numb;
 
@@ -174,7 +174,7 @@ namespace University
         /// </summary>
         /// <param name="student">Student.</param>
         /// <returns>True if successful, otherwise False.</returns>
-        public bool Delete(Student student)
+        public bool Delete(Students student)
         {
             int numb;
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))

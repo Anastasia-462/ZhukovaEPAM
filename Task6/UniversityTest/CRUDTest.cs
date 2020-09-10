@@ -29,7 +29,7 @@ namespace UniversityTest
         public void InsertStudentTest()
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=University;Integrated Security=True";
-            Student student = new Student("Жукова", "Анастасия", "Александровна", "ж", new DateTime(2001, 02, 19), 2);
+            Students student = new Students("Жукова", "Анастасия", "Александровна", "ж", new DateTime(2001, 02, 19), 2);
             MSSQLStudentDAO mSSQLStudentDAO = new MSSQLStudentDAO(connectionString);
             Assert.IsTrue(mSSQLStudentDAO.Insert(student));
         }
@@ -41,7 +41,7 @@ namespace UniversityTest
         public void InsertGroupTest()
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=University;Integrated Security=True";
-            Group group = new Group("ПЗ-31");
+            Groups group = new Groups("ПЗ-31");
             MSSQLGroupDAO mSSQLGroupDAO = new MSSQLGroupDAO(connectionString);
             Assert.IsTrue(mSSQLGroupDAO.Insert(group));
         }
@@ -78,8 +78,8 @@ namespace UniversityTest
         public void UptadeStudentTest()
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=University;Integrated Security=True";
-            Student oldStudent = new Student("Дубровский", "Александр", "Андреев", "м", new DateTime(2001, 4, 25), 1);
-            Student newStudent = new Student("Жукова", "Анастасия", "Александровна", "ж", new DateTime(2001, 02, 19), 2);
+            Students oldStudent = new Students("Дубровский", "Александр", "Андреев", "м", new DateTime(2001, 4, 25), 1);
+            Students newStudent = new Students("Жукова", "Анастасия", "Александровна", "ж", new DateTime(2001, 02, 19), 2);
             MSSQLStudentDAO mSSQLStudentDAO = new MSSQLStudentDAO(connectionString);
             Assert.IsTrue(mSSQLStudentDAO.Update(oldStudent, newStudent));
         }
@@ -91,8 +91,8 @@ namespace UniversityTest
         public void UptadeGroupTest()
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=University;Integrated Security=True";
-            Group newGroup = new Group("ПЗ-31");
-            Group oldGroup = new Group("ИТИ-31");
+            Groups newGroup = new Groups("ПЗ-31");
+            Groups oldGroup = new Groups("ИТИ-31");
             MSSQLGroupDAO mSSQLGroupDAO = new MSSQLGroupDAO(connectionString);
             Assert.IsTrue(mSSQLGroupDAO.Update(oldGroup, newGroup));
         }
@@ -129,7 +129,7 @@ namespace UniversityTest
         public void DeleteStudentTest()
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=University;Integrated Security=True";
-            Student student = new Student("Жукова", "Анастасия", "Александровна", "ж", new DateTime(2001, 02, 19), 2);
+            Students student = new Students("Жукова", "Анастасия", "Александровна", "ж", new DateTime(2001, 02, 19), 2);
             MSSQLStudentDAO mSSQLStudentDAO = new MSSQLStudentDAO(connectionString);
             Assert.IsTrue(mSSQLStudentDAO.Delete(student));
         }
@@ -141,7 +141,7 @@ namespace UniversityTest
         public void DeleteGroupTest()
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=University;Integrated Security=True";
-            Group group = new Group("ПЗ-31");
+            Groups group = new Groups("ПЗ-31");
             MSSQLGroupDAO mSSQLGroupDAO = new MSSQLGroupDAO(connectionString);
             Assert.IsTrue(mSSQLGroupDAO.Delete(group));
         }

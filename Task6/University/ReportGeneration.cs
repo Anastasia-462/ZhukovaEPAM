@@ -47,7 +47,7 @@ namespace University
 
             FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, CONNECTIONSTRING);
             IGroup group = factory.GetGroup();
-            Group[] groups = group.GetGroups();
+            Groups[] groups = group.GetGroups();
             Exam[] exams = factory.GetExam().GetExams();
 
             IEnumerable<IGrouping<string, Exam>> session = exams.GroupBy(exam => exam.Session);
@@ -81,13 +81,13 @@ namespace University
         /// Method which forms list of expelled students.
         /// </summary>
         /// <returns>Dictionary.</returns>
-        public static Dictionary<string, Student[]> FormListOfExpelledStudents(string session)
+        public static Dictionary<string, Students[]> FormListOfExpelledStudents(string session)
         {
-            Dictionary<string, Student[]> expelledStudent = new Dictionary<string, Student[]>();
+            Dictionary<string, Students[]> expelledStudent = new Dictionary<string, Students[]>();
 
             FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, CONNECTIONSTRING);
             IGroup group = factory.GetGroup();
-            Group[] groups = group.GetGroups();
+            Groups[] groups = group.GetGroups();
             for (int i = 0; i < groups.Length; i++)
             {
                 expelledStudent.Add(groups[i].GroupName, ExpelledStudent(group.GetIdGroup(groups[i]), session));
@@ -109,11 +109,11 @@ namespace University
             sheet.Name = "Итоги сессии";
 
             FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, CONNECTIONSTRING);
-            Group[] groups = factory.GetGroup().GetGroups();
+            Groups[] groups = factory.GetGroup().GetGroups();
             IExam exe = factory.GetExam();
             Exam[] exams = exe.GetExams();
             Grades[] grades = factory.GetGrade().GetGrades();
-            Student[] students = factory.GetStudent().GetStudents();
+            Students[] students = factory.GetStudent().GetStudents();
             MSSQLStudentDAO st = new MSSQLStudentDAO(CONNECTIONSTRING);
 
             int pos = 0;
@@ -143,7 +143,7 @@ namespace University
                         k++;
                     }
                     sheet.Cells[++pos, 1] = "ФИО";
-                    IEnumerable<Student> studentGroup = SortingStudents(sorting, students.Where(student => student.GroupId == group.ElementAt(j).Key));
+                    IEnumerable<Students> studentGroup = SortingStudents(sorting, students.Where(student => student.GroupId == group.ElementAt(j).Key));
                     for (k = 0; k < studentGroup.Count(); k++)
                     {
                         sheet.Cells[++pos, 1] = FormFullName(studentGroup.ElementAt(k));
@@ -167,7 +167,7 @@ namespace University
             return true;
         }
 
-        private static IEnumerable<Student> SortingStudents(Sorting sorting, IEnumerable<Student> students)
+        private static IEnumerable<Students> SortingStudents(Sorting sorting, IEnumerable<Students> students)
         {
             switch(sorting)
             {
@@ -182,7 +182,7 @@ namespace University
         }
 
 
-        private static string SearchNameById(IGroup group, Group[] groups, int id)
+        private static string SearchNameById(IGroup group, Groups[] groups, int id)
         {
             for (int i = 0; i < groups.Length; i++)
             {
@@ -248,7 +248,7 @@ namespace University
         {
             FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, CONNECTIONSTRING);
             IStudent student = factory.GetStudent();
-            Student[] students = student.GetStudents();
+            Students[] students = student.GetStudents();
             List<float> averageStudentsScore = new List<float>();
             for (int i = 0; i < students.Length; i++)
             {
@@ -283,12 +283,12 @@ namespace University
         }
 
         
-        private static Student[] ExpelledStudent(int groupId, string session)
+        private static Students[] ExpelledStudent(int groupId, string session)
         {
             FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, CONNECTIONSTRING);
             IStudent student = factory.GetStudent();
-            Student[] students = student.GetStudents();
-            List<Student> expelledStudents = new List<Student>();
+            Students[] students = student.GetStudents();
+            List<Students> expelledStudents = new List<Students>();
             
             for (int i = 0; i < students.Length; i++)
             {                
@@ -321,7 +321,7 @@ namespace University
             }
         }
 
-        private static string FormFullName(Student student)
+        private static string FormFullName(Students student)
         {
             return student.Surname + " " + student.Name + " " + student.MiddleName;
         }

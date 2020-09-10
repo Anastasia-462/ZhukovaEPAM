@@ -13,7 +13,11 @@
             /// <summary>
             /// MSSQL is database management system.
             /// </summary>
-            MSSQL
+            MSSQL,
+            /// <summary>
+            /// LINQ is database management system.
+            /// </summary>
+            LINQ
         }
 
         /// <summary>
@@ -51,7 +55,9 @@
             switch (typeFactory)
             {
                 case DBMS.MSSQL:
-                    return MSSQLFactoryDAO.GetInstance(connectionString); ;
+                    return MSSQLFactoryDAO.GetInstance(connectionString);
+                case DBMS.LINQ:
+                    return LINQFactoryDAO.GetInstance(connectionString);
                 default:
                     return null;
             }

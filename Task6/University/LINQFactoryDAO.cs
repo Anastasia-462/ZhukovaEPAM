@@ -1,14 +1,20 @@
-﻿namespace University
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace University
 {
     /// <summary>
     /// Object for getting data from MS SQL SERVER database.
     /// </summary>
-    public class MSSQLFactoryDAO : FactoryDAO
+    public class LINQFactoryDAO : FactoryDAO
     {
         private string connectionString;
 
-        private static MSSQLFactoryDAO _instance;
-        private MSSQLFactoryDAO(string connectionString)
+        private static LINQFactoryDAO _instance;
+        private LINQFactoryDAO(string connectionString)
         {
             this.connectionString = connectionString;
         }
@@ -18,11 +24,11 @@
         /// </summary>
         /// <param name="connectionString">The string connecting to the database.</param>
         /// <returns>An object of this class.</returns>
-        public static MSSQLFactoryDAO GetInstance(string connectionString)
+        public static LINQFactoryDAO GetInstance(string connectionString)
         {
-            if(_instance == null)
+            if (_instance == null)
             {
-                _instance = new MSSQLFactoryDAO(connectionString);
+                _instance = new LINQFactoryDAO(connectionString);
             }
             return _instance;
         }
@@ -34,7 +40,7 @@
         /// <returns>DAO exam.</returns>
         public override IExam GetExam()
         {
-            return new MSSQLExamDAO(connectionString);
+            return new LINQExamDAO(connectionString);
         }
 
         /// <summary>
@@ -43,7 +49,7 @@
         /// <returns>DAO grade.</returns>
         public override IGrade GetGrade()
         {
-            return new MSSQLGradesDAO(connectionString);
+            return new LINQGradesDAO(connectionString);
         }
 
         /// <summary>
@@ -52,7 +58,7 @@
         /// <returns>DAO group.</returns>
         public override IGroup GetGroup()
         {
-            return new MSSQLGroupDAO(connectionString);
+            return new LINQGroupDAO(connectionString);
         }
 
         /// <summary>
@@ -61,7 +67,8 @@
         /// <returns>DAO student.</returns>
         public override IStudent GetStudent()
         {
-            return new MSSQLStudentDAO(connectionString);
+            return new LINQStudentDAO(connectionString);
         }
+
     }
 }

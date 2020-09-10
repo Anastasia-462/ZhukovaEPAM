@@ -58,7 +58,7 @@ namespace University
         /// </summary>
         /// <param name="group">A Group.</param>
         /// <returns>An in number.</returns>
-        public int GetIdGroup(Group group)
+        public int GetIdGroup(Groups group)
         {
             int id = 0;
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
@@ -76,9 +76,9 @@ namespace University
             return id;
         }
 
-        private Group CreateGroup(SqlDataReader reader)
+        private Groups CreateGroup(SqlDataReader reader)
         {
-            Group group = new Group();
+            Groups group = new Groups();
 
             group.GroupName = reader.GetString(1);
             return group;
@@ -89,7 +89,7 @@ namespace University
         /// </summary>
         /// <param name="group">Group.</param>
         /// <returns>True if successful, otherwise False.</returns>
-        public bool Insert(Group group)
+        public bool Insert(Groups group)
         {
             int numb;
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))
@@ -107,9 +107,9 @@ namespace University
         /// Getting a list of all groups from the MS SQL Server database.
         /// </summary>
         /// <returns>All groups in the database.</returns>
-        public Group[] GetGroups()
+        public Groups[] GetGroups()
         {
-            List<Group> group = new List<Group>();
+            List<Groups> group = new List<Groups>();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -131,7 +131,7 @@ namespace University
         /// <param name="nowGroup">Group for renewal.</param>
         /// <param name="newGroup">New group.</param>
         /// <returns>True if successful, otherwise False.</returns>
-        public bool Update(Group nowGroup, Group newGroup)
+        public bool Update(Groups nowGroup, Groups newGroup)
         {
             int numb;
 
@@ -153,7 +153,7 @@ namespace University
         /// </summary>
         /// <param name="group">Group.</param>
         /// <returns>True if successful, otherwise False.</returns>
-        public bool Delete(Group group)
+        public bool Delete(Groups group)
         {
             int numb;
             using (SqlConnection sqlConnection = new SqlConnection(connectionString))

@@ -50,6 +50,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LINQ_CRUDTest.cs" />
     <Compile Include="ReportGenerationTest.cs" />
     <Compile Include="CRUDTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

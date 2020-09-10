@@ -10,7 +10,7 @@
         /// </summary>
         /// <param name="group">Group.</param>
         /// <returns>An int number.</returns>
-        int GetIdGroup(Group group);
+        int GetIdGroup(Groups group);
 
 
         /// <summary>
@@ -18,13 +18,13 @@
         /// </summary>
         /// <param name="group">A group.</param>
         /// <returns>True if the operation was successful, otherwise False.</returns>
-        bool Insert(Group group);
+        bool Insert(Groups group);
 
         /// <summary>
         /// Getting a list of all groups from the database.
         /// </summary>
         /// <returns>All groups.</returns>
-        Group[] GetGroups();
+        Groups[] GetGroups();
 
         /// <summary>
         /// Updating the group to the database.
@@ -32,13 +32,13 @@
         /// <param name="nowGroup">A current group.</param>
         /// <param name="newGroup">A new group.</param>
         /// <returns>True if the operation was successful, otherwise False.</returns>
-        bool Update(Group nowGroup, Group newGroup);
+        bool Update(Groups nowGroup, Groups newGroup);
 
         /// <summary>
         /// Deleting the group to the database.
         /// </summary>
         /// <param name="group">A group.</param>
         /// <returns>True if the operation was successful, otherwise False.</returns>
-        bool Delete(Group group);
+        bool Delete(Groups group);
     }
 }
