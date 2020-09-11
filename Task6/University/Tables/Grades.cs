@@ -1,4 +1,5 @@
-﻿using System.Data.Linq.Mapping;
+﻿using System;
+using System.Data.Linq.Mapping;
 
 namespace University
 {
@@ -6,7 +7,7 @@ namespace University
     /// Class describing the grade.
     /// </summary>
     [Table(Name = "Grades")]
-    public class Grades
+    public class Grades : IComparable<Grades>
     {
         /// <summary>
         /// Grade id.
@@ -62,6 +63,30 @@ namespace University
             Grade = grade;
             ExamId = examId;
             StudentId = studentId;
+        }
+
+        public int CompareTo(Grades other)
+        {
+            return GradeId.CompareTo(other.GradeId);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Grades grades &&
+                   GradeId == grades.GradeId &&
+                   Grade == grades.Grade &&
+                   ExamId == grades.ExamId &&
+                   StudentId == grades.StudentId;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1992022823;
+            hashCode = hashCode * -1521134295 + GradeId.GetHashCode();
+            hashCode = hashCode * -1521134295 + Grade.GetHashCode();
+            hashCode = hashCode * -1521134295 + ExamId.GetHashCode();
+            hashCode = hashCode * -1521134295 + StudentId.GetHashCode();
+            return hashCode;
         }
     }
 }

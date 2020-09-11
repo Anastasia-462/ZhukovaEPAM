@@ -147,7 +147,7 @@ namespace University
         /// <param name="nowStudent">Student for renewal.</param>
         /// <param name="newStudent">New student.</param>
         /// <returns>True if successful, otherwise False.</returns>
-        public bool Update(Students nowStudent, Students newStudent)
+        public bool UpdateMssql(Students nowStudent, Students newStudent)
         {
             int numb;
 
@@ -187,6 +187,16 @@ namespace University
                 numb = sqlCommand.ExecuteNonQuery();
             }
             return numb > 0;
+        }
+
+        public bool UpdateLinq(Students newStudent)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Students GetStudentByIndex(int id)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

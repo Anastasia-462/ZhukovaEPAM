@@ -77,6 +77,52 @@ namespace University
             return true;
         }
 
+
+        /// <summary>
+        /// Method which forms summary table. 
+        /// </summary>
+        /// <returns>True if method works right, false in the opposite case.</returns>
+        public static bool SpecialtyTable()
+        {
+            Application ex = new Application();
+            ex.SheetsInNewWorkbook = 1;
+            Workbook workBook = ex.Workbooks.Add(Type.Missing);
+            ex.DisplayAlerts = false;
+            Worksheet sheet = (Worksheet)ex.Worksheets.get_Item(1);
+            sheet.Name = "Сводная таблица";
+
+            FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.LINQ, CONNECTIONSTRING);
+            IGroup group = factory.GetGroup();
+            Groups[] groups = group.GetGroups();
+            Exam[] exams = factory.GetExam().GetExams();
+
+            IEnumerable<IGrouping<string, Exam>> session = exams.GroupBy(exam => exam.Session);
+            int pos = 0;
+            sheet.Columns[1].ColumnWidth = 15;
+            sheet.Columns[2].ColumnWidth = 15;
+            sheet.Columns[3].ColumnWidth = 15;
+            sheet.Columns[4].ColumnWidth = 15;
+            for (int i = 0; i < session.Count(); i++)
+            {
+                sheet.Range[sheet.Cells[++pos, 1], sheet.Cells[pos, 4]].Merge();
+                sheet.Cells[pos, 1] = FormSessionName(session.ElementAt(i).Key) + " cессия";
+                sheet.Cells[pos, 1].Font.Bold = 7;
+                sheet.Cells[++pos, 1] = "Cпециальность";
+                sheet.Cells[pos, 2] = "Средний";
+                sheet.Cells[pos, 3] = "Минимальный";
+                sheet.Cells[pos, 4] = "Максимальный";
+                for (int j = 0; j < groups.Count(); j++)
+                {
+                    sheet.Cells[++pos, 1] = groups[j].Specialty;
+                    sheet.Cells[pos, 2] = GroupAverageScore(group.GetIdGroup(groups[j]), session.ElementAt(i).Key);
+                    sheet.Cells[pos, 3] = GroupMinScore(group.GetIdGroup(groups[j]), session.ElementAt(i).Key);
+                    sheet.Cells[pos, 4] = GroupMaxScore(group.GetIdGroup(groups[j]), session.ElementAt(i).Key);
+                }
+            }
+            ex.Application.ActiveWorkbook.SaveCopyAs(Directory.GetCurrentDirectory() + @"\SummaryTable.xlsx");
+            return true;
+        }
+
         /// <summary>
         /// Method which forms list of expelled students.
         /// </summary>
@@ -193,7 +239,7 @@ namespace University
             }
             throw new Exception("Not found.");
         }
-
+        
 
         private static float GroupMaxScore(int groupId, string session)
         {
@@ -230,6 +276,9 @@ namespace University
             }
             return minScore;
         }
+        //Дополнить отчёты информацией в рамках одной сессии о среднем бале по
+        //каждой специальности, о среднем бале по каждому экзаменатору.В
+        
 
         private static float GroupAverageScore(int id, string session)
         {

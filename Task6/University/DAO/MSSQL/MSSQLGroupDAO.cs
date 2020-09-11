@@ -49,8 +49,6 @@ namespace University
         public MSSQLGroupDAO(string connectionString)
         {
             this.connectionString = connectionString;
-
-            FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, connectionString);
         }
 
         /// <summary>
@@ -131,7 +129,7 @@ namespace University
         /// <param name="nowGroup">Group for renewal.</param>
         /// <param name="newGroup">New group.</param>
         /// <returns>True if successful, otherwise False.</returns>
-        public bool Update(Groups nowGroup, Groups newGroup)
+        public bool UpdateMssql(Groups nowGroup, Groups newGroup)
         {
             int numb;
 
@@ -166,6 +164,15 @@ namespace University
                 numb = sqlCommand.ExecuteNonQuery();
             }
             return numb > 0;
+        }
+        public Groups GetGroupByIndex(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool UpdateLinq(Groups newGroup)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

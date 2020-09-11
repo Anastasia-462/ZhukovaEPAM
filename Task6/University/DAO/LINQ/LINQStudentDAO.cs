@@ -20,6 +20,18 @@ namespace University
             dataContext = new DataContext(connectionString);
         }
 
+        /// <summary>
+        /// Method which get student by index.
+        /// </summary>
+        /// <param name="id">An int number.</param>
+        /// <returns>Students.</returns>
+        public Students GetStudentByIndex(int id)
+        {
+            var query = from st in dataContext.GetTable<Students>()
+                        where st.StudentId == id
+                        select st;
+            return query.First();
+        }
 
         /// <summary>
         /// Removing a exam from the database.
@@ -72,11 +84,11 @@ namespace University
         /// <summary>
         /// Updating the student in the database.
         /// </summary>
-        /// <param name="nowStudent">Student for renewal.</param>
         /// <param name="newStudent">New student.</param>
         /// <returns>True if successful, otherwise False.</returns>
-        public bool Update(Students nowStudent, Students newStudent)
+        public bool UpdateLinq(Students newStudent)
         {
+            Students nowStudent = GetStudentByIndex(newStudent.StudentId);
             nowStudent.Surname = newStudent.Surname;
             nowStudent.Name = newStudent.Name;
             nowStudent.MiddleName = newStudent.MiddleName;
@@ -85,6 +97,17 @@ namespace University
             nowStudent.GroupId = newStudent.GroupId;
             dataContext.SubmitChanges();
             return true;
+        }
+
+        /// <summary>
+        /// Updating the student to the database.
+        /// </summary>
+        /// <param name="nowStudent">A current student.</param>
+        /// <param name="newStudent">A new student.</param>
+        /// <returns>True if the operation was successful, otherwise False.</returns>
+        public bool UpdateMssql(Students nowStudent, Students newStudent)
+        {
+            throw new NotImplementedException();
         }
     }
 }

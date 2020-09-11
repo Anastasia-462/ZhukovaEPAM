@@ -31,7 +31,14 @@
         /// <param name="nowStudent">A current student.</param>
         /// <param name="newStudent">A new student.</param>
         /// <returns>True if the operation was successful, otherwise False.</returns>
-        bool Update(Students nowStudent, Students newStudent);
+        bool UpdateMssql(Students nowStudent, Students newStudent);
+
+        /// <summary>
+        /// Updating the student to the database.
+        /// </summary>
+        /// <param name="newStudent">A new student.</param>
+        /// <returns>True if the operation was successful, otherwise False.</returns>
+        bool UpdateLinq(Students newStudent);
 
         /// <summary>
         /// Deleting the student to the database.
@@ -39,5 +46,12 @@
         /// <param name="student">A student.</param>
         /// <returns>True if the operation was successful, otherwise False.</returns>
         bool Delete(Students student);
+
+        /// <summary>
+        /// Method which get student by index.
+        /// </summary>
+        /// <param name="id">An int number.</param>
+        /// <returns>Students.</returns>
+        Students GetStudentByIndex(int id);
     }
 }

@@ -52,11 +52,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LINQExamDAO.cs" />
-    <Compile Include="LINQFactoryDAO.cs" />
-    <Compile Include="LINQGradesDAO.cs" />
-    <Compile Include="LINQGroupDAO.cs" />
-    <Compile Include="LINQStudentDAO.cs" />
+    <Compile Include="DAO\LINQ\LINQExamDAO.cs" />
+    <Compile Include="DAO\LINQ\LINQFactoryDAO.cs" />
+    <Compile Include="DAO\LINQ\LINQGradesDAO.cs" />
+    <Compile Include="DAO\LINQ\LINQGroupDAO.cs" />
+    <Compile Include="DAO\LINQ\LINQStudentDAO.cs" />
     <Compile Include="ReportGeneration.cs" />
     <Compile Include="Tables\Exam.cs" />
     <Compile Include="DAO\FactoryDAO.cs" />

@@ -54,46 +54,6 @@ namespace University
         public Exam[] GetExams()
         {
             Table<Exam> exams = dataContext.GetTable<Exam>();
-            //List<Exam> ex = new List<Exam>();
-            //foreach (var exam in exams)
-            //{
-            //    ex.Add(exam);
-            //}
-            //List<Exam> exams = new List<Exam>();
-            //var query = from ex in dataContext.GetTable<Exam>()
-            //            join eId in dataContext.GetTable<Exam>()
-            //            on ex.ExamId equals eId.ExamId
-            //            join prP in dataContext.GetTable<Exam>()
-            //            on ex.AssessmentForm equals prP.AssessmentForm
-            //            join sn in dataContext.GetTable<Exam>()
-            //            on ex.SubjectName equals sn.SubjectName
-            //            join ed in dataContext.GetTable<Exam>()
-            //            on ex.ExamDate equals ed.ExamDate
-            //            join s in dataContext.GetTable<Exam>()
-            //            on ex.Session equals s.Session
-            //            join gr in dataContext.GetTable<Group>()
-            //            on ex.GroupId equals gr.GroupId
-            //            join ts in dataContext.GetTable<Exam>()
-            //            on ex.TeacherSurname equals ts.TeacherSurname
-            //            join tn in dataContext.GetTable<Exam>()
-            //            on ex.TeacherName equals tn.TeacherName
-            //            join tm in dataContext.GetTable<Exam>()
-            //            on ex.TeacherMiddleName equals tm.TeacherMiddleName
-
-            //            select new Exam()
-            //            {
-            //                ExamId = ex.ExamId,
-            //                AssessmentForm = ex.AssessmentForm,
-            //                SubjectName = ex.SubjectName,
-            //                ExamDate = ex.ExamDate,
-            //                Session = ex.Session,
-            //                GroupId = gr.GroupId,
-            //                TeacherSurname = ex.TeacherSurname,
-            //                TeacherName = ex.TeacherName,
-            //                TeacherMiddleName = ex.TeacherMiddleName,
-            //            };
-            //foreach (Exam exam in query)
-            //    exams.Add(exam);
             return exams.ToArray();
         }
 

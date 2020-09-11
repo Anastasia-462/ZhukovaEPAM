@@ -63,5 +63,16 @@ namespace UniversityTest
         {
             Assert.IsTrue(ReportGeneration.OutcomeOfSession(Sorting.SortDateOfBirth));
         }
+
+
+
+        /// <summary>
+        /// Testing method which form outcome of session and sort by gender.
+        /// </summary>
+        [TestMethod]
+        public void SessionGenderSortTest()
+        {
+            Assert.IsTrue(ReportGeneration.SpecialtyTable());
+        }
     }
 }
