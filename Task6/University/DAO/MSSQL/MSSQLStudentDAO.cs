@@ -147,7 +147,7 @@ namespace University
         /// <param name="nowStudent">Student for renewal.</param>
         /// <param name="newStudent">New student.</param>
         /// <returns>True if successful, otherwise False.</returns>
-        public bool UpdateMssql(Students nowStudent, Students newStudent)
+        public bool Update(Students nowStudent, Students newStudent)
         {
             int numb;
 
@@ -189,11 +189,21 @@ namespace University
             return numb > 0;
         }
 
-        public bool UpdateLinq(Students newStudent)
+        /// <summary>
+        /// Updating the student in the MS SQL Server database.
+        /// </summary>
+        /// <param name="newStudent">New student.</param>
+        /// <returns>True if successful, otherwise False.</returns>
+        public bool Update(Students newStudent)
         {
             throw new System.NotImplementedException();
         }
 
+        /// <summary>
+        /// Method which get student by index.
+        /// </summary>
+        /// <param name="id">An int number.</param>
+        /// <returns>Students.</returns>
         public Students GetStudentByIndex(int id)
         {
             throw new System.NotImplementedException();

@@ -40,10 +40,9 @@ namespace UniversityTest
         public void UptadeExamTest()
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=UniversityNew;Integrated Security=True";
-            Exam newExam = new Exam("мат", new DateTime(2020, 6, 13), 2, "э", "л", "RH", "TY", "TR");
-            Exam oldExam = new Exam("лит", new DateTime(2020, 6, 13), 2, "э", "л", "RH", "TY", "TR");
+            Exam newExam = new Exam(36, "история", new DateTime(2020, 6, 14), 3, "э", "л", "Мешкин", "Петр", "Эдуардович");
             LINQExamDAO lINQExam = new LINQExamDAO(connectionString);
-            Assert.IsTrue(lINQExam.Update(oldExam, newExam));
+            Assert.IsTrue(lINQExam.Update(newExam));
         }
 
         /// <summary>
@@ -90,9 +89,8 @@ namespace UniversityTest
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=UniversityNew;Integrated Security=True";
             Groups newGroup = new Groups(3, "ИТИ-11", "Игровая индустрия");
-            Groups oldGroup = new Groups("ПИ-11", "Игровая индустрия");
             LINQGroupDAO lINQGroup = new LINQGroupDAO(connectionString);
-            Assert.IsTrue(lINQGroup.UpdateLinq(newGroup));
+            Assert.IsTrue(lINQGroup.Update(newGroup));
         }
 
         /// <summary>
@@ -139,17 +137,16 @@ namespace UniversityTest
         public void UptadeGradesTest()
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=UniversityNew;Integrated Security=True";
-            Grades newGrades = new Grades(8, 1, 1);
-            Grades oldGrades = new Grades(9, 1, 1);
+            Grades newGrades = new Grades(1, 10, 1, 1);
             LINQGradesDAO lINQGrades = new LINQGradesDAO(connectionString);
-            Assert.IsTrue(lINQGrades.Update(oldGrades, newGrades));
+            Assert.IsTrue(lINQGrades.Update(newGrades));
         }
 
         /// <summary>
         /// Testing method which deletes data in the Grades table.
         /// </summary>
         [TestMethod]
-        public void DeleteGradesTest()
+        public void DeleteGradesTests()
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=UniversityNew;Integrated Security=True";
             Grades grade = new Grades(181, 9, 1, 1);
@@ -191,7 +188,7 @@ namespace UniversityTest
             Students newStudents = new Students(1002, "Митрохон", "Антон", "Даниилович", "м", new DateTime(2001, 12, 5), 4);
             Students oldStudents = new Students("Шерон", "Андрей", "Даниилович", "м", new DateTime(2001, 12, 5), 4);
             LINQStudentDAO lINQStudent = new LINQStudentDAO(connectionString);
-            Assert.IsTrue(lINQStudent.UpdateLinq(newStudents));
+            Assert.IsTrue(lINQStudent.Update(newStudents));
         }
 
         /// <summary>

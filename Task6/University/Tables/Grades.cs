@@ -65,11 +65,21 @@ namespace University
             StudentId = studentId;
         }
 
+        /// <summary>
+        /// Method to compare objects.
+        /// </summary>
+        /// <param name="other">Grades.</param>
+        /// <returns>An int number.</returns>
         public int CompareTo(Grades other)
         {
             return GradeId.CompareTo(other.GradeId);
         }
 
+        /// <summary>
+        /// Method to compare objects.
+        /// </summary>
+        /// <param name="obj">An object.</param>
+        /// <returns>True if objects are equal,  false in the opposite case.</returns>
         public override bool Equals(object obj)
         {
             return obj is Grades grades &&
@@ -79,6 +89,10 @@ namespace University
                    StudentId == grades.StudentId;
         }
 
+        /// <summary>
+        /// Method which gets hash code.
+        /// </summary>
+        /// <returns>An int number.</returns>
         public override int GetHashCode()
         {
             int hashCode = -1992022823;

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Linq;
+﻿using System.Data.Linq;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace University
 {
+    /// <summary>
+    /// DAO exams for LINQ DBMS.
+    /// </summary>
     public class LINQStudentDAO : IStudent
     {
         DataContext dataContext;
@@ -86,7 +85,7 @@ namespace University
         /// </summary>
         /// <param name="newStudent">New student.</param>
         /// <returns>True if successful, otherwise False.</returns>
-        public bool UpdateLinq(Students newStudent)
+        public bool Update(Students newStudent)
         {
             Students nowStudent = GetStudentByIndex(newStudent.StudentId);
             nowStudent.Surname = newStudent.Surname;
@@ -105,9 +104,16 @@ namespace University
         /// <param name="nowStudent">A current student.</param>
         /// <param name="newStudent">A new student.</param>
         /// <returns>True if the operation was successful, otherwise False.</returns>
-        public bool UpdateMssql(Students nowStudent, Students newStudent)
+        public bool Update(Students nowStudent, Students newStudent)
         {
-            throw new NotImplementedException();
+            nowStudent.Surname = newStudent.Surname;
+            nowStudent.Name = newStudent.Name;
+            nowStudent.MiddleName = newStudent.MiddleName;
+            nowStudent.Gender = newStudent.Gender;
+            nowStudent.DateOfBirth = newStudent.DateOfBirth;
+            nowStudent.GroupId = newStudent.GroupId;
+            dataContext.SubmitChanges();
+            return true;
         }
     }
 }

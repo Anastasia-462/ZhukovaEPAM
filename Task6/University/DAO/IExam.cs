@@ -34,6 +34,13 @@
         bool Update(Exam nowExam, Exam newExam);
 
         /// <summary>
+        /// Updating the exam to the database.
+        /// </summary>
+        /// <param name="newExam">A new exam.</param>
+        /// <returns>True if the operation was successful, otherwise False.</returns>
+        bool Update(Exam newExam);
+
+        /// <summary>
         /// Deleting the grade to the database.
         /// </summary>
         /// <param name="exam">A exam.</param>

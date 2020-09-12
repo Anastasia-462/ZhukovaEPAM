@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Data.Linq;
 
@@ -100,6 +98,30 @@ namespace University
             nowExam.TeacherName = newExam.TeacherName;
             nowExam.TeacherMiddleName = newExam.TeacherMiddleName;
             dataContext.SubmitChanges();
+            return true;
+        }
+
+        /// <summary>
+        /// Updating the exam in the database.
+        /// </summary>
+        /// <param name="newExam">New exam.</param>
+        /// <returns>True if successful, otherwise False.</returns>
+        public bool Update(Exam newExam)
+        {
+            Exam nowExam = GetExamByIndex(newExam.ExamId);
+            nowExam.AssessmentForm = newExam.AssessmentForm;
+            nowExam.SubjectName = newExam.SubjectName;
+            nowExam.ExamDate = newExam.ExamDate;
+            nowExam.Session = newExam.Session;
+            nowExam.GroupId = newExam.GroupId;
+            nowExam.TeacherSurname = newExam.TeacherSurname;
+            nowExam.TeacherName = newExam.TeacherName;
+            nowExam.TeacherMiddleName = newExam.TeacherMiddleName;
+            try
+            {
+                dataContext.SubmitChanges();
+            }
+            catch (Exception) { }
             return true;
         }
     }

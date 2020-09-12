@@ -50,8 +50,6 @@ namespace University
         public MSSQLExamDAO(string connectionString)
         {
             this.connectionString = connectionString;
-
-            //FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.MSSQL, connectionString);
         }
 
         /// <summary>
@@ -208,6 +206,16 @@ namespace University
                 }
             }
             return exam;
+        }
+
+        /// <summary>
+        /// Updating the exam in the MS SQL Server database.
+        /// </summary>
+        /// <param name="newExam">New exam.</param>
+        /// <returns>True if successful, otherwise False.</returns>
+        public bool Update(Exam newExam)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

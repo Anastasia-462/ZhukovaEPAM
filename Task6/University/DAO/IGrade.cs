@@ -32,10 +32,24 @@
         bool Update(Grades nowGrade, Grades newGrade);
 
         /// <summary>
+        /// Updating the grade to the database.
+        /// </summary>
+        /// <param name="newGrade">A new grade.</param>
+        /// <returns>True if the operation was successful, otherwise False.</returns>
+        bool Update(Grades newGrade);
+
+        /// <summary>
         /// Deleting the grade to the database.
         /// </summary>
         /// <param name="grade">A grade.</param>
         /// <returns>True if the operation was successful, otherwise False.</returns>
         bool Delete(Grades grade);
+
+        /// <summary>
+        /// Method which get grade by index.
+        /// </summary>
+        /// <param name="id">An int number.</param>
+        /// <returns>Grades.</returns>
+        Grades GetGradeByIndex(int id);
     }
 }

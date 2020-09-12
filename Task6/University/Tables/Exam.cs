@@ -90,7 +90,6 @@ namespace University
         /// <summary>
         /// Constructor of this class.
         /// </summary>
-        /// <param name="examId">An int number.</param>
         /// <param name="subjectName">A string value.</param>
         /// <param name="examDate">A DateTime.</param>
         /// <param name="groupId">A int value.</param>
@@ -112,11 +111,47 @@ namespace University
             TeacherMiddleName = middleNameTeacher;
         }
 
+        /// <summary>
+        /// Constructor of this class.
+        /// </summary>
+        /// <param name="examId">An int number.</param>
+        /// <param name="subjectName">A string value.</param>
+        /// <param name="examDate">A DateTime.</param>
+        /// <param name="groupId">A int value.</param>
+        /// <param name="assessmentForm">A string value.</param>
+        /// <param name="session">A string value.</param>
+        /// <param name="surnameTeacher">A string value.</param>
+        /// <param name="nameTeacher">A string value.</param>
+        /// <param name="middleNameTeacher">A string value.</param>
+        public Exam(int examId, string subjectName, DateTime examDate, int groupId, string assessmentForm,
+            string session, string surnameTeacher, string nameTeacher, string middleNameTeacher)
+        {
+            ExamId = examId;
+            SubjectName = subjectName;
+            ExamDate = examDate;
+            GroupId = groupId;
+            AssessmentForm = assessmentForm;
+            Session = session;
+            TeacherSurname = surnameTeacher;
+            TeacherName = nameTeacher;
+            TeacherMiddleName = middleNameTeacher;
+        }
+
+        /// <summary>
+        /// Method to compare objects.
+        /// </summary>
+        /// <param name="other">Exams.</param>
+        /// <returns>An int number.</returns>
         public int CompareTo(Exam other)
         {
             return ExamId.CompareTo(other.ExamId);
         }
 
+        /// <summary>
+        /// Method to compare objects.
+        /// </summary>
+        /// <param name="obj">An object.</param>
+        /// <returns>True if objects are equal,  false in the opposite case.</returns>
         public override bool Equals(object obj)
         {
             return obj is Exam exam &&
@@ -131,6 +166,10 @@ namespace University
                    TeacherMiddleName == exam.TeacherMiddleName;
         }
 
+        /// <summary>
+        /// Method which gets hash code.
+        /// </summary>
+        /// <returns>An int number.</returns>
         public override int GetHashCode()
         {
             int hashCode = 1698072773;

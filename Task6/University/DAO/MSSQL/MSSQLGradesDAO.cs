@@ -168,5 +168,25 @@ namespace University
             }
             return numb > 0;
         }
+
+        /// <summary>
+        /// Updating the grade in the MS SQL Server database.
+        /// </summary>
+        /// <param name="newGrade">New grade.</param>
+        /// <returns>True if successful, otherwise False.</returns>
+        public bool Update(Grades newGrade)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <summary>
+        /// Method which get grade by index.
+        /// </summary>
+        /// <param name="id">An int number.</param>
+        /// <returns>Grades.</returns>
+        public Grades GetGradeByIndex(int id)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

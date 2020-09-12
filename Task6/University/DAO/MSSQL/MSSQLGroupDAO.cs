@@ -129,7 +129,7 @@ namespace University
         /// <param name="nowGroup">Group for renewal.</param>
         /// <param name="newGroup">New group.</param>
         /// <returns>True if successful, otherwise False.</returns>
-        public bool UpdateMssql(Groups nowGroup, Groups newGroup)
+        public bool Update(Groups nowGroup, Groups newGroup)
         {
             int numb;
 
@@ -165,12 +165,23 @@ namespace University
             }
             return numb > 0;
         }
+
+        /// <summary>
+        /// Method which get group by index.
+        /// </summary>
+        /// <param name="id">An int number.</param>
+        /// <returns>Groups.</returns>
         public Groups GetGroupByIndex(int id)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool UpdateLinq(Groups newGroup)
+        /// <summary>
+        /// Updating the group in the MS SQL Server database.
+        /// </summary>
+        /// <param name="newGroup">New group.</param>
+        /// <returns>True if successful, otherwise False.</returns>
+        public bool Update(Groups newGroup)
         {
             throw new System.NotImplementedException();
         }

@@ -31,14 +31,14 @@
         /// <param name="nowStudent">A current student.</param>
         /// <param name="newStudent">A new student.</param>
         /// <returns>True if the operation was successful, otherwise False.</returns>
-        bool UpdateMssql(Students nowStudent, Students newStudent);
+        bool Update(Students nowStudent, Students newStudent);
 
         /// <summary>
         /// Updating the student to the database.
         /// </summary>
         /// <param name="newStudent">A new student.</param>
         /// <returns>True if the operation was successful, otherwise False.</returns>
-        bool UpdateLinq(Students newStudent);
+        bool Update(Students newStudent);
 
         /// <summary>
         /// Deleting the student to the database.

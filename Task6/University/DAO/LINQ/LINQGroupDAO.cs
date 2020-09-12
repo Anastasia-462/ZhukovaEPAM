@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace University
 {
@@ -102,7 +100,7 @@ namespace University
         /// </summary>
         /// <param name="newGroup">New group.</param>
         /// <returns>True if successful, otherwise False.</returns>
-        public bool UpdateLinq(Groups newGroup)
+        public bool Update(Groups newGroup)
         {
             Groups nowGroup = GetGroupByIndex(newGroup.GroupId);
             nowGroup.GroupName = newGroup.GroupName;
@@ -121,9 +119,16 @@ namespace University
         /// <param name="nowGroup">A current group.</param>
         /// <param name="newGroup">A new group.</param>
         /// <returns>True if the operation was successful, otherwise False.</returns>
-        public bool UpdateMssql(Groups nowGroup, Groups newGroup)
+        public bool Update(Groups nowGroup, Groups newGroup)
         {
-            throw new NotImplementedException();
+            nowGroup.GroupName = newGroup.GroupName;
+            nowGroup.Specialty = newGroup.Specialty;
+            try
+            {
+                dataContext.SubmitChanges();
+            }
+            catch (Exception) { }
+            return true;
         }
     }
 }

@@ -31,7 +31,15 @@
         /// </summary>
         /// <param name="newGroup">A new group.</param>
         /// <returns>True if the operation was successful, otherwise False.</returns>
-        bool UpdateLinq(Groups newGroup);
+        bool Update(Groups newGroup);
+
+        /// <summary>
+        /// Updating the group to the database.
+        /// </summary>
+        /// <param name="nowGroup">A current group.</param>
+        /// <param name="newGroup">A new group.</param>
+        /// <returns>True if the operation was successful, otherwise False.</returns>
+        bool Update(Groups nowGroup, Groups newGroup);
 
         /// <summary>
         /// Deleting the group to the database.
@@ -47,13 +55,5 @@
         /// <param name="id">An int number.</param>
         /// <returns>Groups.</returns>
         Groups GetGroupByIndex(int id);
-
-        /// <summary>
-        /// Updating the group to the database.
-        /// </summary>
-        /// <param name="nowGroup">A current group.</param>
-        /// <param name="newGroup">A new group.</param>
-        /// <returns>True if the operation was successful, otherwise False.</returns>
-        bool UpdateMssql(Groups nowGroup, Groups newGroup);
     }
 }

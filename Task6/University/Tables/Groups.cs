@@ -12,7 +12,7 @@ namespace University
     /// Class describing the group.
     /// </summary>
     [Table(Name = "Groups")]
-    public class Groups
+    public class Groups : IComparable<Groups>
     {
         /// <summary>
         /// Group id.
@@ -79,7 +79,11 @@ namespace University
             return GroupName + " " + Specialty + ";";
         }
 
-
+        /// <summary>
+        /// Method to compare objects.
+        /// </summary>
+        /// <param name="obj">An object.</param>
+        /// <returns>True if objects are equal,  false in the opposite case.</returns>
         public override bool Equals(object obj)
         {
             return obj is Groups groups &&
@@ -88,6 +92,10 @@ namespace University
                    Specialty == groups.Specialty;
         }
 
+        /// <summary>
+        /// Method which gets hash code.
+        /// </summary>
+        /// <returns>An int number.</returns>
         public override int GetHashCode()
         {
             int hashCode = 108697023;
@@ -95,6 +103,16 @@ namespace University
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(GroupName);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Specialty);
             return hashCode;
+        }
+
+        /// <summary>
+        /// Method to compare objects.
+        /// </summary>
+        /// <param name="other">Groups.</param>
+        /// <returns>An int number.</returns>
+        public int CompareTo(Groups other)
+        {
+            return GroupId.CompareTo(other.GroupId);
         }
     }
 }

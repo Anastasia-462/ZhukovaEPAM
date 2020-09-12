@@ -81,7 +81,7 @@ namespace UniversityTest
             Students oldStudent = new Students("Дубровский", "Александр", "Андреев", "м", new DateTime(2001, 4, 25), 1);
             Students newStudent = new Students("Жукова", "Анастасия", "Александровна", "ж", new DateTime(2001, 02, 19), 2);
             MSSQLStudentDAO mSSQLStudentDAO = new MSSQLStudentDAO(connectionString);
-            Assert.IsTrue(mSSQLStudentDAO.UpdateMssql(oldStudent, newStudent));
+            Assert.IsTrue(mSSQLStudentDAO.Update(oldStudent, newStudent));
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace UniversityTest
             Groups newGroup = new Groups("ПЗ-31");
             Groups oldGroup = new Groups("ИТИ-31");
             MSSQLGroupDAO mSSQLGroupDAO = new MSSQLGroupDAO(connectionString);
-            Assert.IsTrue(mSSQLGroupDAO.UpdateMssql(oldGroup, newGroup));
+            Assert.IsTrue(mSSQLGroupDAO.Update(oldGroup, newGroup));
         }
 
         /// <summary>

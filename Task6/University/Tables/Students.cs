@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Linq.Mapping;
 
 namespace University
@@ -7,7 +8,7 @@ namespace University
     /// Class describing the student.
     /// </summary>
     [Table(Name = "Students")]
-    public class Students
+    public class Students : IComparable<Students>
     {
         /// <summary>
         /// Student id.
@@ -94,6 +95,50 @@ namespace University
             Gender = gender;
             DateOfBirth = dateOfBirth;
             GroupId = groupId;
+        }
+
+        /// <summary>
+        /// Method to compare objects.
+        /// </summary>
+        /// <param name="other">Students.</param>
+        /// <returns>An int number.</returns>
+        public int CompareTo(Students other)
+        {
+            return StudentId.CompareTo(other.StudentId);
+        }
+
+        /// <summary>
+        /// Method to compare objects.
+        /// </summary>
+        /// <param name="obj">An object.</param>
+        /// <returns>True if objects are equal,  false in the opposite case.</returns>
+        public override bool Equals(object obj)
+        {
+            return obj is Students students &&
+                   StudentId == students.StudentId &&
+                   Surname == students.Surname &&
+                   Name == students.Name &&
+                   MiddleName == students.MiddleName &&
+                   Gender == students.Gender &&
+                   DateOfBirth == students.DateOfBirth &&
+                   GroupId == students.GroupId;
+        }
+
+        /// <summary>
+        /// Method which gets hash code.
+        /// </summary>
+        /// <returns>An int number.</returns>
+        public override int GetHashCode()
+        {
+            int hashCode = -1959153046;
+            hashCode = hashCode * -1521134295 + StudentId.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Surname);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Name);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(MiddleName);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Gender);
+            hashCode = hashCode * -1521134295 + DateOfBirth.GetHashCode();
+            hashCode = hashCode * -1521134295 + GroupId.GetHashCode();
+            return hashCode;
         }
     }
 }

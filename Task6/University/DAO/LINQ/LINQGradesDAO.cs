@@ -36,6 +36,19 @@ namespace University
         }
 
         /// <summary>
+        /// Method which get grade by index.
+        /// </summary>
+        /// <param name="id">An int number.</param>
+        /// <returns>Grades.</returns>
+        public Grades GetGradeByIndex(int id)
+        {
+            var query = from grd in dataContext.GetTable<Grades>()
+                        where grd.GradeId == id
+                        select grd;
+            return query.First();
+        }
+
+        /// <summary>
         /// Getting a list of all grades from the database.
         /// </summary>
         /// <returns>All grades in the database.</returns>
@@ -58,7 +71,26 @@ namespace University
         }
 
         /// <summary>
-        /// Updating the grade in the MS SQL Server database.
+        /// Updating the grade in the database.
+        /// </summary>
+        /// <param name="newGrade">New grade.</param>
+        /// <returns>True if successful, otherwise False.</returns>
+        public bool Update(Grades newGrade)
+        {
+            Grades nowGrade = GetGradeByIndex(newGrade.GradeId);
+            nowGrade.GradeId = newGrade.GradeId;
+            nowGrade.StudentId = newGrade.StudentId;
+            nowGrade.Grade = newGrade.Grade;
+            try
+            {
+                dataContext.SubmitChanges();
+            }
+            catch (Exception) { }
+            return true;
+        }
+
+        /// <summary>
+        /// Updating the grade in the database.
         /// </summary>
         /// <param name="nowGrade">Grade for renewal.</param>
         /// <param name="newGrade">New grade.</param>
