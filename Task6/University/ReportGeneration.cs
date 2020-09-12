@@ -31,6 +31,7 @@ namespace University
     public static class ReportGeneration
     {
         private const string CONNECTIONSTRING = @"Data Source=.\SQLEXPRESS;Initial Catalog=University;Integrated Security=True";
+        private const string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=UniversityNew;Integrated Security=True";
 
         /// <summary>
         /// Method which forms summary table. 
@@ -79,29 +80,29 @@ namespace University
 
 
         /// <summary>
-        /// Method which forms summary table. 
+        /// Method which forms summary table on specialty. 
         /// </summary>
         /// <returns>True if method works right, false in the opposite case.</returns>
         public static bool SpecialtyTable()
         {
+            
             Application ex = new Application();
             ex.SheetsInNewWorkbook = 1;
             Workbook workBook = ex.Workbooks.Add(Type.Missing);
             ex.DisplayAlerts = false;
             Worksheet sheet = (Worksheet)ex.Worksheets.get_Item(1);
-            sheet.Name = "Сводная таблица";
+            sheet.Name = "Средний балл по специальности";
 
-            FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.LINQ, CONNECTIONSTRING);
+            FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.LINQ, connectionString);
             IGroup group = factory.GetGroup();
             Groups[] groups = group.GetGroups();
             Exam[] exams = factory.GetExam().GetExams();
 
             IEnumerable<IGrouping<string, Exam>> session = exams.GroupBy(exam => exam.Session);
+            IEnumerable<IGrouping<string, Groups>> specialty = groups.GroupBy(groupe => groupe.Specialty);
             int pos = 0;
-            sheet.Columns[1].ColumnWidth = 15;
+            sheet.Columns[1].ColumnWidth = 30;
             sheet.Columns[2].ColumnWidth = 15;
-            sheet.Columns[3].ColumnWidth = 15;
-            sheet.Columns[4].ColumnWidth = 15;
             for (int i = 0; i < session.Count(); i++)
             {
                 sheet.Range[sheet.Cells[++pos, 1], sheet.Cells[pos, 4]].Merge();
@@ -109,19 +110,60 @@ namespace University
                 sheet.Cells[pos, 1].Font.Bold = 7;
                 sheet.Cells[++pos, 1] = "Cпециальность";
                 sheet.Cells[pos, 2] = "Средний";
-                sheet.Cells[pos, 3] = "Минимальный";
-                sheet.Cells[pos, 4] = "Максимальный";
-                for (int j = 0; j < groups.Count(); j++)
+                
+                for (int j = 0; j < specialty.Count(); j++)
                 {
-                    sheet.Cells[++pos, 1] = groups[j].Specialty;
-                    sheet.Cells[pos, 2] = GroupAverageScore(group.GetIdGroup(groups[j]), session.ElementAt(i).Key);
-                    sheet.Cells[pos, 3] = GroupMinScore(group.GetIdGroup(groups[j]), session.ElementAt(i).Key);
-                    sheet.Cells[pos, 4] = GroupMaxScore(group.GetIdGroup(groups[j]), session.ElementAt(i).Key);
+                    sheet.Cells[++pos, 1] = specialty.ElementAt(j).Key;
+                    sheet.Cells[pos, 2] = SpecialtyAverageScore(specialty.ElementAt(j).GetEnumerator(), session.ElementAt(i).Key);
                 }
             }
-            ex.Application.ActiveWorkbook.SaveCopyAs(Directory.GetCurrentDirectory() + @"\SummaryTable.xlsx");
+            ex.Application.ActiveWorkbook.SaveCopyAs(Directory.GetCurrentDirectory() + @"\SpecialtyTable.xlsx");
             return true;
         }
+
+        /// <summary>
+        /// Method which forms summary table on specialty. 
+        /// </summary>
+        /// <returns>True if method works right, false in the opposite case.</returns>
+        public static bool TeacherTable()
+        {
+
+            Application ex = new Application();
+            ex.SheetsInNewWorkbook = 1;
+            Workbook workBook = ex.Workbooks.Add(Type.Missing);
+            ex.DisplayAlerts = false;
+            Worksheet sheet = (Worksheet)ex.Worksheets.get_Item(1);
+            sheet.Name = "Средний балл по преподавателю";
+
+            FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.LINQ, connectionString);
+            IGroup group = factory.GetGroup();
+            Groups[] groups = group.GetGroups();
+            Exam[] exams = factory.GetExam().GetExams();
+
+            IEnumerable<IGrouping<string, Exam>> session = exams.GroupBy(exam => exam.Session);
+            
+            int pos = 0;
+            sheet.Columns[1].ColumnWidth = 20;
+            sheet.Columns[2].ColumnWidth = 15;
+            for (int i = 0; i < session.Count(); i++)
+            {
+                sheet.Range[sheet.Cells[++pos, 1], sheet.Cells[pos, 4]].Merge();
+                sheet.Cells[pos, 1] = FormSessionName(session.ElementAt(i).Key) + " cессия";
+                sheet.Cells[pos, 1].Font.Bold = 7;
+                sheet.Cells[++pos, 1] = "Экзаменатор";
+                sheet.Cells[pos, 2] = "Средний";
+                IEnumerable<IGrouping<string, Exam>> teacher = SortingTeachers(Sorting.SortSurmame, exams.Where(exs => exs.Session == session.ElementAt(i).Key)).GroupBy(exam => exam.TeacherSurname);
+                //IEnumerable<Exam> teacherS = SortingTeachers(Sorting.SortSurmame, exams.Where(exs => exs.Session == session.ElementAt(i).Key));
+                for (int j = 0; j < teacher.Count(); j++)
+                {
+                    sheet.Cells[++pos, 1] = teacher.ElementAt(j).Key;
+                    sheet.Cells[pos, 2] = TeacherAverageScore(teacher.ElementAt(j).GetEnumerator());
+                }
+            }
+            ex.Application.ActiveWorkbook.SaveCopyAs(Directory.GetCurrentDirectory() + @"\TeacherTable.xlsx");
+            return true;
+        }
+
 
         /// <summary>
         /// Method which forms list of expelled students.
@@ -227,6 +269,15 @@ namespace University
             throw new Exception("It is impossible to sort.");
         }
 
+        private static IEnumerable<Exam> SortingTeachers(Sorting sorting, IEnumerable<Exam> exams)
+        {
+            switch (sorting)
+            {
+                case Sorting.SortSurmame:
+                    return exams.OrderBy(ex => ex.TeacherSurname);
+            }
+            throw new Exception("It is impossible to sort.");
+        }
 
         private static string SearchNameById(IGroup group, Groups[] groups, int id)
         {
@@ -276,9 +327,36 @@ namespace University
             }
             return minScore;
         }
-        //Дополнить отчёты информацией в рамках одной сессии о среднем бале по
-        //каждой специальности, о среднем бале по каждому экзаменатору.В
-        
+
+        private static float SpecialtyAverageScore(IEnumerator<Groups> group, string session)
+        {
+            FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.LINQ, connectionString);
+            IGroup groupDAO = factory.GetGroup();
+            float averageScore = 0;
+            int countGroups = 0;
+            while(group.MoveNext())
+            {
+                countGroups++;
+                averageScore += GroupAverageScore(groupDAO.GetIdGroup(group.Current), session);
+            }
+            return averageScore / countGroups;
+        }
+
+        private static float TeacherAverageScore(IEnumerator<Exam> exam)
+        {
+            FactoryDAO factory = FactoryDAO.GetFactoryDAO(FactoryDAO.DBMS.LINQ, connectionString);
+            Grades[] grades = factory.GetGrade().GetGrades();
+            float averageScore = 0;
+            int countGrades = 0;
+            while (exam.MoveNext())
+            {
+                countGrades++;
+                Grades grade = grades.Where(gr => gr.ExamId == exam.Current.ExamId).FirstOrDefault();
+                if (grade != null)
+                    averageScore += grade.Grade;
+            }
+            return averageScore / countGrades;
+        }
 
         private static float GroupAverageScore(int id, string session)
         {
@@ -375,17 +453,10 @@ namespace University
             return student.Surname + " " + student.Name + " " + student.MiddleName;
         }
 
-        private static string FormGroupName(string session)
+        private static string FormFullName(Exam exam)
         {
-            switch (session)
-            {
-                case "л":
-                    return "Летняя";
-                case "з":
-                    return "Зимняя";
-                default:
-                    return null;
-            }
+            return exam.TeacherSurname + " " + exam.TeacherName + " " + exam.TeacherMiddleName;
         }
+
     }
 }

@@ -56,16 +56,16 @@ namespace University
         /// <returns>All groups in the database.</returns>
         public Groups[] GetGroups()
         {
-            //Table<Groups> groups = dataContext.GetTable<Groups>();
-            //return groups.ToArray();
-            var query = from group1 in dataContext.GetTable<Groups>()
-                        select group1;
-            List<Groups> groups = new List<Groups>();
-            foreach (Groups group in query)
-            {
-                groups.Add(group);
-            }
+            Table<Groups> groups = dataContext.GetTable<Groups>();
             return groups.ToArray();
+            //var query = from group1 in dataContext.GetTable<Groups>()
+            //            select group1;
+            //List<Groups> groups = new List<Groups>();
+            //foreach (Groups group in query)
+            //{
+            //    groups.Add(group);
+            //}
+            //return groups.ToArray();
         }
 
         /// <summary>

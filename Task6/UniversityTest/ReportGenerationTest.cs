@@ -70,9 +70,18 @@ namespace UniversityTest
         /// Testing method which form outcome of session and sort by gender.
         /// </summary>
         [TestMethod]
-        public void SessionGenderSortTest()
+        public void SpecialtyTest()
         {
             Assert.IsTrue(ReportGeneration.SpecialtyTable());
+        }
+
+        /// <summary>
+        /// Testing method which form outcome of session and sort by gender.
+        /// </summary>
+        [TestMethod]
+        public void TeacherTest()
+        {
+            Assert.IsTrue(ReportGeneration.TeacherTable());
         }
     }
 }
