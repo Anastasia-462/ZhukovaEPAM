@@ -39,7 +39,7 @@ namespace University
         /// <returns>True if successful, otherwise False.</returns>
         public bool Delete(Students student)
         {
-            dataContext.GetTable<Students>().DeleteOnSubmit(student);
+            dataContext.GetTable<Students>().DeleteOnSubmit(GetStudentByIndex(student.StudentId));
             dataContext.SubmitChanges();
             return true;
         }

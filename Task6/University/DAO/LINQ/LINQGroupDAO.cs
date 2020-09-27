@@ -41,12 +41,8 @@ namespace University
         /// <returns>True if successful, otherwise False.</returns>
         public bool Delete(Groups group)
         {
-            dataContext.GetTable<Groups>().DeleteOnSubmit(group);
-            try
-            {
-                dataContext.SubmitChanges();
-            }
-            catch (Exception) { }
+            dataContext.GetTable<Groups>().DeleteOnSubmit(GetGroupByIndex(group.GroupId));
+            dataContext.SubmitChanges();
             return true;
         }
 

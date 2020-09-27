@@ -18,7 +18,7 @@ namespace UniversityTest
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=UniversityNew;Integrated Security=True";
             LINQExamDAO lINQExam = new LINQExamDAO(connectionString);
-            Assert.AreEqual(37, lINQExam.GetExams().Length);
+            Assert.AreEqual(36, lINQExam.GetExams().Length);
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace UniversityTest
         public void DeleteExamTest()
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=UniversityNew;Integrated Security=True";
-            Exam exam = new Exam("мат", new DateTime(2020, 6, 13), 2, "э", "л", "RH", "TY", "TR");
+            Exam exam = new Exam(1002, "лит", new DateTime(2020, 6, 13), 2, "э", "л", "RH", "TY", "TR");
             LINQExamDAO lINQExam = new LINQExamDAO(connectionString);
             Assert.IsTrue(lINQExam.Delete(exam));
         }
@@ -66,7 +66,7 @@ namespace UniversityTest
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=UniversityNew;Integrated Security=True";
             LINQGroupDAO lINQGroup = new LINQGroupDAO(connectionString);
-            Assert.AreEqual(4, lINQGroup.GetGroups().Length);
+            Assert.AreEqual(5, lINQGroup.GetGroups().Length);
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace UniversityTest
         public void DeleteGroupTest()
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=UniversityNew;Integrated Security=True";
-            Groups group = new Groups(4, "ПИ-11", "Игровая индустрия");
+            Groups group = new Groups(1002, "ПИ-11", "Игровая индустрия");
             LINQGroupDAO lINQGroup = new LINQGroupDAO(connectionString);
             Assert.IsTrue(lINQGroup.Delete(group));
         }
@@ -115,7 +115,7 @@ namespace UniversityTest
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=UniversityNew;Integrated Security=True";
             LINQGradesDAO lINQGrades = new LINQGradesDAO(connectionString);
-            Assert.AreEqual(180, lINQGrades.GetGrades().Length);
+            Assert.AreEqual(181, lINQGrades.GetGrades().Length);
         }
 
         /// <summary>
@@ -186,7 +186,6 @@ namespace UniversityTest
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=UniversityNew;Integrated Security=True";
             Students newStudents = new Students(1002, "Митрохон", "Антон", "Даниилович", "м", new DateTime(2001, 12, 5), 4);
-            Students oldStudents = new Students("Шерон", "Андрей", "Даниилович", "м", new DateTime(2001, 12, 5), 4);
             LINQStudentDAO lINQStudent = new LINQStudentDAO(connectionString);
             Assert.IsTrue(lINQStudent.Update(newStudents));
         }
@@ -198,7 +197,7 @@ namespace UniversityTest
         public void DeleteStudentTest()
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=UniversityNew;Integrated Security=True";
-            Students student = new Students("Митрохон", "Антон", "Даниилович", "м", new DateTime(2001, 12, 5), 4);
+            Students student = new Students(1002, "Митрохон", "Антон", "Даниилович", "м", new DateTime(2001, 12, 5), 4);
             LINQStudentDAO lINQStudent = new LINQStudentDAO(connectionString);
             Assert.IsTrue(lINQStudent.Delete(student));
         }

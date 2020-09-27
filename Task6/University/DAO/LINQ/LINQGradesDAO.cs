@@ -30,7 +30,7 @@ namespace University
         /// <returns>True if successful, otherwise False.</returns>
         public bool Delete(Grades grade)
         {
-            dataContext.GetTable<Grades>().DeleteOnSubmit(grade);
+            dataContext.GetTable<Grades>().DeleteOnSubmit(GetGradeByIndex(grade.GradeId));
             dataContext.SubmitChanges();
             return true;
         }

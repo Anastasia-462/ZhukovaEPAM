@@ -27,7 +27,7 @@ namespace University
         /// <returns>True if successful, otherwise False.</returns>
         public bool Delete(Exam exam)
         {
-            dataContext.GetTable<Exam>().DeleteOnSubmit(exam);
+            dataContext.GetTable<Exam>().DeleteOnSubmit(GetExamByIndex(exam.ExamId));
             dataContext.SubmitChanges();
             return true;
         }

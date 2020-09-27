@@ -41,7 +41,7 @@ namespace UniversityTest
         public void InsertGroupTest()
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=University;Integrated Security=True";
-            Groups group = new Groups("ПЗ-31");
+            Groups group = new Groups("ЭП-31");
             MSSQLGroupDAO mSSQLGroupDAO = new MSSQLGroupDAO(connectionString);
             Assert.IsTrue(mSSQLGroupDAO.Insert(group));
         }
@@ -65,8 +65,8 @@ namespace UniversityTest
         public void UptadeExamTest()
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=University;Integrated Security=True";
-            Exam oldExam = new Exam("ООП", new DateTime(2020, 1, 11), 1, "э", "з");
-            Exam newExam = new Exam("лит", new DateTime(2020, 6, 13), 2, "э", "л");
+            Exam oldExam = new Exam("лит", new DateTime(2020, 6, 13), 2, "э", "л");
+            Exam newExam = new Exam("мат", new DateTime(2020, 6, 13), 2, "э", "л");
             MSSQLExamDAO mSSQLExamDAO = new MSSQLExamDAO(connectionString);
             Assert.IsTrue(mSSQLExamDAO.Update(oldExam, newExam));
         }
@@ -78,8 +78,8 @@ namespace UniversityTest
         public void UptadeStudentTest()
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=University;Integrated Security=True";
-            Students oldStudent = new Students("Дубровский", "Александр", "Андреев", "м", new DateTime(2001, 4, 25), 1);
-            Students newStudent = new Students("Жукова", "Анастасия", "Александровна", "ж", new DateTime(2001, 02, 19), 2);
+            Students newStudent = new Students("Дубровский", "Александр", "Андреев", "м", new DateTime(2001, 4, 25), 1);
+            Students oldStudent = new Students("Жукова", "Анастасия", "Александровна", "ж", new DateTime(2001, 02, 19), 2);
             MSSQLStudentDAO mSSQLStudentDAO = new MSSQLStudentDAO(connectionString);
             Assert.IsTrue(mSSQLStudentDAO.Update(oldStudent, newStudent));
         }
@@ -104,8 +104,8 @@ namespace UniversityTest
         public void UptadeGradesTest()
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=University;Integrated Security=True";
-            Grades oldGrades = new Grades(7, 9, 1);
-            Grades newGrades = new Grades(9, 9, 1);
+            Grades oldGrades = new Grades(9, 1, 6);
+            Grades newGrades = new Grades(8, 1, 6);
             MSSQLGradesDAO mSSQLGradesDAO = new MSSQLGradesDAO(connectionString);
             Assert.IsTrue(mSSQLGradesDAO.Update(oldGrades, newGrades));
         }
@@ -141,7 +141,7 @@ namespace UniversityTest
         public void DeleteGroupTest()
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=University;Integrated Security=True";
-            Groups group = new Groups("ПЗ-31");
+            Groups group = new Groups("ЭП-31");
             MSSQLGroupDAO mSSQLGroupDAO = new MSSQLGroupDAO(connectionString);
             Assert.IsTrue(mSSQLGroupDAO.Delete(group));
         }
@@ -166,7 +166,7 @@ namespace UniversityTest
         {
             string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=University;Integrated Security=True";
             MSSQLExamDAO mSSQLExamDAO = new MSSQLExamDAO(connectionString);
-            Assert.AreEqual(37, mSSQLExamDAO.GetExams().Length);
+            Assert.AreEqual(38, mSSQLExamDAO.GetExams().Length);
         }
 
         /// <summary>
